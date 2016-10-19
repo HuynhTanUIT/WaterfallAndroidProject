@@ -1,3 +1,0 @@
-# WaterfallAndroidProject
-# GraphicialWaterfallAndroidProject
-# WaterfallAndroidProject
