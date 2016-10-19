@@ -1,0 +1,330 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:fadeScrollbars="false"
+    android:scrollbars="vertical">
+
+
+    <LinearLayout
+        android:paddingLeft="10dp"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/touchOutsideEdittext">
+        <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <Switch
+                        android:id="@+id/switch1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:padding="7dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="Edit Enable   " />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtLable_valves"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_centerVertical="true"
+                        android:text="Number Of Valves:"
+                        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+                    <Spinner
+                        android:id="@+id/spinner_van"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_toRightOf="@+id/txtLable_valves"
+                        android:spinnerMode="dropdown"></Spinner>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtLable_2Rows"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:padding="7dp"
+                        android:text="Between 2 Rows(ms):"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <EditText
+                        android:id="@+id/edt2Rows"
+                        android:layout_width="60dp"
+                        android:maxLength="4"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/txtLable_2Rows"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/colorAccent"
+                        android:enabled="true"
+                        android:inputType="number"
+                        android:padding="5dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtLable_2Image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Between 2 Images(ms):"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <EditText
+                        android:id="@+id/edt2Images"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:maxLength="4"
+                        android:textColor="@color/colorAccent"
+                        android:ems="10"
+                        android:enabled="true"
+                        android:inputType="number"
+                        android:padding="5dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/txtLable_2Image"
+                        android:layout_toEndOf="@+id/txtLable_2Image" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/edtThreshold"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/txtLable_BlackWhite"
+                        android:maxLength="3"
+                        android:ems="10"
+                        android:textColor="@color/colorAccent"
+                        android:enabled="true"
+                        android:inputType="number|numberDecimal"
+                        android:padding="5dp" />
+
+                    <TextView
+                        android:id="@+id/txtLable_BlackWhite"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Black and White Threshold:"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="4"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtLanguages"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="13dp"
+                        android:text="Languages:"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+                    <Spinner
+                        android:id="@+id/spinLanguage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@+id/txtLanguages" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtThems"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="13dp"
+                        android:text="Themes:"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <Spinner
+                        android:id="@+id/spinTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="50dp"
+                        android:layout_toRightOf="@+id/txtThems" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="294dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.97">
+
+                    <TextView
+                        android:id="@+id/txtLable_IP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginLeft="30dp"
+                        android:text="IP:"
+                        android:textAppearance="?android:attr/textAppearanceSmall"/>
+                    <EditText
+                        android:id="@+id/edtIP"
+                        android:lines="1"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/colorAccent"
+                        android:layout_toRightOf="@+id/txtLable_IP"
+                        android:inputType="number|numberDecimal"
+                        android:digits="0123456789."
+                        android:ems="10"
+                        android:enabled="true"
+                        android:padding="5dp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtLable_Port"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginLeft="12dp"
+                        android:text="PORT:"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <EditText
+                        android:id="@+id/edtPort"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:maxLength="5"
+                        android:textColor="@color/colorAccent"
+                        android:ems="10"
+                        android:enabled="true"
+                        android:inputType="number"
+                        android:padding="5dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/txtLable_Port"
+                        android:layout_toEndOf="@+id/txtLable_Port" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_alignParentBottom="false"
+                    android:id="@+id/btnApply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@color/colorAccent"
+                    android:textColor="#ffffff"
+                    android:text="APPLY" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_alignParentBottom="false"
+                    android:id="@+id/btnSetDefault"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="#ffffff"
+                    android:background="@color/colorAccent"
+                    android:text=   "   SET DEFAULT   " />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>
+

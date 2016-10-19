@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.0_49fda8c894f4ac90a1056b12c6b45748abfe94ed/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="f9b41622897665678d31d78e57a361cb0cebcb0d">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.0_20b62d7c39156b97467112ffa5672ec295eb274e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="96e33a7aaee00ab64270e2a9887b8f9ef32c8b73">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-24.2.0_6c12798e4265762f0b88b29b086d91a1863dcdb7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="820acba36fa86ab15cb3d472b654dedb495075fd">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-gridlayout-v7-24.2.0_aa79895cd438b3f8e84152de6505163e0fd474b2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="af7582c6b327449c6d32518e6a10307860b7b5d6">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-9.6.1_b04a63597de88b3b6fff7e8753dbbd2576f99169/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c755536e5a100d9c76c8ea0b72f76c018f7a9de2">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.0_9743cf5e62a15cbd3b54f0110f5bc56541a450b9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-clearcut/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ee0ccb43f6ab276191b7f2d77c305fa9beb26db9">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-clearcut-9.6.1_b359247f6b54deb3da7dbc88afac4478d2d8c07e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="62ff84124b89177abc0c27f3e38c9732f2d41617">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-maps-9.6.1_7d0a4368a7cb939de73879635ea7e4ee7a79ca0e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.0/support-annotations-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.0_3277cd33c831c63b722b0dae67437244eceeaca6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_ed767e2e28f4f8273c109a13477bf9c8ed35dae0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/design/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="23eb0d2998a782213b56168cbf23a0688b9111d9">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-24.2.0_2b7f6c3dcf9f88091e4befa51bb3f6a80f48bf34/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="032a4b53def5e2ceedfc2e793b126c0163cfa1dd">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_225384865e994b3ccdec36f08366abf53110f8e4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="045be695d968dd707691cc55d23746dbf8cf569a">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_26a976b3d4b374d4c7da4ae153c5b28d9175753e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="3d42e6fd3d0141036a5a9ffc8d59e30363bf0c0e">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_dec0c6243099311e4a210a88530a5a48d02ef8cc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="771b3cc0e597b54da25f8086ba73180c59c6bc71">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_dbb74c6ee3126ae57f04aa995a856450c6015dba/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.0_f55647426f60ecb1579615657f37a8d878101ef7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c3c638be6e650b165ab9ae144857b64e82787fad">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.0_b8a3efb769042a0e3dbcf4441738fd70a70ac245/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6e02e34594ebe9c0501ffda8dd48497f81b82977">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_fa0a6c7fa12375b78b81d9ee39759a52e6acb15d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.0_c9b22e9bda1616b5fbfad5ad851e6882452af17d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.0_904859e2c7cad17333c5bbc4793252182dc2a8cc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="fcc945a86ebcbf527429acb8216ec7dae2c06417">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.0_8316598e46a1c97574abececa68e538043898b11/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="f3ee23ef25c9a8fe3d40246d0b7097267963a612">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.0_71883e98dfcc4438baac8d69912c6b109fb45578/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="45f5eda279825ff470e3f51019d374d1ef61e000">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.0_ca0e4f8779a62a8acba9485130271734d48dcba4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ee61ace5f3e488fc610e1c67693c49186a441f32">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-gass-9.6.1_786c30ec53de975166e1662cfb640ec2c7db4bd4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="eccaaa9ffa6bb4bfbd2e870f01aaf69655d353be">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-9.6.1_422b64e3ca6baf264323edef88fcf4ede17e5747/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/glide-3.7.0_bb077b85b22262a5385c0037d611289cb245482e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="47bbb3ec4b31ba71e125241c090dabe70cbb4de7">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-9.6.1_44cddf60831f4fa91164d484e43891dc0b23db67/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6ff796a3173787afe2e712f3aec6f5b99796118e">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-lite-9.6.1_45dc591ff0bbb21aa1c670591a963804f2176f75/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="da7cc337450d2a5c6d22d1a3f72f17c392238d6e">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_d6ac4d5046e194df02dab81bbe30df0ad46cea12/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="4a36600281a648769411ef642c331851732bf29e">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/NewestLastProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.6.1_fef56f79782b269223405a60b8f3da3ce87b07bf/classes.dex" />
+    </item>
+
+</items>

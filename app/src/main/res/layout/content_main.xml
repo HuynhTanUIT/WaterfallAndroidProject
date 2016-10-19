@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/framelayout_for_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.tan_pc.navigationdraweractivity.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <RelativeLayout
+        android:id="@+id/rHome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rDisplayText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rClock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rPaint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rSettings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rImport"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></RelativeLayout>
+
+</FrameLayout>
