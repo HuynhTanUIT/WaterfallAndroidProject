@@ -43,19 +43,20 @@
                 android:background="#ffffff"
                 android:orientation="vertical"
                 android:padding="5dp">
+
                 <LinearLayout
-                    android:layout_weight="4"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                    android:layout_height="0dp"
+                    android:layout_weight="4">
+
                     <RadioGroup
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
 
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true"
                             android:text="Gallery"
                             android:textColor="@color/colorPrimary" />
 
@@ -66,10 +67,12 @@
                             android:textColor="@color/colorPrimary" />
                     </RadioGroup>
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_weight="2"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -226,6 +229,7 @@
                             android:layout_toRightOf="@+id/txtvalve"
                             android:ems="10"
                             android:inputType="number"
+                            android:enabled="false"
                             android:maxLength="3"
                             android:padding="5dp" />
                     </RelativeLayout>
@@ -243,9 +247,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:text="Convert and Save"
-
                         android:layout_marginLeft="10dp"
+
+                        android:text="Convert and Save"
                         android:textColor="@color/colorPrimary" />
                 </LinearLayout>
 
@@ -261,8 +265,8 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
 
-                        android:layout_marginLeft="5dp"
                         android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
                         android:background="@color/colorAccent"
                         android:text="convert"
                         android:textColor="#ffffff" />
@@ -356,92 +360,119 @@
                     <Switch
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:text="Active    "
                         android:textColor="@color/colorPrimary" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/disable"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:text="Repeat(Times):" />
+                        android:text="Repeat(Times):"
+                        android:textColor="@color/disable" />
 
                     <EditText
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:inputType="number"
                         android:enabled="false"
+                        android:inputType="number"
+                        android:layout_gravity="center"
                         android:maxLength="4"
                         android:padding="5dp" />
 
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/disable"
                         android:layout_marginLeft="10dp"
-                        android:text="Repeat After: " />
+                        android:layout_gravity="center"
+                        android:text="Repeat After: "
+                        android:textColor="@color/disable" />
 
                     <EditText
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:ems="10"
-                        android:inputType="number"
                         android:enabled="false"
+                        android:inputType="number"
                         android:maxLength="4"
                         android:padding="5dp" />
                 </LinearLayout>
-                <RelativeLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:textColor="@color/disable"
-                        android:layout_marginLeft="10dp"
-                        android:text="Sending Progress: "
-                        android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:id="@+id/txtSendingProgressHome" />
-                    <TextView
-                        android:id="@+id/txtpercentTextHome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="5dp"
-                        android:layout_toLeftOf="@+id/progressBarHome"
-                        android:text="5% "
-                        android:textColor="@color/colorPrimaryDark" />
 
-                    <ProgressBar
-                        android:id="@+id/progressBarHome"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:indeterminate="false"
-                        android:max="100"
-                        android:minHeight="13dp"
-                        android:minWidth="200dp"
-                        android:progress="5" />
-
-                </RelativeLayout>
                 <LinearLayout
-                    android:layout_weight="1.5"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3">
+
+                        <TextView
+                            android:id="@+id/txtSendingProgressHome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:text="Sending Progress: "
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/disable" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:id="@+id/txtpercentTextHome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            android:text="5% "
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <ProgressBar
+                            android:id="@+id/progressBarHome"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@+id/txtpercentTextHome"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:minHeight="13dp"
+                            android:minWidth="200dp"
+                            android:progress="5" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5">
+
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
