@@ -18,7 +18,7 @@ import adapter.AdapterGrid;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ImportFragment extends Fragment {
+public class AlbumDisplay extends Fragment {
     // Context context;
     GridView gridViewColor;
     AdapterGrid adapterGrid;
@@ -26,7 +26,7 @@ public class ImportFragment extends Fragment {
     ArrayList<Integer> arrayimg = new ArrayList<Integer>();
 
     //  ArrayList<File> list;
-    public ImportFragment() {
+    public AlbumDisplay() {
         // Required empty public constructor
     }
 

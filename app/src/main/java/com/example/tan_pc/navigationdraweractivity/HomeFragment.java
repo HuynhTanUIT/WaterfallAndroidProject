@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
     Button btnConvertHome;
     Button btnSendHome;
 
-    GridView gridviewHome;
+    //GridView gridviewHome;
 
     private Uri picUri;
     final int CROP_PIC = 2;
@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        InitializeComponent(v);
+       // InitializeComponent(v);
         return v;
     }
 
@@ -93,16 +93,16 @@ public class HomeFragment extends Fragment {
             btnSaveHome.setOnClickListener(btnClickListener);
             btnConvertHome.setOnClickListener(btnClickListener);
             btnSendHome.setOnClickListener(btnClickListener);
-            gridviewHome.setOnItemClickListener(onItemClickListener);
+            //gridviewHome.setOnItemClickListener(onItemClickListener);
             //gridviewHome.setCon
-            LoadImageToGridView();
+            //LoadImageToGridView();
         }catch (Exception e){
             ToastShow(e.getMessage().toString());
         }
     }
 
     public void LoadImageToGridView() {
-        try {
+
             imageArray.clear();
             Cursor image = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_BINARY_192);
             while (image.moveToNext()) {
@@ -114,12 +114,8 @@ public class HomeFragment extends Fragment {
                 ));
             }
             GridAdapterHome apdaterHome = new GridAdapterHome(getContext(), R.layout.row, imageArray);
-//      gridviewHome.setAdapter(apdaterHome);
-            gridviewHome.setAdapter(apdaterHome);
-            //gridviewHome.setAdapter(null);
-        } catch (Exception e) {
-            ToastShow(e.getMessage().toString());
-        }
+            //gridviewHome.setAdapter(apdaterHome);
+
     }
 
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
@@ -136,8 +132,7 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            try {
-                switch (view.getId()) {
+              switch (view.getId()) {
                     case R.id.btnGalleryHome:
                         ButtonGalleryClicked();
                         break;
@@ -152,9 +147,7 @@ public class HomeFragment extends Fragment {
                     case R.id.btnSendHome:
                         break;
                 }
-            } catch (Exception e) {
-                ToastShow(e.getMessage().toString());
-            }
+
 
         }
     };
@@ -173,7 +166,7 @@ public class HomeFragment extends Fragment {
                     192,
                     ImageView_To_Byte(imageViewColorImageHome)
             );
-            LoadImageToGridView();
+            //LoadImageToGridView();
             ToastShow("Binary Image Has Been Saved!");
         } catch (Exception e) {
             if (e.getMessage().toString().contains("UNIQUE")) {
@@ -201,19 +194,19 @@ public class HomeFragment extends Fragment {
 //    }
     public void ButtonGalleryClicked() {
         try {
-            Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            gallery.setType("image/*");
-            gallery.putExtra("crop", "true");
-            //gallery.putExtra("scale", true);
-            gallery.putExtra("return-data", true);
-            startActivityForResult(gallery, 1111);
-            /***
-             *Intent intent = new Intent();
-             *intent.setType("image/*");
-             *intent.setAction(Intent.ACTION_GET_CONTENT);
-             * startActivityForResult(Intent.createChooser(intent, "Select Image"), 1111);
-             *   *Luu ANh dang URI*
-             */
+//            Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//            gallery.setType("image/*");
+//            gallery.putExtra("crop", "true");
+//            //gallery.putExtra("scale", true);
+//            gallery.putExtra("return-data", true);
+//            startActivityForResult(gallery, 1111);
+
+             Intent intent = new Intent();
+             intent.setType("image/*");
+             intent.setAction(Intent.ACTION_GET_CONTENT);
+              startActivityForResult(Intent.createChooser(intent, "Select Image"), 1111);
+            // Luu ANh dang URI*
+
         } catch (Exception e) {
             ToastShow("This device doesn't support this action!");
         }
@@ -246,11 +239,11 @@ public class HomeFragment extends Fragment {
             // set crop properties
             cropIntent.putExtra("crop", "true");
             // indicate aspect of desired crop
-            cropIntent.putExtra("aspectX", 1);
-            cropIntent.putExtra("aspectY", 1);
+//            cropIntent.putExtra("aspectX", 1);
+//            cropIntent.putExtra("aspectY", 1);
             // indicate output X and Y
-            cropIntent.putExtra("outputX", 256);
-            cropIntent.putExtra("outputY", 256);
+//            cropIntent.putExtra("outputX", 256);
+//            cropIntent.putExtra("outputY", 256);
             // retrieve data on return
             cropIntent.putExtra("return-data", true);
             // start the activity - we handle returning in onActivityResult
@@ -264,14 +257,17 @@ public class HomeFragment extends Fragment {
         }
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         try {
             if (resultCode == RESULT_OK) {
                 if (requestCode == 1111) {
-                    Bitmap photo = (Bitmap) data.getParcelableExtra("data");
-                    imageViewColorImageHome.setImageBitmap(photo);
-                    //                imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
+//                    Bitmap photo = (Bitmap) data.getParcelableExtra("data");
+//                    imageViewColorImageHome.setImageBitmap(photo);
+                    picUri = data.getData();
+                    performCrop();
+                                   // imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
                 } else if (requestCode == 8888) {
 //                Bitmap photo = (Bitmap)data.getExtras().get("data");
 //            imageViewColorImageHome.setImageBitmap(photo);
@@ -309,7 +305,7 @@ public class HomeFragment extends Fragment {
             btnConvertHome = (Button) v.findViewById(R.id.btnConvertHome);
             btnSendHome = (Button) v.findViewById(R.id.btnSendHome);
 
-            gridviewHome = (GridView) v.findViewById(R.id.gridviewHome);
+           // gridviewHome = (GridView) v.findViewById(R.id.gridviewHome);
 
             imageArray = new ArrayList<ImageSingelHome>();
             //adapter=new ArrayAdapter<ImageSingelHome>(getContext(),R.layout.row,imageArray);
@@ -324,15 +320,15 @@ public class HomeFragment extends Fragment {
     public void onConfigurationChanged(Configuration newConfig) {
         try {
             super.onConfigurationChanged(newConfig);
-            BackupComponen();
+//            BackupComponen();
             ViewGroup rootView = (ViewGroup) getView();
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View newview = inflater.inflate(R.layout.fragment_home, rootView, false);
             rootView.removeAllViews();
             rootView.addView(newview);
-            //Restore Values
-            InitializeComponent(newview);
-            RecoverValuesComponent();
+//            //Restore Values
+//            InitializeComponent(newview);
+//            RecoverValuesComponent();
         } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }

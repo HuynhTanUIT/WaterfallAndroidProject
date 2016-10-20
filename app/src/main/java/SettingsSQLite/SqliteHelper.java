@@ -42,6 +42,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
     public static final String WIDTH_BIN192_="WidthBin";
     public static final String HEIGHT_BIN192_="HeightBin";
     public static final String IMAGE_BIN192="ImageBin";
+
     
 //    public SqliteHelper(Context context) {
 //        super(context, PROJECTDATABASE, null, 1);
@@ -83,7 +84,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
     }
     //insert Binary Image To Database
     public void INSERT_BINARY_192Valves(String name,int width,int height, byte[] image){
-        try{
             SQLiteDatabase db=getWritableDatabase();
             String sql="INSERT INTO "+TABLE_BINARY_192+" VALUES(NULL,?,?,?,?)";
             SQLiteStatement statement = db.compileStatement(sql);
@@ -94,13 +94,12 @@ public class SqliteHelper extends SQLiteOpenHelper {
             statement.bindBlob(4,image);
             statement.executeInsert();
             db.close();
-        }catch (Exception e){
 
-        }
 
     }
+
     public void CreateBinary_192Valves(SQLiteDatabase db){
-        try{
+
             String CREATE_TABLE_BINARY192="CREATE TABLE IF NOT EXISTS "+TABLE_BINARY_192+" ("
                     +ID_BIN192+" INTEGER PRIMARY KEY AUTOINCREMENT, "
                     +NAME_BIN192+" TEXT,"
@@ -108,14 +107,11 @@ public class SqliteHelper extends SQLiteOpenHelper {
                     +HEIGHT_BIN192_+" INT,"
                     +IMAGE_BIN192+" BLOB UNIQUE)";
             db.execSQL(CREATE_TABLE_BINARY192);
-        }catch (Exception e){
-
-        }
 
     }
     public void CreateSettingsAndInitialValues(SQLiteDatabase db)
     {
-        try{
+
             String CREATE_TABLE_SETTINGS="CREATE TABLE IF NOT EXISTS "+TABLE_SETTINGS+" ("
                     +KEY_ID+" INTEGER PRIMARY KEY, "
                     +KEY_VALVES+" INTERGER,"
@@ -129,9 +125,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
             db.execSQL(CREATE_TABLE_SETTINGS);
             insertSettings(db);
             Log.e("DATABASE OPERATION","TABLE SETTINGS CREATED");
-        }catch (Exception e){
-
-        }
 
     }
 //    public void insertSettingsValues (SQLiteDatabase db){
@@ -152,19 +145,16 @@ public class SqliteHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Thực hiện các thao tác chỉnh sửa cấu trúc bảng của DB
-        try{
+
             db.execSQL("DROP TABLE IF EXISTS "+TABLE_SETTINGS);
             db.execSQL("DROP TABLE IF EXISTS "+TABLE_BINARY_192);
             onCreate(db);
-        }catch (Exception e){
 
-        }
 
     }
 //    //thêm bản ghi
     public void insertSettings(SQLiteDatabase db){
 
-        try {
             ContentValues contentValues = new ContentValues();
             contentValues.put(KEY_ID, 0);
             contentValues.put(KEY_VALVES, 0);
@@ -176,10 +166,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
             contentValues.put(KEY_LANGUAGES, 0);
             contentValues.put(KEY_THEMES, 0);
             db.insert(TABLE_SETTINGS, null, contentValues);
-
-        }catch (Exception e){
-
-        }
 
     }
     //Cập nhật bản ghi

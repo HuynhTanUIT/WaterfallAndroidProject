@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity
     Button btSlideShow;
     int sttfragment = 0;//trang thai dang o fragment nao 0=home; 1=Displaytext;2=Clock; 3=Import....
     DisplayTextFragment displayTextFragment = new DisplayTextFragment();
-    ImportFragment importFragment = new ImportFragment();
+    AlbumDisplay albumDisplay = new AlbumDisplay();
     PaintFragment paintFragment = new PaintFragment();
     SettingsFragment settingsFragment = new SettingsFragment();
     ClockFragment clockFragment = new ClockFragment();
@@ -80,19 +80,18 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         InitializeComponent();
-        FragmentShow(5);
         FragmentShow(4);
         FragmentShow(3);
         FragmentShow(2);
         FragmentShow(1);
-        //Log.e("Show Display Text: ", "Fragment 1");
-//        FragmentShow(0);
-//        FragmentShow(5);
-//        FragmentShow(4);
-//        FragmentShow(3);
-//        FragmentShow(2);
-//        FragmentShow(1);
         FragmentShow(5);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                Log.e("Show Hom: ", "Fragment 5");
+            }
+        });
         FragmentShow(0);
         Log.e("Show Hom: ", "Fragment 0");
     }
@@ -280,7 +279,7 @@ public class MainActivity extends AppCompatActivity
                     hideAllFragment();
                     rImport.setVisibility(View.VISIBLE);
                     setTitle("Gallery");
-                    manager.beginTransaction().replace(R.id.rImport, importFragment).commit();
+                    manager.beginTransaction().replace(R.id.rImport, albumDisplay).commit();
 
                     break;
                 case 4:

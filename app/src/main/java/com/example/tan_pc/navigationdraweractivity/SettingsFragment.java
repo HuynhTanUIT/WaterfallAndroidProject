@@ -110,7 +110,6 @@ public class SettingsFragment extends Fragment {
     public SettingsFragment() {
         // Required empty public constructor
 
-        Log.e("Show Setting: ", "Fragment 5");
     }
 
     //Check Ip Correct
@@ -393,7 +392,6 @@ public class SettingsFragment extends Fragment {
                         edtIP.requestFocus();
                         edtIP.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
                         //showKeyBoard(edtIP);
-
 
                         break;
                     case R.id.edtPort:

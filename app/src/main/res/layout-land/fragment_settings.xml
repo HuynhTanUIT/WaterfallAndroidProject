@@ -38,7 +38,7 @@
                         android:layout_height="wrap_content"
                         android:checked="false"
                         android:padding="7dp"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="Edit Enable   " />
                 </RelativeLayout>
@@ -53,7 +53,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="7dp"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:layout_centerVertical="true"
                         android:text="Number Of Valves:"
                         android:textAppearance="?android:attr/textAppearanceSmall"/>
@@ -64,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_centerVertical="true"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:layout_toRightOf="@+id/txtLable_valves"
                         android:spinnerMode="dropdown"></Spinner>
                 </RelativeLayout>
@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:padding="7dp"
                         android:text="Between 2 Rows(ms):"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:padding="5dp"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:text="Between 2 Images(ms):"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -149,10 +149,10 @@
                     <TextView
                         android:id="@+id/txtLable_BlackWhite"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="Black and White Threshold:"
+                        android:text="Threshold Comparition (Bit):"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:layout_centerVertical="true"
                         android:layout_alignParentLeft="true"
@@ -178,7 +178,7 @@
                         android:layout_centerVertical="true"
                         android:padding="13dp"
                         android:text="Languages:"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textAppearance="?android:attr/textAppearanceSmall"/>
 
                     <Spinner
@@ -204,7 +204,7 @@
                         android:layout_centerVertical="true"
                         android:padding="13dp"
                         android:text="Themes:"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Spinner
@@ -226,7 +226,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerInParent="true"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:layout_marginLeft="30dp"
                         android:text="IP:"
                         android:textAppearance="?android:attr/textAppearanceSmall"/>
@@ -257,7 +257,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerInParent="true"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
                         android:layout_marginLeft="12dp"
                         android:text="PORT:"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
