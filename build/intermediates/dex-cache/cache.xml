@@ -21,6 +21,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/libs/internal_impl-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_d4a76a7c6a5867ae3dfdb1cc79dee5ba27f177fb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/libs/internal_impl-24.2.0.jar"
         jumboMode="true"
         optimize="true"
@@ -36,6 +45,33 @@
         revision="24.0.2"
         sha1="23eb0d2998a782213b56168cbf23a0688b9111d9">
         <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-24.2.0_b1db73f46f64d259ed288e2d2f0d30e9f2acb867/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.0_faa532a179347d1c3aedcf0e2a695ae352ae480e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-clearcut/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="ee0ccb43f6ab276191b7f2d77c305fa9beb26db9">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-clearcut-9.6.1_9ddcbac0bf979177b5d064747e9eb26709f224cf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="820acba36fa86ab15cb3d472b654dedb495075fd">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-gridlayout-v7-24.2.0_180f9e73ac2c68094dee4b99e4aabe4837c3f5f0/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -75,114 +111,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="dabae17e057afaf6ee29378a6ccaa989c5b1dec2">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_7908a422ff1ff59cdc01b69c0d2237f97f14dbc3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.0_161b37e695181db3daed92c4b3fb6ef19e0fd424/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.0_be235654f41379de7f1d4efe25ecd70af45a4a8a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.0/support-annotations-24.2.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.0_3277cd33c831c63b722b0dae67437244eceeaca6/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.6.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="af7582c6b327449c6d32518e6a10307860b7b5d6">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-9.6.1_19f15e64cec5630bbbe399b6fdbe70ffa81f4a32/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="7abe7e407482245c287631fd956c752a61fc2623">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_772b463f098a643adbd8d1aa83b597165ab8abc3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.6.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="4a36600281a648769411ef642c331851732bf29e">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.6.1_0ad6436e19be8270d1c3db26fc81ac2aafacfca1/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="c755536e5a100d9c76c8ea0b72f76c018f7a9de2">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.0_077f309175ab214e87abc9d7126b9cf4b238a0b2/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.0/jars/libs/internal_impl-24.2.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="60d7b23621d31e6f42f4f76f16af467e57a20cda">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.0_d4a76a7c6a5867ae3dfdb1cc79dee5ba27f177fb/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="6eb9107eb34d2fe2b020662b7fbbec991dcba846">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.0_faa532a179347d1c3aedcf0e2a695ae352ae480e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-clearcut/9.6.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="ee0ccb43f6ab276191b7f2d77c305fa9beb26db9">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-clearcut-9.6.1_9ddcbac0bf979177b5d064747e9eb26709f224cf/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/24.2.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="820acba36fa86ab15cb3d472b654dedb495075fd">
-        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-gridlayout-v7-24.2.0_180f9e73ac2c68094dee4b99e4aabe4837c3f5f0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -198,6 +126,15 @@
         revision="24.0.2"
         sha1="62ff84124b89177abc0c27f3e38c9732f2d41617">
         <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-maps-9.6.1_6d1b9160ac3ea988800d3130654b85a29fcfd9d2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="2f91e0268fd08e8b01f2b28fa5f7779dbc329152">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_7908a422ff1ff59cdc01b69c0d2237f97f14dbc3/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -219,6 +156,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d8bd2268fdcbfd52c76ade65d9900cd8def93a44">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.0_161b37e695181db3daed92c4b3fb6ef19e0fd424/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/home/tan-pc/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
         jumboMode="true"
         optimize="true"
@@ -234,6 +180,15 @@
         revision="24.0.2"
         sha1="c3c638be6e650b165ab9ae144857b64e82787fad">
         <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.0_2612458e47fd002c1144907c5b5a8d2fc79a709c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c84e216d9bf618464d6b9564d71d9a656433e7c4">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.0_be235654f41379de7f1d4efe25ecd70af45a4a8a/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -255,12 +210,57 @@
     </item>
     <item
         is-multidex="true"
+        jar="/home/tan-pc/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.0/support-annotations-24.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6be858a75633b1f0a2d24cad740db57775cb6871">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.0_3277cd33c831c63b722b0dae67437244eceeaca6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="beac40bcc8a320a896dd15f5109cfcaea5e1e0e3">
         <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.0_6fdefcb3f754219b18d4b3f8c4716830263af938/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="af7582c6b327449c6d32518e6a10307860b7b5d6">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-9.6.1_19f15e64cec5630bbbe399b6fdbe70ffa81f4a32/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="60cad67b493576bc7442df7ad89ae9c86735213b">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_772b463f098a643adbd8d1aa83b597165ab8abc3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.6.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="4a36600281a648769411ef642c331851732bf29e">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.6.1_0ad6436e19be8270d1c3db26fc81ac2aafacfca1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/24.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c755536e5a100d9c76c8ea0b72f76c018f7a9de2">
+        <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-24.2.0_077f309175ab214e87abc9d7126b9cf4b238a0b2/classes.dex" />
     </item>
     <item
         is-multidex="true"

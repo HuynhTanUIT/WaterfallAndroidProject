@@ -1,8 +1,6 @@
 package com.example.tan_pc.navigationdraweractivity;
 
 import android.content.Context;
-import android.content.res.Configuration;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -12,40 +10,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import SettingsSQLite.SqliteHelper;
-import adapter.AdapterGrid;
-
-import static SettingsSQLite.SqliteHelper.KEY_ID;
-import static SettingsSQLite.SqliteHelper.KEY_IMAGES;
-import static SettingsSQLite.SqliteHelper.KEY_IP;
-import static SettingsSQLite.SqliteHelper.KEY_LANGUAGES;
-import static SettingsSQLite.SqliteHelper.KEY_PORT;
-import static SettingsSQLite.SqliteHelper.KEY_ROWS;
-import static SettingsSQLite.SqliteHelper.KEY_THEMES;
-import static SettingsSQLite.SqliteHelper.KEY_THREHOLD;
-import static SettingsSQLite.SqliteHelper.KEY_VALVES;
-import static SettingsSQLite.SqliteHelper.TABLE_SETTINGS;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

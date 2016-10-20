@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/HomeLinearLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
+
     android:orientation="vertical"
     android:paddingLeft="0dp">
 
@@ -20,7 +22,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtColorHome"
+                android:id="@+id/txtChooseImageFrom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#009688"
@@ -55,12 +57,14 @@
                         android:layout_gravity="center">
 
                         <RadioButton
+                            android:id="@+id/radioGallery"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Gallery"
                             android:textColor="@color/colorPrimary" />
 
                         <RadioButton
+                            android:id="@+id/radioCamera"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Camera"
@@ -74,6 +78,7 @@
                     android:layout_weight="2">
 
                     <Button
+                        android:id="@+id/btnChoose"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -106,7 +111,7 @@
                 android:padding="5dp">
 
                 <ImageView
-                    android:id="@+id/imageViewBinaryImageHome"
+                    android:id="@+id/imageViewColorImageHome"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/disable"
@@ -134,6 +139,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txtConvertHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#009688"
@@ -162,13 +168,25 @@
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/txtThrehold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-
                         android:layout_marginLeft="10dp"
                         android:text="Threshold (Bit):"
                         android:textColor="@color/colorPrimary" />
+
+                    <EditText
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/edtThreholdHome"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:padding="5dp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -177,10 +195,10 @@
                     android:layout_weight="1">
 
                     <Switch
+                        android:id="@+id/switchConfigSizeHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-
                         android:layout_marginLeft="10dp"
                         android:text="Config Size:  "
                         android:textColor="@color/colorPrimary" />
@@ -198,6 +216,7 @@
                         android:layout_weight="1">
 
                         <TextView
+                            android:id="@+id/txtWxH"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -213,7 +232,7 @@
                         android:layout_weight="2">
 
                         <TextView
-                            android:id="@+id/txtvalve"
+                            android:id="@+id/txt192x"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="false"
@@ -223,13 +242,14 @@
                             android:textColor="@color/colorPrimary" />
 
                         <EditText
+                            android:id="@+id/edtHeighHome"
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_toRightOf="@+id/txtvalve"
+                            android:layout_toRightOf="@+id/txt192x"
                             android:ems="10"
-                            android:inputType="number"
                             android:enabled="false"
+                            android:inputType="number"
                             android:maxLength="3"
                             android:padding="5dp" />
                     </RelativeLayout>
@@ -244,11 +264,11 @@
                     android:layout_weight="1">
 
                     <CheckBox
+                        android:id="@+id/checkboxConvertAndSaveHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="10dp"
-
                         android:text="Convert and Save"
                         android:textColor="@color/colorPrimary" />
                 </LinearLayout>
@@ -264,7 +284,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="5dp"
                         android:background="@color/colorAccent"
@@ -284,12 +303,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#009688" />
-
-            <TextView
-                android:id="@+id/txtBinaryImageViewHome"
+                android:id="@+id/txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#009688"
@@ -307,6 +321,7 @@
                 android:padding="5dp">
 
                 <ImageView
+                    android:id="@+id/imageViewBinaryImageHome"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/disable"
@@ -331,7 +346,7 @@
             android:paddingBottom="3dp">
 
             <TextView
-                android:id="@+id/txtDatabaseHome"
+                android:id="@+id/txtSendToHardware"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#009688"
@@ -357,7 +372,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1">
+
                     <Switch
+                        android:id="@+id/switchActiveHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -372,6 +389,7 @@
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/txtRepeatTimeHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -380,12 +398,13 @@
                         android:textColor="@color/disable" />
 
                     <EditText
+                        android:id="@+id/edtRepeatTimeHome"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:ems="10"
                         android:enabled="false"
                         android:inputType="number"
-                        android:layout_gravity="center"
                         android:maxLength="4"
                         android:padding="5dp" />
 
@@ -397,14 +416,16 @@
                     android:layout_weight="1">
 
                     <TextView
+                        android:id="@+id/txtRepeatAfterHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
                         android:text="Repeat After: "
                         android:textColor="@color/disable" />
 
                     <EditText
+                        android:id="@+id/edtRepeatAfterHome"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -465,7 +486,6 @@
                             android:minWidth="200dp"
                             android:progress="5" />
                     </RelativeLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -474,6 +494,7 @@
                     android:layout_weight="1.5">
 
                     <Button
+                        android:id="@+id/btnSendHome"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_alignParentBottom="true"
