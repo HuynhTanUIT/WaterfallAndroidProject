@@ -83,41 +83,56 @@ public class SqliteHelper extends SQLiteOpenHelper {
     }
     //insert Binary Image To Database
     public void INSERT_BINARY_192Valves(String name,int width,int height, byte[] image){
-        SQLiteDatabase db=getWritableDatabase();
-        String sql="INSERT INTO "+TABLE_BINARY_192+" VALUES(NULL,?,?,?,?)";
-        SQLiteStatement statement = db.compileStatement(sql);
-        statement.clearBindings();
-        statement.bindString(1,name);
-        statement.bindLong(2,width);
-        statement.bindLong(3,height);
-        statement.bindBlob(4,image);
-        statement.executeInsert();
-        db.close();
+        try{
+            SQLiteDatabase db=getWritableDatabase();
+            String sql="INSERT INTO "+TABLE_BINARY_192+" VALUES(NULL,?,?,?,?)";
+            SQLiteStatement statement = db.compileStatement(sql);
+            statement.clearBindings();
+            statement.bindString(1,name);
+            statement.bindLong(2,width);
+            statement.bindLong(3,height);
+            statement.bindBlob(4,image);
+            statement.executeInsert();
+            db.close();
+        }catch (Exception e){
+
+        }
+
     }
     public void CreateBinary_192Valves(SQLiteDatabase db){
-        String CREATE_TABLE_BINARY192="CREATE TABLE IF NOT EXISTS "+TABLE_BINARY_192+" ("
-                +ID_BIN192+" INTEGER PRIMARY KEY AUTOINCREMENT, "
-                +NAME_BIN192+" TEXT,"
-                +WIDTH_BIN192_+" INT,"
-                +HEIGHT_BIN192_+" INT,"
-                +IMAGE_BIN192+" BLOB UNIQUE)";
-        db.execSQL(CREATE_TABLE_BINARY192);
+        try{
+            String CREATE_TABLE_BINARY192="CREATE TABLE IF NOT EXISTS "+TABLE_BINARY_192+" ("
+                    +ID_BIN192+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    +NAME_BIN192+" TEXT,"
+                    +WIDTH_BIN192_+" INT,"
+                    +HEIGHT_BIN192_+" INT,"
+                    +IMAGE_BIN192+" BLOB UNIQUE)";
+            db.execSQL(CREATE_TABLE_BINARY192);
+        }catch (Exception e){
+
+        }
+
     }
     public void CreateSettingsAndInitialValues(SQLiteDatabase db)
     {
-        String CREATE_TABLE_SETTINGS="CREATE TABLE IF NOT EXISTS "+TABLE_SETTINGS+" ("
-                +KEY_ID+" INTEGER PRIMARY KEY, "
-                +KEY_VALVES+" INTERGER,"
-                +KEY_ROWS+" INTEGER,"
-                +KEY_IMAGES+" INTEGER,"
-                +KEY_THREHOLD+" INTEGER,"
-                +KEY_IP+" TEXT,"
-                +KEY_PORT+" INTEGER,"
-                +KEY_LANGUAGES+" INTEGER,"
-                +KEY_THEMES+" INTEGER)";
-        db.execSQL(CREATE_TABLE_SETTINGS);
-        insertSettings(db);
-        Log.e("DATABASE OPERATION","TABLE SETTINGS CREATED");
+        try{
+            String CREATE_TABLE_SETTINGS="CREATE TABLE IF NOT EXISTS "+TABLE_SETTINGS+" ("
+                    +KEY_ID+" INTEGER PRIMARY KEY, "
+                    +KEY_VALVES+" INTERGER,"
+                    +KEY_ROWS+" INTEGER,"
+                    +KEY_IMAGES+" INTEGER,"
+                    +KEY_THREHOLD+" INTEGER,"
+                    +KEY_IP+" TEXT,"
+                    +KEY_PORT+" INTEGER,"
+                    +KEY_LANGUAGES+" INTEGER,"
+                    +KEY_THEMES+" INTEGER)";
+            db.execSQL(CREATE_TABLE_SETTINGS);
+            insertSettings(db);
+            Log.e("DATABASE OPERATION","TABLE SETTINGS CREATED");
+        }catch (Exception e){
+
+        }
+
     }
 //    public void insertSettingsValues (SQLiteDatabase db){
 //        ContentValues contentValues =new ContentValues();
@@ -137,24 +152,34 @@ public class SqliteHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Thực hiện các thao tác chỉnh sửa cấu trúc bảng của DB
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_SETTINGS);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_BINARY_192);
-        onCreate(db);
+        try{
+            db.execSQL("DROP TABLE IF EXISTS "+TABLE_SETTINGS);
+            db.execSQL("DROP TABLE IF EXISTS "+TABLE_BINARY_192);
+            onCreate(db);
+        }catch (Exception e){
+
+        }
+
     }
 //    //thêm bản ghi
     public void insertSettings(SQLiteDatabase db){
 
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(KEY_ID, 0);
-        contentValues.put(KEY_VALVES, 0);
-        contentValues.put(KEY_ROWS, 150);
-        contentValues.put(KEY_IMAGES, 2000);
-        contentValues.put(KEY_THREHOLD, 128);
-        contentValues.put(KEY_IP, "192.168.1.1");
-        contentValues.put(KEY_PORT, 8888);
-        contentValues.put(KEY_LANGUAGES, 0);
-        contentValues.put(KEY_THEMES, 0);
-        db.insert(TABLE_SETTINGS, null, contentValues);
+        try {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(KEY_ID, 0);
+            contentValues.put(KEY_VALVES, 0);
+            contentValues.put(KEY_ROWS, 150);
+            contentValues.put(KEY_IMAGES, 2000);
+            contentValues.put(KEY_THREHOLD, 128);
+            contentValues.put(KEY_IP, "192.168.1.1");
+            contentValues.put(KEY_PORT, 8888);
+            contentValues.put(KEY_LANGUAGES, 0);
+            contentValues.put(KEY_THEMES, 0);
+            db.insert(TABLE_SETTINGS, null, contentValues);
+
+        }catch (Exception e){
+
+        }
 
     }
     //Cập nhật bản ghi

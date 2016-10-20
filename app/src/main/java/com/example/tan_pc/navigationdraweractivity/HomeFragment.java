@@ -67,14 +67,16 @@ public class HomeFragment extends Fragment {
     GridView gridviewHome;
 
     private Uri picUri;
-    final int CROP_PIC=2;
+    final int CROP_PIC = 2;
 
     private CountDownTimer countDownTimer;
-    ArrayList <ImageSingelHome>imageArray;
-    ArrayAdapter<ImageSingelHome>adapter;
+    ArrayList<ImageSingelHome> imageArray;
+    ArrayAdapter<ImageSingelHome> adapter;
+
     public HomeFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,40 +84,51 @@ public class HomeFragment extends Fragment {
         InitializeComponent(v);
         return v;
     }
-   private void InitializeComponent(View v){
-       ReflectAndListener(v);
-       btnGalleryHome.setOnClickListener(btnClickListener);
-       btnCameraHome.setOnClickListener(btnClickListener);
-       btnSaveHome.setOnClickListener(btnClickListener);
-       btnConvertHome.setOnClickListener(btnClickListener);
-       btnSendHome.setOnClickListener(btnClickListener);
-       gridviewHome.setOnItemClickListener(onItemClickListener);
-       //gridviewHome.setCon
-       LoadImageToGridView();
-   }
-  public void LoadImageToGridView(){
-      imageArray.clear();
-      Cursor image=PROJECTDATABASE.GetData("SELECT * FROM "+TABLE_BINARY_192);
-      while (image.moveToNext()){
-          imageArray.add(new ImageSingelHome(
-                  image.getString(1),
-                  image.getLong(2),
-                  image.getLong(3),
-                  image.getBlob(4)
-          ));
-      }
-      GridAdapterHome apdaterHome= new GridAdapterHome(getContext(),R.layout.row,imageArray);
-//      gridviewHome.setAdapter(apdaterHome);
-      gridviewHome.setAdapter(apdaterHome);
-      //gridviewHome.setAdapter(null);
+
+    private void InitializeComponent(View v) {
+        try {
+            ReflectAndListener(v);
+            btnGalleryHome.setOnClickListener(btnClickListener);
+            btnCameraHome.setOnClickListener(btnClickListener);
+            btnSaveHome.setOnClickListener(btnClickListener);
+            btnConvertHome.setOnClickListener(btnClickListener);
+            btnSendHome.setOnClickListener(btnClickListener);
+            gridviewHome.setOnItemClickListener(onItemClickListener);
+            //gridviewHome.setCon
+            LoadImageToGridView();
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
+        }
     }
-    private  AdapterView.OnItemClickListener onItemClickListener= new AdapterView.OnItemClickListener() {
+
+    public void LoadImageToGridView() {
+        try {
+            imageArray.clear();
+            Cursor image = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_BINARY_192);
+            while (image.moveToNext()) {
+                imageArray.add(new ImageSingelHome(
+                        image.getString(1),
+                        image.getLong(2),
+                        image.getLong(3),
+                        image.getBlob(4)
+                ));
+            }
+            GridAdapterHome apdaterHome = new GridAdapterHome(getContext(), R.layout.row, imageArray);
+//      gridviewHome.setAdapter(apdaterHome);
+            gridviewHome.setAdapter(apdaterHome);
+            //gridviewHome.setAdapter(null);
+        } catch (Exception e) {
+            ToastShow(e.getMessage().toString());
+        }
+    }
+
+    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            try{
+            try {
 //                PROJECTDATABASE.DETELE__BINARY_192Valves((int)id);
 //                LoadImageToGridView();
-            }catch (Exception e){
+            } catch (Exception e) {
 //                ToastShow(e.getMessage().toString());
             }
         }
@@ -123,24 +136,30 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.btnGalleryHome:
-                    ButtonGalleryClicked();
-                    break;
-                case R.id.btnCameraHome:
-                    ButtonCameraClicked();
-                    break;
-                case R.id.btnSaveHome:
-                    ButtonSaveClicked();
-                    break;
-                case R.id.btnConvertHome:
-                    break;
-                case R.id.btnSendHome:
-                    break;
+            try {
+                switch (view.getId()) {
+                    case R.id.btnGalleryHome:
+                        ButtonGalleryClicked();
+                        break;
+                    case R.id.btnCameraHome:
+                        ButtonCameraClicked();
+                        break;
+                    case R.id.btnSaveHome:
+                        ButtonSaveClicked();
+                        break;
+                    case R.id.btnConvertHome:
+                        break;
+                    case R.id.btnSendHome:
+                        break;
+                }
+            } catch (Exception e) {
+                ToastShow(e.getMessage().toString());
             }
+
         }
     };
-    public void ButtonSaveClicked(){
+
+    public void ButtonSaveClicked() {
         try {
 //            String s=String.valueOf(PROJECTDATABASE.CountImage192Valves());
             long yourmilliseconds = System.currentTimeMillis();
@@ -149,24 +168,24 @@ public class HomeFragment extends Fragment {
             System.out.println(sdf.format(resultdate));
             //ToastShow(s);
             PROJECTDATABASE.INSERT_BINARY_192Valves(
-                    "Image192_"+sdf.format(resultdate),
+                    "Image192_" + sdf.format(resultdate),
                     192,
                     192,
                     ImageView_To_Byte(imageViewColorImageHome)
             );
             LoadImageToGridView();
             ToastShow("Binary Image Has Been Saved!");
-        }catch (Exception e){
-            if(e.getMessage().toString().contains("UNIQUE")){
+        } catch (Exception e) {
+            if (e.getMessage().toString().contains("UNIQUE")) {
                 ToastShow("This image already exists! ");
-            }
-            else if(e.getMessage().toString().contains("Attempt to invoke virtual method 'android.graphics.Bitmap")){
+            } else if (e.getMessage().toString().contains("Attempt to invoke virtual method 'android.graphics.Bitmap")) {
                 ToastShow("Nothing to save!");
-            }
-            else ToastShow("Failed When Saving Image. Error Detail:\n\t"+e.getMessage().toString());
+            } else
+                ToastShow("Failed When Saving Image. Error Detail:\n\t" + e.getMessage().toString());
         }
     }
-//    public void RefreshGridview(){
+
+    //    public void RefreshGridview(){
 ////        Cursor image=PROJECTDATABASE.GetData("SELECT * FROM "+TABLE_BINARY_192);
 ////        while (image.moveToNext()){
 ////            imageArray.add(new ImageSingelHome(
@@ -180,37 +199,39 @@ public class HomeFragment extends Fragment {
 ////      gridviewHome.setAdapter(apdaterHome);;
 //        gridviewHome.setAdapter(apdaterHome);
 //    }
-    public void ButtonGalleryClicked(){
+    public void ButtonGalleryClicked() {
         try {
-            Intent gallery = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             gallery.setType("image/*");
             gallery.putExtra("crop", "true");
             //gallery.putExtra("scale", true);
             gallery.putExtra("return-data", true);
-            startActivityForResult(gallery,1111);
+            startActivityForResult(gallery, 1111);
             /***
              *Intent intent = new Intent();
              *intent.setType("image/*");
              *intent.setAction(Intent.ACTION_GET_CONTENT);
              * startActivityForResult(Intent.createChooser(intent, "Select Image"), 1111);
              *   *Luu ANh dang URI*
-           */
-        }catch (Exception e){
+             */
+        } catch (Exception e) {
             ToastShow("This device doesn't support this action!");
         }
     }
-    public void  ButtonCameraClicked(){
+
+    public void ButtonCameraClicked() {
         try {
             Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             camera.putExtra("scale", true);
             camera.putExtra("crop", "true");
             camera.putExtra("return-data", true);
-            startActivityForResult(camera,8888);
-        }catch (Exception e){
+            startActivityForResult(camera, 8888);
+        } catch (Exception e) {
             ToastShow("This device doesn't support Camera!");
         }
 
     }
+
     /**
      * this function does the crop operation.
      */
@@ -242,82 +263,102 @@ public class HomeFragment extends Fragment {
             toast.show();
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode==RESULT_OK){
-            if(requestCode==1111){
-                Bitmap photo = (Bitmap)data.getParcelableExtra("data");
-            imageViewColorImageHome.setImageBitmap(photo);
-                //                imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
-            }else if(requestCode==8888){
+        try {
+            if (resultCode == RESULT_OK) {
+                if (requestCode == 1111) {
+                    Bitmap photo = (Bitmap) data.getParcelableExtra("data");
+                    imageViewColorImageHome.setImageBitmap(photo);
+                    //                imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
+                } else if (requestCode == 8888) {
 //                Bitmap photo = (Bitmap)data.getExtras().get("data");
 //            imageViewColorImageHome.setImageBitmap(photo);
-                picUri = data.getData();
-                performCrop();
-            }   else if (requestCode == CROP_PIC) {
-                // get the returned data
-                Bundle extras = data.getExtras();
-                // get the cropped bitmap
-                Bitmap thePic = extras.getParcelable("data");
-                imageViewColorImageHome.setImageBitmap(thePic);
+                    picUri = data.getData();
+                    performCrop();
+                } else if (requestCode == CROP_PIC) {
+                    // get the returned data
+                    Bundle extras = data.getExtras();
+                    // get the cropped bitmap
+                    Bitmap thePic = extras.getParcelable("data");
+                    imageViewColorImageHome.setImageBitmap(thePic);
+                }
+
             }
 
+        } catch (Exception e) {
+            ToastShow(e.getMessage().toString());
         }
     }
 
-    private void ReflectAndListener(View v){
-         txtColorHome = (TextView)v.findViewById(R.id.txtColorHome);
-         txtBinaryImageViewHome = (TextView)v.findViewById(R.id.txtBinaryImageViewHome);
-         txtPickImageFromHome = (TextView)v.findViewById(R.id.txtPickImageFromHome);
-         txtSaveSend = (TextView)v.findViewById(R.id.txtSaveSend);
-         txtDatabaseHome = (TextView)v.findViewById(R.id.txtDatabaseHome);
+    private void ReflectAndListener(View v) {
+        try {
+            txtColorHome = (TextView) v.findViewById(R.id.txtColorHome);
+            txtBinaryImageViewHome = (TextView) v.findViewById(R.id.txtBinaryImageViewHome);
+            txtPickImageFromHome = (TextView) v.findViewById(R.id.txtPickImageFromHome);
+            txtSaveSend = (TextView) v.findViewById(R.id.txtSaveSend);
+            txtDatabaseHome = (TextView) v.findViewById(R.id.txtDatabaseHome);
 
-         imageViewColorImageHome = (ImageView)v.findViewById(R.id.imageViewColorImageHome);
-         imageViewBinaryImageHome = (ImageView)v.findViewById(R.id.imageViewBinaryImageHome);
+            imageViewColorImageHome = (ImageView) v.findViewById(R.id.imageViewColorImageHome);
+            imageViewBinaryImageHome = (ImageView) v.findViewById(R.id.imageViewBinaryImageHome);
 
-         btnGalleryHome = (Button)v.findViewById(R.id.btnGalleryHome);
-         btnCameraHome = (Button)v.findViewById(R.id.btnCameraHome);
-         btnSaveHome = (Button)v.findViewById(R.id.btnSaveHome);
-         btnConvertHome = (Button)v.findViewById(R.id.btnConvertHome);
-         btnSendHome = (Button)v.findViewById(R.id.btnSendHome);
+            btnGalleryHome = (Button) v.findViewById(R.id.btnGalleryHome);
+            btnCameraHome = (Button) v.findViewById(R.id.btnCameraHome);
+            btnSaveHome = (Button) v.findViewById(R.id.btnSaveHome);
+            btnConvertHome = (Button) v.findViewById(R.id.btnConvertHome);
+            btnSendHome = (Button) v.findViewById(R.id.btnSendHome);
 
-         gridviewHome = (GridView)v.findViewById(R.id.gridviewHome);
+            gridviewHome = (GridView) v.findViewById(R.id.gridviewHome);
 
-        imageArray=new ArrayList<ImageSingelHome>();
-        //adapter=new ArrayAdapter<ImageSingelHome>(getContext(),R.layout.row,imageArray);
+            imageArray = new ArrayList<ImageSingelHome>();
+            //adapter=new ArrayAdapter<ImageSingelHome>(getContext(),R.layout.row,imageArray);
+        } catch (Exception e) {
+            ToastShow(e.getMessage().toString());
+        }
+
     }
+
     //khi xoay man hinh thi khong bi giu nguyen layout
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        BackupComponen();
-        ViewGroup rootView = (ViewGroup) getView();
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View newview = inflater.inflate(R.layout.fragment_home, rootView, false);
-        rootView.removeAllViews();
-        rootView.addView(newview);
-        //Restore Values
-        InitializeComponent(newview);
-        RecoverValuesComponent();
-    }
-    private  void BackupComponen(){
+        try {
+            super.onConfigurationChanged(newConfig);
+            BackupComponen();
+            ViewGroup rootView = (ViewGroup) getView();
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View newview = inflater.inflate(R.layout.fragment_home, rootView, false);
+            rootView.removeAllViews();
+            rootView.addView(newview);
+            //Restore Values
+            InitializeComponent(newview);
+            RecoverValuesComponent();
+        } catch (Exception e) {
+            ToastShow(e.getMessage().toString());
+        }
 
     }
-    private void RecoverValuesComponent(){
+
+    private void BackupComponen() {
 
     }
-    public byte[] ImageView_To_Byte(ImageView imgv){
 
-        BitmapDrawable drawable = (BitmapDrawable) imgv.getDrawable();
-        Bitmap bmp = drawable.getBitmap();
+    private void RecoverValuesComponent() {
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
     }
-    private void ToastShow(String s){
-        Toast.makeText(getContext(),s,Toast.LENGTH_SHORT).show();
+
+    public byte[] ImageView_To_Byte(ImageView imgv) {
+            BitmapDrawable drawable = (BitmapDrawable) imgv.getDrawable();
+            Bitmap bmp = drawable.getBitmap();
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] byteArray = stream.toByteArray();
+            return byteArray;
+    }
+
+    private void ToastShow(String s) {
+        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
     }
 
 //    private void start() {
@@ -378,7 +419,7 @@ public class HomeFragment extends Fragment {
 //                .centerCrop()
 //
 //                .into(img);
-        // background.setBackgroundResource(R.drawable.icon);
+    // background.setBackgroundResource(R.drawable.icon);
 //    }
 
 

@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -268,6 +269,7 @@ public class ClockFragment extends Fragment {
     }
     void RecoverValuesComponent()
     {
+
         ColorDrawable buttonColor = (ColorDrawable) btnClockActiveB.getBackground();
         txtClockWillShowAfter.setTextColor(txtClockWillShowAfterB.getTextColors());
         txtSendingProgress.setTextColor(txtSendingProgressB.getTextColors());

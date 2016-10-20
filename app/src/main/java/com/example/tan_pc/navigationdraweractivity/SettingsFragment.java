@@ -193,15 +193,20 @@ public class SettingsFragment extends Fragment {
     }
     public void SetButtondisableOrEnable(Button btn,boolean b)
     {
-        if(b==true)
-        {
-            btn.setBackgroundColor(Color.parseColor("#269999"));
-            btn.setEnabled(true);
+        try{
+            if(b==true)
+            {
+                btn.setBackgroundColor(Color.parseColor("#269999"));
+                btn.setEnabled(true);
+            }
+            else {
+                btn.setBackgroundColor(Color.parseColor("#d3d3d3"));
+                btn.setEnabled(false);
+            }
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
         }
-        else {
-            btn.setBackgroundColor(Color.parseColor("#d3d3d3"));
-            btn.setEnabled(false);
-        }
+
     }
 
     public void ReflectAndListener(View view) {
@@ -264,12 +269,17 @@ public class SettingsFragment extends Fragment {
 
 //            switch (v.getId()) {
 //                case R.id.edt2Rows:
-            if (!hasFocus) {
-                //Switch1check(switch1.isChecked());
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
+            try{
+                if (!hasFocus) {
+                    //Switch1check(switch1.isChecked());
+                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
+                }
+            }catch (Exception e){
+                ToastShow(e.getMessage().toString());
             }
+
         }
     };
 
@@ -343,62 +353,67 @@ public class SettingsFragment extends Fragment {
     private View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.switch1:
-                    Switch1check(switch1.isChecked());
-                    break;
-                case R.id.btnApply:
-                    ButtonApplyClicked();
-                    break;
-                case R.id.btnSetDefault:
-                    ButtonDefaultClicked();
-                    break;
-                case R.id.edt2Rows:
-                    //edt2Rows.setFocusableInTouchMode(false);
-                    edt2Rows.setFocusable(true);
-                    edt2Rows.requestFocus();
-                    edt2Rows.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+            try{
+                switch (view.getId()) {
+                    case R.id.switch1:
+                        Switch1check(switch1.isChecked());
+                        break;
+                    case R.id.btnApply:
+                        ButtonApplyClicked();
+                        break;
+                    case R.id.btnSetDefault:
+                        ButtonDefaultClicked();
+                        break;
+                    case R.id.edt2Rows:
+                        //edt2Rows.setFocusableInTouchMode(false);
+                        edt2Rows.setFocusable(true);
+                        edt2Rows.requestFocus();
+                        edt2Rows.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
 
-                    break;
-                case R.id.edt2Images:
-                    //edt2Images.setFocusableInTouchMode(true);
-                    edt2Images.setFocusable(true);
-                    edt2Images.requestFocus();
-                    edt2Images.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
-                    //showKeyBoard(edt2Images);
-                    break;
-                case R.id.edtThreshold:
-                    //edtThreshold.setFocusableInTouchMode(true);
-                    edtThreshold.setFocusable(true);
-                    edtThreshold.requestFocus();
-                    edtThreshold.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
-                    //showKeyBoard(edtThreshold);
+                        break;
+                    case R.id.edt2Images:
+                        //edt2Images.setFocusableInTouchMode(true);
+                        edt2Images.setFocusable(true);
+                        edt2Images.requestFocus();
+                        edt2Images.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+                        //showKeyBoard(edt2Images);
+                        break;
+                    case R.id.edtThreshold:
+                        //edtThreshold.setFocusableInTouchMode(true);
+                        edtThreshold.setFocusable(true);
+                        edtThreshold.requestFocus();
+                        edtThreshold.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+                        //showKeyBoard(edtThreshold);
 
-                    break;
-                case R.id.edtIP:
-                    //edtIP.setError(null);
-                    //edtIP.setFocusableInTouchMode(true);
-                    edtIP.setFocusable(true);
-                    edtIP.requestFocus();
-                    edtIP.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
-                    //showKeyBoard(edtIP);
+                        break;
+                    case R.id.edtIP:
+                        //edtIP.setError(null);
+                        //edtIP.setFocusableInTouchMode(true);
+                        edtIP.setFocusable(true);
+                        edtIP.requestFocus();
+                        edtIP.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+                        //showKeyBoard(edtIP);
 
 
-                    break;
-                case R.id.edtPort:
-                    //edtPort.setFocusableInTouchMode(true);
-                    edtPort.setFocusable(true);
-                    edtPort.requestFocus();
-                    edtPort.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
-                    //showKeyBoard(edtPort);
-                    break;
-                case R.id.touchOutsideEdittext://dfg
-                    edtIP.setError(null);
-                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
-                    break;
+                        break;
+                    case R.id.edtPort:
+                        //edtPort.setFocusableInTouchMode(true);
+                        edtPort.setFocusable(true);
+                        edtPort.requestFocus();
+                        edtPort.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+                        //showKeyBoard(edtPort);
+                        break;
+                    case R.id.touchOutsideEdittext://dfg
+                        edtIP.setError(null);
+                        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                        InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
+                        break;
+                }
+            }catch (Exception e){
+                ToastShow(e.getMessage().toString());
             }
+
         }
     };
 
@@ -464,7 +479,7 @@ public class SettingsFragment extends Fragment {
             Editable editObj = edt.getText();
             Selection.setSelection(editObj, position);
         }catch (Exception e){
-           // Toast
+           ToastShow(e.getMessage().toString());
         }
 
     }
@@ -490,184 +505,221 @@ public void ToastShow(String s){
     }
 
     public void ButtonDefaultClicked() {
-        Switch1check(true);
-        edtIP.setError(null);
-        edt2Rows.setText("150");
-        edt2Images.setText("2000");
-        edtThreshold.setText("128");
-        edtIP.setText("192.168.101.1");
-        edtPort.setText("8888");
-        spinLanguages.setSelection(0);
-        spinThems.setSelection(0);
-        spinValves.setSelection(0);
+        try{
+            Switch1check(true);
+            edtIP.setError(null);
+            edt2Rows.setText("150");
+            edt2Images.setText("2000");
+            edtThreshold.setText("128");
+            edtIP.setText("192.168.101.1");
+            edtPort.setText("8888");
+            spinLanguages.setSelection(0);
+            spinThems.setSelection(0);
+            spinValves.setSelection(0);
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
+        }
+
     }
 
     //switch=checked =>enable edit else disable
     public void Switch1check(boolean b) {
         // spinnerLoad(b);
-        spinValves.setEnabled(b);
-        spinLanguages.setEnabled(b);
-        spinThems.setEnabled(b);
-        edt2Rows.setEnabled(b);
-        edt2Images.setEnabled(b);
-        edtThreshold.setEnabled(b);
-        edtIP.setEnabled(b);
-        edtPort.setEnabled(b);
-        edt2Rows.setFocusableInTouchMode(b);
-        edt2Rows.setFocusable(b);
-        edt2Images.setFocusableInTouchMode(b);
-        edt2Images.setFocusable(b);
-        edtThreshold.setFocusableInTouchMode(b);
-        edtThreshold.setFocusable(b);
-        edtIP.setFocusableInTouchMode(b);
-        edtIP.setFocusable(b);
-        edtPort.setFocusableInTouchMode(b);
-        edtPort.setFocusable(b);
-        SetButtondisableOrEnable(btnDefault,b);
-        SetButtondisableOrEnable(btnApply,false);
-        if (b == true) {
+        try{
+            spinValves.setEnabled(b);
+            spinLanguages.setEnabled(b);
+            spinThems.setEnabled(b);
+            edt2Rows.setEnabled(b);
+            edt2Images.setEnabled(b);
+            edtThreshold.setEnabled(b);
+            edtIP.setEnabled(b);
+            edtPort.setEnabled(b);
+            edt2Rows.setFocusableInTouchMode(b);
+            edt2Rows.setFocusable(b);
+            edt2Images.setFocusableInTouchMode(b);
+            edt2Images.setFocusable(b);
+            edtThreshold.setFocusableInTouchMode(b);
+            edtThreshold.setFocusable(b);
+            edtIP.setFocusableInTouchMode(b);
+            edtIP.setFocusable(b);
+            edtPort.setFocusableInTouchMode(b);
+            edtPort.setFocusable(b);
+            SetButtondisableOrEnable(btnDefault,b);
+            SetButtondisableOrEnable(btnApply,false);
+            if (b == true) {
 
-            edtIP.setTextColor(Color.parseColor("#269999"));
-            edtPort.setTextColor(Color.parseColor("#269999"));
-            edt2Rows.setTextColor(Color.parseColor("#269999"));
-            edt2Images.setTextColor(Color.parseColor("#269999"));
-            edtThreshold.setTextColor(Color.parseColor("#269999"));
-            //          edtIP.setBackground(originalDrawable2Rows);
-        } else {
+                edtIP.setTextColor(Color.parseColor("#269999"));
+                edtPort.setTextColor(Color.parseColor("#269999"));
+                edt2Rows.setTextColor(Color.parseColor("#269999"));
+                edt2Images.setTextColor(Color.parseColor("#269999"));
+                edtThreshold.setTextColor(Color.parseColor("#269999"));
+                //          edtIP.setBackground(originalDrawable2Rows);
+            } else {
 
-            DisplaySettingsValue();
-            edtIP.setTextColor(Color.parseColor("#d3d3d3"));
-            edtPort.setTextColor(Color.parseColor("#d3d3d3"));
-            edt2Rows.setTextColor(Color.parseColor("#d3d3d3"));
-            edt2Images.setTextColor(Color.parseColor("#d3d3d3"));
-            edtThreshold.setTextColor(Color.parseColor("#d3d3d3"));
+                DisplaySettingsValue();
+                edtIP.setTextColor(Color.parseColor("#d3d3d3"));
+                edtPort.setTextColor(Color.parseColor("#d3d3d3"));
+                edt2Rows.setTextColor(Color.parseColor("#d3d3d3"));
+                edt2Images.setTextColor(Color.parseColor("#d3d3d3"));
+                edtThreshold.setTextColor(Color.parseColor("#d3d3d3"));
 
+            }
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
         }
+
     }
 
     void spinnerLoad(boolean boo) {
-        if (boo == true) {
-            //Load Valves enanble Color
-            valves = getActivity().getResources().getStringArray(R.array.valvesEnable);
-            //Load Languages enable Color
-        } else {
-            //Load Valves Disable Color
-            valves = getActivity().getResources().getStringArray(R.array.valvesDisable);
-            //Load Languages Disable Color
-        }
-        languages = getActivity().getResources().getStringArray(R.array.languagesEnable);
-        //Valves Adapter
-        for (int i = 0; i < valves.length; i++) {
-            spannedStringsValves[i] = Html.fromHtml(valves[i]);
-        }
-        spinValves.setAdapter(new ArrayAdapter<CharSequence>(getActivity(),
-                R.layout.support_simple_spinner_dropdown_item, spannedStringsValves));
-        //languages Adapter
+        try{
+            if (boo == true) {
+                //Load Valves enanble Color
+                valves = getActivity().getResources().getStringArray(R.array.valvesEnable);
+                //Load Languages enable Color
+            } else {
+                //Load Valves Disable Color
+                valves = getActivity().getResources().getStringArray(R.array.valvesDisable);
+                //Load Languages Disable Color
+            }
+            languages = getActivity().getResources().getStringArray(R.array.languagesEnable);
+            //Valves Adapter
+            for (int i = 0; i < valves.length; i++) {
+                spannedStringsValves[i] = Html.fromHtml(valves[i]);
+            }
+            spinValves.setAdapter(new ArrayAdapter<CharSequence>(getActivity(),
+                    R.layout.support_simple_spinner_dropdown_item, spannedStringsValves));
+            //languages Adapter
 
-        for (int i = 0; i < languages.length; i++) {
-            spannedStringsLanguages[i] = Html.fromHtml(languages[i]);
+            for (int i = 0; i < languages.length; i++) {
+                spannedStringsLanguages[i] = Html.fromHtml(languages[i]);
+            }
+            spinLanguages.setAdapter(new ArrayAdapter<CharSequence>(getActivity(),
+                    R.layout.support_simple_spinner_dropdown_item, spannedStringsLanguages));
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
         }
-        spinLanguages.setAdapter(new ArrayAdapter<CharSequence>(getActivity(),
-                R.layout.support_simple_spinner_dropdown_item, spannedStringsLanguages));
+
     }
 
     private void BackupComponen() {
-        Button btnDefaultB;
-        edtIPB = edtIP;
-        edtPortB = edtPort;
-        edt2RowsB = edt2Rows;
-        edt2ImagesB = edt2Images;
-        edtThresholdB = edtThreshold;
-        spinValvesB = spinValves.getSelectedItemPosition();
-        spinLanguagesB = spinLanguages.getSelectedItemPosition();
-        spinThemsB = spinThems.getSelectedItemPosition();
+        try{
+            Button btnDefaultB;
+            edtIPB = edtIP;
+            edtPortB = edtPort;
+            edt2RowsB = edt2Rows;
+            edt2ImagesB = edt2Images;
+            edtThresholdB = edtThreshold;
+            spinValvesB = spinValves.getSelectedItemPosition();
+            spinLanguagesB = spinLanguages.getSelectedItemPosition();
+            spinThemsB = spinThems.getSelectedItemPosition();
+            switch1B = switch1;
+            btnApplyB = btnApply;
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
+        }
 
-        switch1B = switch1;
-        btnApplyB = btnApply;
     }
     private void RecoverValuesComponent() {
-        //Save status of all component Setting Fragment Before Screen Configchanged
-        switch1.setChecked(switch1B.isChecked());
-        edtIP.setText(edtIPB.getText());
-        edtPort.setText(edtPortB.getText());
-        edt2Rows.setText(edt2RowsB.getText());
-        edt2Images.setText(edt2ImagesB.getText());
-        edtThreshold.setText(edtThresholdB.getText());
-        spinValves.setSelection(spinValvesB);
-        spinLanguages.setSelection(spinLanguagesB);
-        spinThems.setSelection(spinThemsB);
+        try {
+            //Save status of all component Setting Fragment Before Screen Configchanged
+            switch1.setChecked(switch1B.isChecked());
+            edtIP.setText(edtIPB.getText());
+            edtPort.setText(edtPortB.getText());
+            edt2Rows.setText(edt2RowsB.getText());
+            edt2Images.setText(edt2ImagesB.getText());
+            edtThreshold.setText(edtThresholdB.getText());
+            spinValves.setSelection(spinValvesB);
+            spinLanguages.setSelection(spinLanguagesB);
+            spinThems.setSelection(spinThemsB);
 
+
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
+        }
     }
 
     //Format Ip in EditText
     private void IPformat(EditText edt) {
-        InputFilter[] filters = new InputFilter[1];
-        filters[0] = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end,
-                                       android.text.Spanned dest, int dstart, int dend) {
-                if (end > start) {
-                    String destTxt = dest.toString();
-                    String resultingTxt = destTxt.substring(0, dstart) + source.subSequence(start, end) + destTxt.substring(dend);
-                    if (!resultingTxt.matches("^\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3})?)?)?)?)?)?")) {
-                        return "";
-                    } else {
-                        String[] splits = resultingTxt.split("\\.");
-                        for (int i = 0; i < splits.length; i++) {
-                            if (Integer.valueOf(splits[i]) > 255) {
-                                return "";
+        try {
+            InputFilter[] filters = new InputFilter[1];
+            filters[0] = new InputFilter() {
+                @Override
+                public CharSequence filter(CharSequence source, int start, int end,
+                                           android.text.Spanned dest, int dstart, int dend) {
+                    if (end > start) {
+                        String destTxt = dest.toString();
+                        String resultingTxt = destTxt.substring(0, dstart) + source.subSequence(start, end) + destTxt.substring(dend);
+                        if (!resultingTxt.matches("^\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3})?)?)?)?)?)?")) {
+                            return "";
+                        } else {
+                            String[] splits = resultingTxt.split("\\.");
+                            for (int i = 0; i < splits.length; i++) {
+                                if (Integer.valueOf(splits[i]) > 255) {
+                                    return "";
+                                }
                             }
                         }
                     }
+                    return null;
                 }
-                return null;
-            }
 
-        };
-        edt.setFilters(filters);
+            };
+            edt.setFilters(filters);
+        }catch ( Exception e){
+            ToastShow(e.getMessage().toString());
+        }
     }
 
     //Define Port
     private void PortFormat(EditText edt) {
-        InputFilter[] filters = new InputFilter[1];
-        filters[0] = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end,
-                                       android.text.Spanned dest, int dstart, int dend) {
-                if (end > start) {
-                    String destTxt = dest.toString();
-                    String resultingTxt = destTxt.substring(0, dstart) + source.subSequence(start, end) + destTxt.substring(dend);
-                    if (!resultingTxt.matches("^\\d{1,5}")) {
-                        return "";
-                    } else {
-                        String[] splits = resultingTxt.split("\\.");
-                        for (int i = 0; i < splits.length; i++) {
-                            if (Integer.valueOf(splits[i]) > 65535) {
-                                return "";
+        try{
+            InputFilter[] filters = new InputFilter[1];
+            filters[0] = new InputFilter() {
+                @Override
+                public CharSequence filter(CharSequence source, int start, int end,
+                                           android.text.Spanned dest, int dstart, int dend) {
+                    if (end > start) {
+                        String destTxt = dest.toString();
+                        String resultingTxt = destTxt.substring(0, dstart) + source.subSequence(start, end) + destTxt.substring(dend);
+                        if (!resultingTxt.matches("^\\d{1,5}")) {
+                            return "";
+                        } else {
+                            String[] splits = resultingTxt.split("\\.");
+                            for (int i = 0; i < splits.length; i++) {
+                                if (Integer.valueOf(splits[i]) > 65535) {
+                                    return "";
+                                }
                             }
                         }
                     }
+                    return null;
                 }
-                return null;
-            }
 
-        };
-        edt.setFilters(filters);
+            };
+            edt.setFilters(filters);
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
+        }
+
     }
 
     //khi xoay man hinh thi khong bi giu nguyen layout
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        BackupComponen();
-        ViewGroup rootView = (ViewGroup) getView();
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View newview = inflater.inflate(R.layout.fragment_settings, rootView, false);
-        rootView.removeAllViews();
-        rootView.addView(newview);
-        //Restore Values
-        InitializeComponent(newview);
-        RecoverValuesComponent();
+        try{
+            super.onConfigurationChanged(newConfig);
+            BackupComponen();
+            ViewGroup rootView = (ViewGroup) getView();
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View newview = inflater.inflate(R.layout.fragment_settings, rootView, false);
+            rootView.removeAllViews();
+            rootView.addView(newview);
+            //Restore Values
+            InitializeComponent(newview);
+            RecoverValuesComponent();
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
+        }
     }
 
 
@@ -677,11 +729,16 @@ public void ToastShow(String s){
         Context context;
 
         public SpinnerAdapter(Context context) {
-            this.context = context;
-            colors = new ArrayList<Integer>();
-            int retrieve[] = context.getResources().getIntArray(R.array.androidcolors);
-            for (int re : retrieve) {
-                colors.add(re);
+            try{
+                this.context = context;
+                colors = new ArrayList<Integer>();
+                int retrieve[] = context.getResources().getIntArray(R.array.androidcolors);
+                for (int re : retrieve) {
+                    colors.add(re);
+                }
+            }catch (Exception e)
+            {
+                ToastShow(e.getMessage().toString());
             }
         }
 

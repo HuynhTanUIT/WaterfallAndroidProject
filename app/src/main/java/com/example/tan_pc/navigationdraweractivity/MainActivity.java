@@ -49,21 +49,21 @@ import static SettingsSQLite.SqliteHelper.TABLE_SETTINGS;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    static  SqliteHelper PROJECTDATABASE;
-    final  static String DATABASENAME="db_Waterfall";
+    static SqliteHelper PROJECTDATABASE;
+    final static String DATABASENAME = "db_Waterfall";
     public RelativeLayout rHome;
     public RelativeLayout rDisplayText;
     public RelativeLayout rClock;
     public RelativeLayout rImport;
     public RelativeLayout rPaint;
     public RelativeLayout rSettings;
-//    public RelativeLayout rHomeB;
+    //    public RelativeLayout rHomeB;
 //    public RelativeLayout rDisplayTextB;
 //    public RelativeLayout rClockB;
 //    public RelativeLayout rImportB;
 //    public RelativeLayout rPaintB;
 //    public RelativeLayout rSettingsB;
-    int countBackButtonPress=0;
+    int countBackButtonPress = 0;
     DrawerLayout backupmainApp;
     Button btSlideShow;
     int sttfragment = 0;//trang thai dang o fragment nao 0=home; 1=Displaytext;2=Clock; 3=Import....
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity
     ClockFragment clockFragment = new ClockFragment();
     HomeFragment homeFragment = new HomeFragment();
     FragmentManager manager = getSupportFragmentManager();
+
     //Hide Keyboard if click app recent button if keyboard in showing
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,31 +92,32 @@ public class MainActivity extends AppCompatActivity
 //        FragmentShow(3);
 //        FragmentShow(2);
 //        FragmentShow(1);
+        FragmentShow(5);
         FragmentShow(0);
         Log.e("Show Hom: ", "Fragment 0");
     }
+
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         Log.d("Focus debug", "Focus changed !");
         if (!hasFocus) {
             View view = this.getCurrentFocus();
             if (view != null) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                countBackButtonPress=0;
+                countBackButtonPress = 0;
             }
         }
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             countBackButtonPress++;
             Log.d(this.getClass().getName(), "back button pressed");
-             if (countBackButtonPress==1)
-            {
+            if (countBackButtonPress == 1) {
                 ToastShow("Press Back Again To Run In BackGround");
-            }
-            else if(countBackButtonPress==2) {
+            } else if (countBackButtonPress == 2) {
                 countBackButtonPress++;
                 moveTaskToBack(true);
             }
@@ -133,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             //Khong Tat Ung Dung Khi nhan nut Back;
             //super.onBackPressed();
-            }
+        }
     }
 
     @Override
@@ -173,22 +175,26 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void InitializeComponent() {
+        try {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+            setContentView(R.layout.activity_main);
 
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        setContentView(R.layout.activity_main);
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+            rHome = (RelativeLayout) findViewById(R.id.rHome);
+            rClock = (RelativeLayout) findViewById(R.id.rClock);
+            rDisplayText = (RelativeLayout) findViewById(R.id.rDisplayText);
+            rImport = (RelativeLayout) findViewById(R.id.rImport);
+            rPaint = (RelativeLayout) findViewById(R.id.rPaint);
+            rSettings = (RelativeLayout) findViewById(R.id.rSettings);
+            backupmainApp = (DrawerLayout) findViewById(R.id.drawer_layout);
+            //btSlideShow = (Button) findViewById(R.id.idslideshow);
+            ThreelinesLeftShow();
+            PROJECTDATABASE = new SqliteHelper(getApplicationContext(), DATABASENAME, null, 1);
+        } catch (Exception e) {
+            ToastShow(e.getMessage().toString());
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        rHome = (RelativeLayout) findViewById(R.id.rHome);
-        rClock = (RelativeLayout) findViewById(R.id.rClock);
-        rDisplayText = (RelativeLayout) findViewById(R.id.rDisplayText);
-        rImport = (RelativeLayout) findViewById(R.id.rImport);
-        rPaint = (RelativeLayout) findViewById(R.id.rPaint);
-        rSettings = (RelativeLayout) findViewById(R.id.rSettings);
-        backupmainApp=(DrawerLayout) findViewById(R.id.drawer_layout);
-        //btSlideShow = (Button) findViewById(R.id.idslideshow);
-        ThreelinesLeftShow();
-        PROJECTDATABASE=new SqliteHelper(getApplicationContext(),DATABASENAME,null,1) ;
+        }
     }
 
     //settings...
@@ -209,109 +215,137 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void ThreelinesLeftShow() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close) {
-            /**
-             * Called when a drawer has settled in a completely closed state.
-             */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-            }
+        try{
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer,
+                    toolbar,
+                    R.string.navigation_drawer_open,
+                    R.string.navigation_drawer_close) {
+                /**
+                 * Called when a drawer has settled in a completely closed state.
+                 */
+                public void onDrawerClosed(View view) {
+                    super.onDrawerClosed(view);
+                }
 
-            /**
-             * Called when a drawer has settled in a completely open state.
-             */
-            // @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-        };
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+                /**
+                 * Called when a drawer has settled in a completely open state.
+                 */
+                // @Override
+                public void onDrawerOpened(View drawerView) {
+                    super.onDrawerOpened(drawerView);
+                }
+            };
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
+        }
+
     }
 
     private void FragmentShow(int frag) {
-        switch (frag) {
-            case 0:
-                sttfragment = 0;
-                hideAllFragment();
-                rHome.setVisibility(View.VISIBLE);
-                setTitle("Graphicial Waterfall ");
-                manager.beginTransaction().replace(R.id.rHome, homeFragment).commit();
+        try{
 
-                break;
-            case 1:
-                sttfragment = 1;
-                hideAllFragment();
-                rDisplayText.setVisibility(View.VISIBLE);
-                setTitle("Display Text");
-                manager.beginTransaction().replace(R.id.rDisplayText, displayTextFragment).commit();
+            switch (frag) {
+                case 0:
+                    sttfragment = 0;
+                    hideAllFragment();
+                    rHome.setVisibility(View.VISIBLE);
+                    setTitle("Graphicial Waterfall ");
+                    manager.beginTransaction().replace(R.id.rHome, homeFragment).commit();
 
-                break;
-            case 2:
-                sttfragment = 2;
-                hideAllFragment();
-                rClock.setVisibility(View.VISIBLE);
-                setTitle("Display Clock");
-                manager.beginTransaction().replace(R.id.rClock, clockFragment).commit();
+                    break;
+                case 1:
+                    sttfragment = 1;
+                    hideAllFragment();
+                    rDisplayText.setVisibility(View.VISIBLE);
+                    setTitle("Display Text");
+                    manager.beginTransaction().replace(R.id.rDisplayText, displayTextFragment).commit();
 
-                break;
-            case 3:
-                sttfragment = 3;
-                hideAllFragment();
-                rImport.setVisibility(View.VISIBLE);
-                setTitle("Gallery");
-                manager.beginTransaction().replace(R.id.rImport, importFragment).commit();
+                    break;
+                case 2:
+                    sttfragment = 2;
+                    hideAllFragment();
+                    rClock.setVisibility(View.VISIBLE);
+                    setTitle("Display Clock");
+                    manager.beginTransaction().replace(R.id.rClock, clockFragment).commit();
 
-                break;
-            case 4:
-                sttfragment = 4;
-                hideAllFragment();
-                rPaint.setVisibility(View.VISIBLE);
-                setTitle("Display Paint");
-                manager.beginTransaction().replace(R.id.rPaint, paintFragment).commit();
+                    break;
+                case 3:
+                    sttfragment = 3;
+                    hideAllFragment();
+                    rImport.setVisibility(View.VISIBLE);
+                    setTitle("Gallery");
+                    manager.beginTransaction().replace(R.id.rImport, importFragment).commit();
 
-                break;
-            case 5: //sttfragment=5;
-                hideAllFragment();
-                rSettings.setVisibility(View.VISIBLE);
-                setTitle("Settings ");
-                manager.beginTransaction().replace(R.id.rSettings, settingsFragment).commit();
+                    break;
+                case 4:
+                    sttfragment = 4;
+                    hideAllFragment();
+                    rPaint.setVisibility(View.VISIBLE);
+                    setTitle("Display Paint");
+                    manager.beginTransaction().replace(R.id.rPaint, paintFragment).commit();
 
-                break;
-            default:
-                sttfragment = 0;
-                hideAllFragment();
-                rHome.setVisibility(View.VISIBLE);
-                setTitle("Graphicial Waterfall ");
-                manager.beginTransaction().replace(R.id.rHome, homeFragment).commit();
+                    break;
+                case 5: //sttfragment=5;
+                    hideAllFragment();
+                    rSettings.setVisibility(View.VISIBLE);
+                    setTitle("Settings ");
+                    manager.beginTransaction().replace(R.id.rSettings, settingsFragment).commit();
 
-                break;
+                    break;
+                default:
+                    sttfragment = 0;
+                    hideAllFragment();
+                    rHome.setVisibility(View.VISIBLE);
+                    setTitle("Graphicial Waterfall ");
+                    manager.beginTransaction().replace(R.id.rHome, homeFragment).commit();
+
+                    break;
+            }
+
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
         }
     }
 
     public void setTitle(String title) {
-        getSupportActionBar().setTitle(title);
+        try{
+            getSupportActionBar().setTitle(title);
+        }catch (Exception e){
+            ToastShow(e.getMessage().toString());
+        }
+
     }
 
     public void ToastShow(String frag) {
-        Toast.makeText(this, frag, Toast.LENGTH_SHORT).show();
+        try{
+            Toast.makeText(this, frag, Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+
+        }
+
     }
 
     public void hideAllFragment() {
-        rHome.setVisibility(View.GONE);
-        rClock.setVisibility(View.GONE);
-        rPaint.setVisibility(View.GONE);
-        rImport.setVisibility(View.GONE);
-        rSettings.setVisibility(View.GONE);
-        rDisplayText.setVisibility(View.GONE);
+        try{
+            rHome.setVisibility(View.GONE);
+            rClock.setVisibility(View.GONE);
+            rPaint.setVisibility(View.GONE);
+            rImport.setVisibility(View.GONE);
+            rSettings.setVisibility(View.GONE);
+            rDisplayText.setVisibility(View.GONE);
+        }catch (Exception e)
+        {
+            ToastShow(e.getMessage().toString());
+        }
+
     }
+
     /* (non-Javadoc)
 * @see android.app.Activity#dispatchTouchEvent(android.view.MotionEvent)
 */
