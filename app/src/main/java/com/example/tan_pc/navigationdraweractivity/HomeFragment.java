@@ -113,6 +113,8 @@ public class HomeFragment extends Fragment {
     private void InitializeComponent(View v) {
         try {
             ReflectAndListener(v);
+            //txt192x.setOnFocusChangeListener(txtFocusChange);
+
             btnChooseHome.setOnClickListener(btnClickListener);
             btnConvertHome.setOnClickListener(btnClickListener);
             btnSendHome.setOnClickListener(btnClickListener);
@@ -127,6 +129,45 @@ public class HomeFragment extends Fragment {
             ToastShow(e.getMessage().toString());
         }
     }
+    private View.OnFocusChangeListener edtFocusChange = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+
+//            switch (v.getId()) {
+//                case R.id.edt2Rows:
+            try{
+                if (!hasFocus) {
+                    //Switch1check(switch1.isChecked());
+                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
+                }
+            }catch (Exception e){
+                ToastShow(e.getMessage().toString());
+            }
+
+        }
+    };
+    private View.OnFocusChangeListener txtFocusChange = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+
+//            switch (v.getId()) {
+//                case R.id.edt2Rows:
+            try{
+                if (!hasFocus) {
+                    //Switch1check(switch1.isChecked());
+                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
+                }
+            }catch (Exception e){
+                ToastShow(e.getMessage().toString());
+            }
+
+        }
+    };
+
 
     public void LoadImageToGridView() {
 
@@ -160,19 +201,19 @@ public class HomeFragment extends Fragment {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-//                    case R.id.btnGalleryHome:
-//                        ButtonGalleryClicked();
-//                        break;
-                case R.id.btnCameraHome:
-                    ButtonCameraClicked();
-                    break;
-                case R.id.btnSaveHome:
-                    ButtonSaveClicked();
+//                case R.id.btnSaveHome:
+//                    ButtonSaveClicked();
+//                    break;
+                //BUTTON CLICK
+                case R.id.btnChooseHome:
+                    ButtonChooseHomeClicked();
                     break;
                 case R.id.btnConvertHome:
                     break;
                 case R.id.btnSendHome:
                     break;
+
+                //RADIO CLICK
                 case R.id.radioGallery:
                     RadioGalleryClicked();
                     break;
@@ -180,10 +221,16 @@ public class HomeFragment extends Fragment {
                     RadioCameraClicked();
                     break;
             }
-
-
         }
     };
+    private void ButtonChooseHomeClicked() {
+        if(radioCamera.isChecked()==true)
+        {
+            CameraMethod();
+        }else if(radioGallery.isChecked()==true){
+            GalleryMethod();
+        }
+    }
 
     private void RadioGalleryClicked() {
         radioCamera.setChecked(false);
@@ -236,7 +283,7 @@ public class HomeFragment extends Fragment {
 ////      gridviewHome.setAdapter(apdaterHome);;
 //        gridviewHome.setAdapter(apdaterHome);
 //    }
-    public void ButtonGalleryClicked() {
+    public void GalleryMethod() {
         try {
 //            Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //            gallery.setType("image/*");
@@ -256,7 +303,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void ButtonCameraClicked() {
+    public void CameraMethod() {
         try {
             Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             camera.putExtra("scale", true);
