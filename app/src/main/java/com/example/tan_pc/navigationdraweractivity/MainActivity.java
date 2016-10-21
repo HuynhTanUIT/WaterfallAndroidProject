@@ -62,15 +62,16 @@ public class MainActivity extends AppCompatActivity
         FragmentShow(2);
         FragmentShow(1);
         FragmentShow(5);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                Log.e("Show Hom: ", "Fragment 5");
-            }
-        });
         FragmentShow(0);
-        Log.e("Show Hom: ", "Fragment 0");
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                Log.e("Show Hom: ", "Fragment 5");
+//            }
+//        });
+//
+//        Log.e("Show Hom: ", "Fragment 0");
     }
 
     public void onWindowFocusChanged(boolean hasFocus) {

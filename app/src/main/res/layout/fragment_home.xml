@@ -5,7 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-
     android:orientation="vertical"
     android:paddingLeft="0dp">
 
@@ -14,6 +13,38 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#009688" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#009688" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/imageViewColorImageHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/disable"
+                    android:scaleType="centerInside" />
+            </LinearLayout>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="0dp"
@@ -60,6 +91,7 @@
                             android:id="@+id/radioGallery"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:checked="true"
                             android:text="Gallery"
                             android:textColor="@color/colorPrimary" />
 
@@ -78,7 +110,7 @@
                     android:layout_weight="2">
 
                     <Button
-                        android:id="@+id/btnChoose"
+                        android:id="@+id/btnChooseHome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -89,8 +121,17 @@
             </LinearLayout>
         </LinearLayout>
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.25"
+        android:orientation="horizontal">
+
         <TextView
-            android:layout_width="1dp"
+            android:layout_width="2dp"
             android:layout_height="match_parent"
             android:background="#009688" />
 
@@ -101,17 +142,26 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#009688" />
+                android:id="@+id/txtView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#009688"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="View"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:padding="5dp">
 
                 <ImageView
-                    android:id="@+id/imageViewColorImageHome"
+                    android:id="@+id/imageViewBinaryImageHome"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/disable"
@@ -119,18 +169,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#009688" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.25"
-        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -173,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:text="Threshold (Bit):"
+                        android:text="Threshold (Bit): "
                         android:textColor="@color/colorPrimary" />
 
                     <EditText
@@ -242,7 +280,7 @@
                             android:textColor="@color/colorPrimary" />
 
                         <EditText
-                            android:id="@+id/edtHeighHome"
+                            android:id="@+id/edtHeightHome"
                             android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -296,40 +334,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#009688"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:text="View"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
-
-                <ImageView
-                    android:id="@+id/imageViewBinaryImageHome"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/disable"
-                    android:scaleType="centerInside" />
-            </LinearLayout>
-
-        </LinearLayout>
-
     </LinearLayout>
 
     <LinearLayout
@@ -357,10 +361,6 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#009688" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -507,4 +507,5 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

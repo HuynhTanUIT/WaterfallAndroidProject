@@ -21,9 +21,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,20 +54,40 @@ import static android.app.Activity.RESULT_OK;
  */
 public class HomeFragment extends Fragment {
 
-    TextView txtColorHome;
-    TextView txtBinaryImageViewHome;
-    TextView txtPickImageFromHome;
-    TextView txtSaveSend;
-    TextView txtDatabaseHome;
+    TextView txtChooseImageFrom;
+    TextView txtConvertHome;
+    TextView txtThrehold;
+    TextView txtWxH;
+    TextView txt192x;
+
+    TextView txtView;
+    TextView txtSendToHardware;
+    TextView txtRepeatTimeHome;
+    TextView txtRepeatAfterHome;
+    TextView txtSendingProgressHome;
+    TextView txtpercentTextHome;
 
     ImageView imageViewColorImageHome;
     ImageView imageViewBinaryImageHome;
 
-    Button btnGalleryHome;
-    Button btnCameraHome;
-    Button btnSaveHome;
+    Button btnChooseHome;
     Button btnConvertHome;
     Button btnSendHome;
+
+    RadioButton radioGallery;
+    RadioButton radioCamera;
+
+    EditText edtThreholdHome;
+    EditText edtHeightHome;
+    EditText edtRepeatTimeHome;
+    EditText edtRepeatAfterHome;
+
+    Switch switchConfigSizeHome;
+    Switch switchActiveHome;
+
+    CheckBox checkboxConvertAndSaveHome;
+
+    ProgressBar progressBarHome;
 
     //GridView gridviewHome;
 
@@ -81,40 +106,42 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-       // InitializeComponent(v);
+        InitializeComponent(v);
         return v;
     }
 
     private void InitializeComponent(View v) {
         try {
             ReflectAndListener(v);
-            btnGalleryHome.setOnClickListener(btnClickListener);
-            btnCameraHome.setOnClickListener(btnClickListener);
-            btnSaveHome.setOnClickListener(btnClickListener);
+            btnChooseHome.setOnClickListener(btnClickListener);
             btnConvertHome.setOnClickListener(btnClickListener);
             btnSendHome.setOnClickListener(btnClickListener);
+
+
+            radioGallery.setOnClickListener(btnClickListener);
+            radioCamera.setOnClickListener(btnClickListener);
             //gridviewHome.setOnItemClickListener(onItemClickListener);
             //gridviewHome.setCon
             //LoadImageToGridView();
-        }catch (Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
     }
 
     public void LoadImageToGridView() {
 
-            imageArray.clear();
-            Cursor image = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_BINARY_192);
-            while (image.moveToNext()) {
-                imageArray.add(new ImageSingelHome(
-                        image.getString(1),
-                        image.getLong(2),
-                        image.getLong(3),
-                        image.getBlob(4)
-                ));
-            }
-            GridAdapterHome apdaterHome = new GridAdapterHome(getContext(), R.layout.row, imageArray);
-            //gridviewHome.setAdapter(apdaterHome);
+        imageArray.clear();
+        Cursor image = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_BINARY_192);
+        while (image.moveToNext()) {
+            imageArray.add(new ImageSingelHome(
+                    image.getString(1),
+                    image.getLong(2),
+                    image.getLong(3),
+                    image.getBlob(4)
+            ));
+        }
+//            GridAdapterHome apdaterHome = new GridAdapterHome(getContext(), R.layout.row, imageArray);
+//            gridviewHome.setAdapter(apdaterHome);
 
     }
 
@@ -132,25 +159,42 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-              switch (view.getId()) {
-                    case R.id.btnGalleryHome:
-                        ButtonGalleryClicked();
-                        break;
-                    case R.id.btnCameraHome:
-                        ButtonCameraClicked();
-                        break;
-                    case R.id.btnSaveHome:
-                        ButtonSaveClicked();
-                        break;
-                    case R.id.btnConvertHome:
-                        break;
-                    case R.id.btnSendHome:
-                        break;
-                }
+            switch (view.getId()) {
+//                    case R.id.btnGalleryHome:
+//                        ButtonGalleryClicked();
+//                        break;
+                case R.id.btnCameraHome:
+                    ButtonCameraClicked();
+                    break;
+                case R.id.btnSaveHome:
+                    ButtonSaveClicked();
+                    break;
+                case R.id.btnConvertHome:
+                    break;
+                case R.id.btnSendHome:
+                    break;
+                case R.id.radioGallery:
+                    RadioGalleryClicked();
+                    break;
+                case R.id.radioCamera:
+                    RadioCameraClicked();
+                    break;
+            }
 
 
         }
     };
+
+    private void RadioGalleryClicked() {
+        radioCamera.setChecked(false);
+        radioGallery.setChecked(true);
+    }
+
+    private void RadioCameraClicked() {
+        radioGallery.setChecked(false);
+        radioCamera.setChecked(true);
+    }
+
 
     public void ButtonSaveClicked() {
         try {
@@ -201,10 +245,10 @@ public class HomeFragment extends Fragment {
 //            gallery.putExtra("return-data", true);
 //            startActivityForResult(gallery, 1111);
 
-             Intent intent = new Intent();
-             intent.setType("image/*");
-             intent.setAction(Intent.ACTION_GET_CONTENT);
-              startActivityForResult(Intent.createChooser(intent, "Select Image"), 1111);
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, "Select Image"), 1111);
             // Luu ANh dang URI*
 
         } catch (Exception e) {
@@ -267,7 +311,7 @@ public class HomeFragment extends Fragment {
 //                    imageViewColorImageHome.setImageBitmap(photo);
                     picUri = data.getData();
                     performCrop();
-                                   // imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
+                    // imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
                 } else if (requestCode == 8888) {
 //                Bitmap photo = (Bitmap)data.getExtras().get("data");
 //            imageViewColorImageHome.setImageBitmap(photo);
@@ -290,25 +334,45 @@ public class HomeFragment extends Fragment {
 
     private void ReflectAndListener(View v) {
         try {
-            txtColorHome = (TextView) v.findViewById(R.id.txtColorHome);
-            txtBinaryImageViewHome = (TextView) v.findViewById(R.id.txtBinaryImageViewHome);
-            txtPickImageFromHome = (TextView) v.findViewById(R.id.txtPickImageFromHome);
-            txtSaveSend = (TextView) v.findViewById(R.id.txtSaveSend);
-            txtDatabaseHome = (TextView) v.findViewById(R.id.txtDatabaseHome);
+            txtChooseImageFrom = (TextView) v.findViewById(R.id.txtChooseImageFrom);
+            txtThrehold = (TextView) v.findViewById(R.id.txtThrehold);
+            txtWxH = (TextView) v.findViewById(R.id.txtWxH);
+            txt192x = (TextView) v.findViewById(R.id.txt192x);
+            txtView = (TextView) v.findViewById(R.id.txtView);
+            txtSendToHardware = (TextView) v.findViewById(R.id.txtSendToHardware);
+            txtRepeatTimeHome = (TextView) v.findViewById(R.id.txtRepeatTimeHome);
+            txtRepeatAfterHome = (TextView) v.findViewById(R.id.txtRepeatAfterHome);
+            txtSendingProgressHome = (TextView) v.findViewById(R.id.txtSendingProgressHome);
+            txtpercentTextHome = (TextView) v.findViewById(R.id.txtpercentTextHome);
+            txtConvertHome = (TextView) v.findViewById(R.id.txtConvertHome);
 
             imageViewColorImageHome = (ImageView) v.findViewById(R.id.imageViewColorImageHome);
             imageViewBinaryImageHome = (ImageView) v.findViewById(R.id.imageViewBinaryImageHome);
 
-            btnGalleryHome = (Button) v.findViewById(R.id.btnGalleryHome);
-            btnCameraHome = (Button) v.findViewById(R.id.btnCameraHome);
-            btnSaveHome = (Button) v.findViewById(R.id.btnSaveHome);
+            btnChooseHome = (Button) v.findViewById(R.id.btnChooseHome);
             btnConvertHome = (Button) v.findViewById(R.id.btnConvertHome);
             btnSendHome = (Button) v.findViewById(R.id.btnSendHome);
 
-           // gridviewHome = (GridView) v.findViewById(R.id.gridviewHome);
+            radioGallery = (RadioButton) v.findViewById(R.id.radioGallery);
+            radioCamera = (RadioButton) v.findViewById(R.id.radioCamera);
+
+            edtThreholdHome = (EditText) v.findViewById(R.id.edtThreholdHome);
+            edtHeightHome = (EditText) v.findViewById(R.id.edtHeightHome);
+            edtRepeatTimeHome = (EditText) v.findViewById(R.id.edtRepeatTimeHome);
+            edtRepeatAfterHome = (EditText) v.findViewById(R.id.edtRepeatAfterHome);
+
+            switchConfigSizeHome = (Switch) v.findViewById(R.id.switchConfigSizeHome);
+            switchActiveHome = (Switch) v.findViewById(R.id.switchActiveHome);
+
+            checkboxConvertAndSaveHome = (CheckBox) v.findViewById(R.id.checkboxConvertAndSaveHome);
+
+            progressBarHome = (ProgressBar) v.findViewById(R.id.progressBarHome);
+
+
+            // gridviewHome = (GridView) v.findViewById(R.id.gridviewHome);
 
             imageArray = new ArrayList<ImageSingelHome>();
-            //adapter=new ArrayAdapter<ImageSingelHome>(getContext(),R.layout.row,imageArray);
+            adapter = new ArrayAdapter<ImageSingelHome>(getContext(), R.layout.row, imageArray);
         } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
@@ -327,7 +391,7 @@ public class HomeFragment extends Fragment {
             rootView.removeAllViews();
             rootView.addView(newview);
 //            //Restore Values
-//            InitializeComponent(newview);
+            InitializeComponent(newview);
 //            RecoverValuesComponent();
         } catch (Exception e) {
             ToastShow(e.getMessage().toString());
@@ -344,13 +408,13 @@ public class HomeFragment extends Fragment {
     }
 
     public byte[] ImageView_To_Byte(ImageView imgv) {
-            BitmapDrawable drawable = (BitmapDrawable) imgv.getDrawable();
-            Bitmap bmp = drawable.getBitmap();
+        BitmapDrawable drawable = (BitmapDrawable) imgv.getDrawable();
+        Bitmap bmp = drawable.getBitmap();
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            return byteArray;
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 
     private void ToastShow(String s) {
