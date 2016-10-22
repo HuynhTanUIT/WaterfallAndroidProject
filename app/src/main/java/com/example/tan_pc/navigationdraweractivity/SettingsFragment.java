@@ -369,7 +369,6 @@ final static  int bundleApply=1;
                         edt2Rows.setFocusable(true);
                         edt2Rows.requestFocus();
                         edt2Rows.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
-
                         break;
                     case R.id.edt2Images:
                         //edt2Images.setFocusableInTouchMode(true);
@@ -436,6 +435,11 @@ final static  int bundleApply=1;
                 PROJECTDATABASE.close();
                 ToastShow("Your Settings Have Been Saved!");
 
+                Bundle isValvesChange = new Bundle();
+                isValvesChange.putString("ValvesChange",spinValves.getSelectedItem().toString());
+
+                Intent intent = getActivity().getIntent();
+                intent.putExtras(isValvesChange);
 //                Fragment fragment = new Fragment();
 //                Bundle bundle = new Bundle();
 //                bundle.putInt("resultApply", bundleApply);
@@ -708,7 +712,6 @@ public void ToastShow(String s){
         }catch (Exception e){
             ToastShow(e.getMessage().toString());
         }
-
     }
 
     //khi xoay man hinh thi khong bi giu nguyen layout
@@ -729,8 +732,6 @@ public void ToastShow(String s){
             ToastShow(e.getMessage().toString());
         }
     }
-
-
     //Color adapter
     class SpinnerAdapter extends BaseAdapter {
         ArrayList<Integer> colors;

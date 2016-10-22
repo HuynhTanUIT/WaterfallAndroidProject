@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -123,10 +126,11 @@ public class HomeFragment extends Fragment {
     private void InitializeComponent(View v) {
         try {
             ReflectAndListener(v);
+            switchConfigSizeHome.setOnCheckedChangeListener(checkedChangedListenner);
 
-
+            switchActiveHome.setOnCheckedChangeListener(checkedChangedListenner);
             //txt192x.setOnFocusChangeListener(txtFocusChange);
-//            HomeLinearLayout.setOnFocusChangeListener(LinearFocusChange);
+            HomeLinearLayout.setOnClickListener(btnClickListener);
 
             btnChooseHome.setOnClickListener(btnClickListener);
             btnConvertHome.setOnClickListener(btnClickListener);
@@ -135,10 +139,11 @@ public class HomeFragment extends Fragment {
 
             radioGallery.setOnClickListener(btnClickListener);
             radioCamera.setOnClickListener(btnClickListener);
+
+            edtHeightHome.setOnClickListener(btnClickListener);
             //LOad Values Threshold and WidthSize from database
             LoadThresholdValves();
-           // StartTimer();
-
+            StartTimer();
             //gridviewHome.setOnItemClickListener(onItemClickListener);
             //gridviewHome.setCon
             //LoadImageToGridView();
@@ -155,17 +160,103 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private CompoundButton.OnCheckedChangeListener checkedChangedListenner = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            switch (buttonView.getId()) {
+                case R.id.switchConfigSizeHome:
+                    switchConfigSizeHomecheck(switchConfigSizeHome.isChecked());
+                    break;
+                case R.id.switchActiveHome:
+                    switchActiveHomecheck(switchActiveHome.isChecked());
+                    //EnableEditText(edtRepeatAfterHome,true);
+                    break;
+            }
+        }
+    };
+
+    public void switchActiveHomecheck(boolean b) {
+        if (b == true) {
+            EnableTextView(txtRepeatTimeHome,true);
+            EnableTextView(txtRepeatAfterHome,true);
+            EnableTextView(txtSendingProgressHome,true);
+
+            EnableEditText(edtRepeatTimeHome,true);
+            EnableEditText(edtRepeatAfterHome,true);
+
+
+        }else{
+            EnableTextView(txtRepeatTimeHome,false);
+            EnableTextView(txtRepeatAfterHome,false);
+            EnableTextView(txtSendingProgressHome,false);
+
+            EnableEditText(edtRepeatTimeHome,false);
+            EnableEditText(edtRepeatAfterHome,false);
+        }
+    }
+
+    public void switchConfigSizeHomecheck(boolean b) {
+        if (b == true) {
+            EnableEditText(edtHeightHome, true);
+            edtHeightHome.setFocusable(false);
+//            edtHeightHome.requestFocus();
+//            edtHeightHome.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+        } else {
+            EnableEditText(edtHeightHome, false);
+            try {
+                int iH = imageViewColorImageHome.getDrawable().getIntrinsicHeight();//H original
+                int iW = imageViewColorImageHome.getDrawable().getIntrinsicWidth();//W original
+                // int ih = imageViewColorImageHome.getMeasuredHeight();//height of imageView
+                Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
+                while (cursorCT.moveToNext()) {
+                    int id = cursorCT.getInt(1);
+                    int NumVal = NumberOfValves(id);
+                    txt192x.setText(String.valueOf(NumVal) + " x ");
+                    int newWidth = (int) (((float) iH / iW) * NumVal);
+                    edtHeightHome.setText(String.valueOf(newWidth));
+//                    //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
+//                    ToastShow(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
+                }//
+//                ToastShow(String.valueOf(iH) +" "+ String.valueOf((float)(iH/iW)*NumberValves));
+            } catch (Exception e) {
+                edtHeightHome.setText("");
+                edtHeightHome.setEnabled(false);
+            }
+        }
+    }
+    private void EnableTextView(TextView txv, boolean b) {
+        if (b == true) {
+            txv.setEnabled(true);
+            txv.setTextColor(Color.parseColor("#125656"));
+        } else {
+            txv.setEnabled(false);
+            txv.setTextColor(Color.parseColor("#d3d3d3"));
+        }
+
+    }
+
+    private void EnableEditText(EditText edt, boolean b) {
+        if (b == true) {
+            edt.setEnabled(true);
+            edt.setTextColor(Color.parseColor("#125656"));
+
+        } else {
+            edt.setEnabled(false);
+            edt.setTextColor(Color.parseColor("#d3d3d3"));
+            edt.setFocusable(false);
+        }
+    }
 
     //Load Threshold and valve from database to TextView
     private void LoadThresholdValves() {
         try {
             Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
             while (cursorCT.moveToNext()) {
-                txt192x.setText(NumberOfValves(cursorCT.getInt(1)) + " x ");
+                txt192x.setText(String.valueOf(NumberOfValves(cursorCT.getInt(1))) + " x ");
                 //edtThreholdHome.setText(String.valueOf(cursorCT.getInt(4)));
             }
             PROJECTDATABASE.close();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -197,10 +288,9 @@ public class HomeFragment extends Fragment {
 ////                case R.id.edt2Rows:
 //            try {
 //                if (!hasFocus) {
-//                    LoadThresholdValves();
 //                }
+//                Log.e("LINEARHOME FOCUS", "onFocusChange: " );
 //            } catch (Exception e) {
-//                ToastShow(e.getMessage().toString());
 //            }
 //
 //        }
@@ -242,6 +332,24 @@ public class HomeFragment extends Fragment {
 //                    ButtonSaveClicked();
 //                    break;
                 //BUTTON CLICK
+                case R.id.edtHeightHome:
+                    edtHeightHome.setFocusable(true);
+                    edtHeightHome.setFocusableInTouchMode(true);
+                    edtHeightHome.requestFocus();
+                    edtHeightHome.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+                    break;
+                case R.id.edtRepeatTimeHome:
+                    edtRepeatTimeHome.setFocusable(true);
+                    edtRepeatTimeHome.setFocusableInTouchMode(true);
+                    edtRepeatTimeHome.requestFocus();
+                    edtRepeatTimeHome.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+                    break;
+                case R.id.edtRepeatAfterHome:
+                    edtRepeatAfterHome.setFocusable(true);
+                    edtRepeatAfterHome.setFocusableInTouchMode(true);
+                    edtRepeatAfterHome.requestFocus();
+                    edtRepeatAfterHome.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+                    break;
                 case R.id.btnChooseHome:
                     btnChooseHome.setEnabled(false);
                     ButtonChooseHomeClicked();
@@ -257,13 +365,20 @@ public class HomeFragment extends Fragment {
                 case R.id.radioCamera:
                     RadioCameraClicked();
                     break;
+                case R.id.HomeLinearLayout:
+//                    edtIP.setError(null);
+                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
+                    LoadThresholdValves();
+                    break;
             }
         }
     };
+
     private void ButtonChooseHomeClicked() {
         if (radioCamera.isChecked() == true) {
             CameraMethod();
-            btnChooseHome.setEnabled(true);
         } else if (radioGallery.isChecked() == true) {
             GalleryMethod();
             //btnChooseHome.setEnabled(true);
@@ -419,11 +534,29 @@ public class HomeFragment extends Fragment {
                     imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
                 }
             }
+            ///////////////////////////////////////////////////////////////
             btnChooseHome.setEnabled(true);
+            switchConfigSizeHome.setChecked(false);
+            switchConfigSizeHomecheck(false);
             try {
-                int iH = imageViewColorImageHome.getDrawable().getIntrinsicHeight();
-                int ih = imageViewColorImageHome.getMeasuredHeight();//height of imageView
-                ToastShow(String.valueOf(iH) +" "+ String.valueOf(ih));
+                int iH = imageViewColorImageHome.getDrawable().getIntrinsicHeight();//H original
+                int iW = imageViewColorImageHome.getDrawable().getIntrinsicWidth();//W original
+
+                // int ih = imageViewColorImageHome.getMeasuredHeight();//height of imageView
+
+                Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
+                while (cursorCT.moveToNext()) {
+
+                    int id = cursorCT.getInt(1);
+                    int NumVal = NumberOfValves(id);
+                    txt192x.setText(String.valueOf(NumVal) + " x ");
+                    int newWidth = (int) (((float) iH / iW) * NumVal);
+                    edtHeightHome.setText(String.valueOf(newWidth));
+                    //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
+                    //ToastShow(String.valueOf(iH) + " " + String.valueOf(iW) + " " + String.valueOf((float) iH / iW) + " " + newWidth);
+                }
+//
+//                ToastShow(String.valueOf(iH) +" "+ String.valueOf((float)(iH/iW)*NumberValves));
             } catch (Exception e) {
 
             }
@@ -484,26 +617,36 @@ public class HomeFragment extends Fragment {
     }
 
     //Load Database After
-//    private void StartTimer() {
-//        countDownTimer = new CountDownTimer(1000, 0) {
-//            @Override
-//            public void onTick(long l) {
-//                try {
-//                    LoadThresholdValves();
-//                }catch (Exception e){
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                countDownTimer.cancel();
-//                countDownTimer = null;
-//                StartTimer();
-//            }
-//        };
-//        countDownTimer.start();
-//    }
+    private void StartTimer() {
+        countDownTimer = new CountDownTimer(1000, 500) {
+            @Override
+            public void onTick(long l) {
+                try {
+                    //LoadThresholdValves();
+                    // isValvesChange
+                    Bundle isValvesChange = getActivity().getIntent().getExtras();
+                    if (isValvesChange != null) {
+//                        if(isValvesChange.getString("ValvesChange"))
+//                        Log.e("bulble Nullllllll ","NUll ROi");
+                        txt192x.setText(isValvesChange.getString("ValvesChange").trim() + " x ");
+                    } else {
+
+                    }
+
+                } catch (Exception e) {
+
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                countDownTimer.cancel();
+                countDownTimer = null;
+                StartTimer();
+            }
+        };
+        countDownTimer.start();
+    }
 
     //khi xoay man hinh thi khong bi giu nguyen layout
     @Override
@@ -547,32 +690,32 @@ public class HomeFragment extends Fragment {
         Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
     }
 
-    public String NumberOfValves(int id) {
-        String s = "";
+    public int NumberOfValves(int id) {
+        int s = 0;
         switch (id) {
             case 0:
-                s = "192";
+                s = 192;
                 break;
             case 1:
-                s = "160";
+                s = 160;
                 break;
             case 2:
-                s = "128";
+                s = 128;
                 break;
             case 3:
-                s = "96";
+                s = 96;
                 break;
             case 4:
-                s = "64";
+                s = 64;
                 break;
             case 5:
-                s = "32";
+                s = 32;
                 break;
             case 6:
-                s = "16";
+                s = 16;
                 break;
             case 7:
-                s = "8";
+                s = 8;
                 break;
 
         }
