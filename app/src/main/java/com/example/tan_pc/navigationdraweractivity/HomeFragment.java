@@ -772,10 +772,12 @@ public class HomeFragment extends Fragment {
         txtRepeatAfterHome.setTextColor(txtRepeatAfterHomeB.getTextColors());
         txtSendingProgressHome.setTextColor(txtSendingProgressHomeB.getTextColors());
         checkboxConvertAndSaveHome.setChecked(checkboxConvertAndSaveHomeB.isChecked());
-
-        
-        imageViewColorImageHome.setImageDrawable(imageViewColorImageHomeB.getDrawable());
-        imageViewBinaryImageHome.setImageDrawable(imageViewBinaryImageHomeB.getDrawable());
+        try {
+            imageViewColorImageHome.setImageDrawable(imageViewColorImageHomeB.getDrawable());
+            imageViewBinaryImageHome.setImageDrawable(imageViewBinaryImageHomeB.getDrawable());
+        }catch (Exception e){
+            
+        }
     }
 
     public byte[] ImageView_To_Byte(ImageView imgv) {
