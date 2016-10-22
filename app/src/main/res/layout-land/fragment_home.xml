@@ -196,7 +196,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/txtThrehold"
+                        android:id="@+id/txtThreholdHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -205,10 +205,11 @@
                         android:textColor="@color/colorPrimary" />
 
                     <EditText
+                        android:id="@+id/edtThreholdHome"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/edtThreholdHome"
+                        android:layout_toRightOf="@+id/txtThreholdHome"
                         android:ems="10"
                         android:enabled="false"
                         android:inputType="number"

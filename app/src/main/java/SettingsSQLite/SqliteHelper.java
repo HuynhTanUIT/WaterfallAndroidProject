@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.tan_pc.navigationdraweractivity.MainActivity;
@@ -43,11 +44,15 @@ public class SqliteHelper extends SQLiteOpenHelper {
     public static final String HEIGHT_BIN192_="HeightBin";
     public static final String IMAGE_BIN192="ImageBin";
 
-    
-//    public SqliteHelper(Context context) {
+    public static final String TABLE_VALVES = "ValvesTable";
+    public static final String ID_VALVES="idValves";
+
+
+    //    public SqliteHelper(Context context) {
 //        super(context, PROJECTDATABASE, null, 1);
 //        Log.e("DATABASE OPERATION","DATABASE CREATE /OPENED...");
 //    }
+
     public SqliteHelper (Context context,String name, SQLiteDatabase.CursorFactory factory,int version){
         super(context,name,factory,version);
         Log.e("DATABASE OPERATION","DATABASE CREATE /OPENED...");
@@ -62,6 +67,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
         SQLiteDatabase database=getReadableDatabase();
         return database.rawQuery(sql,null);
     }
+
     //count Row
     public long CountImage192Valves() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -80,7 +86,10 @@ public class SqliteHelper extends SQLiteOpenHelper {
     public void DETELE__BINARY_192Valves(int id){
         SQLiteDatabase db=getWritableDatabase();
         db.execSQL("DELETE FROM "+TABLE_BINARY_192+" WHERE "+ID_BIN192+"=" +String.valueOf(id));
-        db.close();
+    }
+
+    public void CreateValvesTable(SQLiteDatabase db){
+
     }
     //insert Binary Image To Database
     public void INSERT_BINARY_192Valves(String name,int width,int height, byte[] image){
@@ -93,9 +102,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
             statement.bindLong(3,height);
             statement.bindBlob(4,image);
             statement.executeInsert();
-            db.close();
-
-
     }
 
     public void CreateBinary_192Valves(SQLiteDatabase db){
@@ -149,7 +155,6 @@ public class SqliteHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS "+TABLE_SETTINGS);
             db.execSQL("DROP TABLE IF EXISTS "+TABLE_BINARY_192);
             onCreate(db);
-
 
     }
 //    //thêm bản ghi

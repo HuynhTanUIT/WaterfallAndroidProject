@@ -1,6 +1,7 @@
 package com.example.tan_pc.navigationdraweractivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -153,6 +154,7 @@ public class MainActivity extends AppCompatActivity
 
     private void InitializeComponent() {
         try {
+
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
             setContentView(R.layout.activity_main);
 
@@ -173,8 +175,7 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
-
-    //settings...
+     //settings...
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

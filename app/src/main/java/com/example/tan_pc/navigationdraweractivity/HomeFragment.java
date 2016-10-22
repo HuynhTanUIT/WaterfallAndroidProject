@@ -25,6 +25,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -44,6 +45,9 @@ import adapter.GridAdapterHome;
 import adapter.ImageSingelHome;
 
 import static SettingsSQLite.SqliteHelper.TABLE_BINARY_192;
+import static SettingsSQLite.SqliteHelper.TABLE_SETTINGS;
+import static android.content.Intent.getIntent;
+import static android.content.Intent.getIntentOld;
 import static com.example.tan_pc.navigationdraweractivity.MainActivity.PROJECTDATABASE;
 
 import static android.app.Activity.RESULT_OK;
@@ -53,10 +57,13 @@ import static android.app.Activity.RESULT_OK;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+    //Give Action ApplyClick
+    private Button btnApply;
+    private CountDownTimer countDownTimer;
 
     TextView txtChooseImageFrom;
     TextView txtConvertHome;
-    TextView txtThrehold;
+    //TextView txtThreholdHome;
     TextView txtWxH;
     TextView txt192x;
 
@@ -77,7 +84,7 @@ public class HomeFragment extends Fragment {
     RadioButton radioGallery;
     RadioButton radioCamera;
 
-    EditText edtThreholdHome;
+    //EditText edtThreholdHome;
     EditText edtHeightHome;
     EditText edtRepeatTimeHome;
     EditText edtRepeatAfterHome;
@@ -89,12 +96,15 @@ public class HomeFragment extends Fragment {
 
     ProgressBar progressBarHome;
 
+    LinearLayout HomeLinearLayout;
+
+    //truong hop bam choose nhieu hon 1 lan
+    //boolean choose=true;
     //GridView gridviewHome;
 
     private Uri picUri;
     final int CROP_PIC = 2;
 
-    private CountDownTimer countDownTimer;
     ArrayList<ImageSingelHome> imageArray;
     ArrayAdapter<ImageSingelHome> adapter;
 
@@ -113,7 +123,10 @@ public class HomeFragment extends Fragment {
     private void InitializeComponent(View v) {
         try {
             ReflectAndListener(v);
+
+
             //txt192x.setOnFocusChangeListener(txtFocusChange);
+//            HomeLinearLayout.setOnFocusChangeListener(LinearFocusChange);
 
             btnChooseHome.setOnClickListener(btnClickListener);
             btnConvertHome.setOnClickListener(btnClickListener);
@@ -122,51 +135,74 @@ public class HomeFragment extends Fragment {
 
             radioGallery.setOnClickListener(btnClickListener);
             radioCamera.setOnClickListener(btnClickListener);
+            //LOad Values Threshold and WidthSize from database
+            StartTimer();
+
             //gridviewHome.setOnItemClickListener(onItemClickListener);
             //gridviewHome.setCon
             //LoadImageToGridView();
+            // Get intent, action and MIME type
+            v.setEnabled(false);
+
+
+//            if(bundle.getInt("resultApply")==1){
+//                LoadThresholdValves();
+//            }
+//
         } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
     }
+
+
+    //Load Threshold and valve from database to TextView
+    private void LoadThresholdValves() {
+        try {
+            Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
+            while (cursorCT.moveToNext()) {
+                txt192x.setText(NumberOfValves(cursorCT.getInt(1)) + " x ");
+                //edtThreholdHome.setText(String.valueOf(cursorCT.getInt(4)));
+            }
+        }catch (Exception e){
+
+        }
+    }
+
+
     private View.OnFocusChangeListener edtFocusChange = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
 
 //            switch (v.getId()) {
 //                case R.id.edt2Rows:
-            try{
+            try {
                 if (!hasFocus) {
                     //Switch1check(switch1.isChecked());
                     getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                     InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 ToastShow(e.getMessage().toString());
             }
 
         }
     };
-    private View.OnFocusChangeListener txtFocusChange = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-
-//            switch (v.getId()) {
-//                case R.id.edt2Rows:
-            try{
-                if (!hasFocus) {
-                    //Switch1check(switch1.isChecked());
-                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
-                }
-            }catch (Exception e){
-                ToastShow(e.getMessage().toString());
-            }
-
-        }
-    };
+//    private View.OnFocusChangeListener LinearFocusChange = new View.OnFocusChangeListener() {
+//        @Override
+//        public void onFocusChange(View v, boolean hasFocus) {
+////            switch (v.getId()) {
+////                case R.id.edt2Rows:
+//            try {
+//                if (!hasFocus) {
+//                    LoadThresholdValves();
+//                }
+//            } catch (Exception e) {
+//                ToastShow(e.getMessage().toString());
+//            }
+//
+//        }
+//    };
 
 
     public void LoadImageToGridView() {
@@ -206,6 +242,7 @@ public class HomeFragment extends Fragment {
 //                    break;
                 //BUTTON CLICK
                 case R.id.btnChooseHome:
+                    btnChooseHome.setEnabled(false);
                     ButtonChooseHomeClicked();
                     break;
                 case R.id.btnConvertHome:
@@ -223,13 +260,16 @@ public class HomeFragment extends Fragment {
             }
         }
     };
+
     private void ButtonChooseHomeClicked() {
-        if(radioCamera.isChecked()==true)
-        {
+        if (radioCamera.isChecked() == true) {
             CameraMethod();
-        }else if(radioGallery.isChecked()==true){
+            btnChooseHome.setEnabled(true);
+        } else if (radioGallery.isChecked() == true) {
             GalleryMethod();
+            //btnChooseHome.setEnabled(true);
         }
+        //
     }
 
     private void RadioGalleryClicked() {
@@ -285,17 +325,21 @@ public class HomeFragment extends Fragment {
 //    }
     public void GalleryMethod() {
         try {
-//            Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//            gallery.setType("image/*");
-//            gallery.putExtra("crop", "true");
-//            //gallery.putExtra("scale", true);
-//            gallery.putExtra("return-data", true);
-//            startActivityForResult(gallery, 1111);
+            Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            gallery.setType("image/*");
+            gallery.putExtra("crop", "true");
+            //gallery.putExtra("scale", true);
+            gallery.putExtra("return-data", true);
+            //startActivityForResult(gallery, 1111);
+            startActivityForResult(Intent.createChooser(gallery, "Select Image"), 1111);
 
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select Image"), 1111);
+//            Intent intent = new Intent();
+//            intent.setType("image/*");
+//            intent.putExtra("return-data", toString());
+////            intent.putExtra("scale", true);
+////            intent.putExtra("crop", "true");
+//            intent.setAction(Intent.ACTION_GET_CONTENT);
+//            startActivityForResult(Intent.createChooser(intent, "Select Image"), 1111);
             // Luu ANh dang URI*
 
         } catch (Exception e) {
@@ -354,11 +398,11 @@ public class HomeFragment extends Fragment {
         try {
             if (resultCode == RESULT_OK) {
                 if (requestCode == 1111) {
-//                    Bitmap photo = (Bitmap) data.getParcelableExtra("data");
-//                    imageViewColorImageHome.setImageBitmap(photo);
-                    picUri = data.getData();
-                    performCrop();
-                    // imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
+                    Bitmap photo = (Bitmap) data.getParcelableExtra("data");
+                    imageViewColorImageHome.setImageBitmap(photo);
+//                    picUri = data.getData();
+//                    performCrop();
+                    //imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
                 } else if (requestCode == 8888) {
 //                Bitmap photo = (Bitmap)data.getExtras().get("data");
 //            imageViewColorImageHome.setImageBitmap(photo);
@@ -370,9 +414,21 @@ public class HomeFragment extends Fragment {
                     // get the cropped bitmap
                     Bitmap thePic = extras.getParcelable("data");
                     imageViewColorImageHome.setImageBitmap(thePic);
+                } else {
+                    picUri = data.getData();
+                    performCrop();
+                    imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
                 }
+            }
+            btnChooseHome.setEnabled(true);
+            try {
+                int iH = imageViewColorImageHome.getDrawable().getIntrinsicHeight();
+                int ih = imageViewColorImageHome.getMeasuredHeight();//height of imageView
+                ToastShow(String.valueOf(iH) +" "+ String.valueOf(ih));
+            } catch (Exception e) {
 
             }
+
 
         } catch (Exception e) {
             ToastShow(e.getMessage().toString());
@@ -381,8 +437,10 @@ public class HomeFragment extends Fragment {
 
     private void ReflectAndListener(View v) {
         try {
+            HomeLinearLayout = (LinearLayout) v.findViewById(R.id.HomeLinearLayout);
+
             txtChooseImageFrom = (TextView) v.findViewById(R.id.txtChooseImageFrom);
-            txtThrehold = (TextView) v.findViewById(R.id.txtThrehold);
+            //txtThreholdHome = (TextView) v.findViewById(R.id.txtThreholdHome);
             txtWxH = (TextView) v.findViewById(R.id.txtWxH);
             txt192x = (TextView) v.findViewById(R.id.txt192x);
             txtView = (TextView) v.findViewById(R.id.txtView);
@@ -403,7 +461,7 @@ public class HomeFragment extends Fragment {
             radioGallery = (RadioButton) v.findViewById(R.id.radioGallery);
             radioCamera = (RadioButton) v.findViewById(R.id.radioCamera);
 
-            edtThreholdHome = (EditText) v.findViewById(R.id.edtThreholdHome);
+            //edtThreholdHome = (EditText) v.findViewById(R.id.edtThreholdHome);
             edtHeightHome = (EditText) v.findViewById(R.id.edtHeightHome);
             edtRepeatTimeHome = (EditText) v.findViewById(R.id.edtRepeatTimeHome);
             edtRepeatAfterHome = (EditText) v.findViewById(R.id.edtRepeatAfterHome);
@@ -424,6 +482,24 @@ public class HomeFragment extends Fragment {
             ToastShow(e.getMessage().toString());
         }
 
+    }
+
+    //Load Database After
+    private void StartTimer() {
+        countDownTimer = new CountDownTimer(1000, 100) {
+            @Override
+            public void onTick(long l) {
+                LoadThresholdValves();
+            }
+
+            @Override
+            public void onFinish() {
+                countDownTimer.cancel();
+                countDownTimer = null;
+                StartTimer();
+            }
+        };
+        countDownTimer.start();
     }
 
     //khi xoay man hinh thi khong bi giu nguyen layout
@@ -468,6 +544,37 @@ public class HomeFragment extends Fragment {
         Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
     }
 
+    public String NumberOfValves(int id) {
+        String s = "";
+        switch (id) {
+            case 0:
+                s = "192";
+                break;
+            case 1:
+                s = "160";
+                break;
+            case 2:
+                s = "128";
+                break;
+            case 3:
+                s = "96";
+                break;
+            case 4:
+                s = "64";
+                break;
+            case 5:
+                s = "32";
+                break;
+            case 6:
+                s = "16";
+                break;
+            case 7:
+                s = "8";
+                break;
+
+        }
+        return s;
+    }
 //    private void start() {
 //        cancel();
 //        countDownTimer = new CountDownTimer(92000 * 1000, 3000) {

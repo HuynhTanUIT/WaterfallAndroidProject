@@ -61,6 +61,7 @@ import static SettingsSQLite.SqliteHelper.KEY_THEMES;
 import static SettingsSQLite.SqliteHelper.KEY_THREHOLD;
 import static SettingsSQLite.SqliteHelper.KEY_VALVES;
 import static SettingsSQLite.SqliteHelper.TABLE_SETTINGS;
+import static android.R.attr.value;
 import static com.example.tan_pc.navigationdraweractivity.MainActivity.PROJECTDATABASE;
 
 
@@ -70,7 +71,7 @@ import static com.example.tan_pc.navigationdraweractivity.MainActivity.PROJECTDA
 public class SettingsFragment extends Fragment {
 
     final String TABLE_NAME = "tblUser";
-
+final static  int bundleApply=1;
 
     SpinnerAdapter customSpinnerAdapter;
     ViewGroup container1;
@@ -432,13 +433,22 @@ public class SettingsFragment extends Fragment {
 
                 Switch1check(false);
                 switch1.setChecked(false);
+
                 ToastShow("Your Settings Have Been Saved!");
+
+//                Fragment fragment = new Fragment();
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("resultApply", bundleApply);
+//                fragment.setArguments(bundle);
+
+//                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
             } catch (Exception e) {
                 ToastShow("Failed When Saving To Database Error:\r\n"+e.getMessage().toString());
             }
         } else {
         }
     }
+
 
     public boolean checkEditTextNotnull() {
         boolean edttrue = true;
