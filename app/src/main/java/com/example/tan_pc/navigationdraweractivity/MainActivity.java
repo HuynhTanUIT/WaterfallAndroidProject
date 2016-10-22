@@ -27,7 +27,7 @@ import SettingsSQLite.SqliteHelper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    static SqliteHelper PROJECTDATABASE;
+    public static SqliteHelper PROJECTDATABASE;
     final static String DATABASENAME = "db_Waterfall";
     public RelativeLayout rHome;
     public RelativeLayout rDisplayText;

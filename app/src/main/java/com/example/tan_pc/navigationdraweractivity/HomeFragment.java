@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -43,9 +44,12 @@ import java.util.Date;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Random;
+import java.util.StringTokenizer;
 
 import adapter.GridAdapterHome;
 import adapter.ImageSingelHome;
+import classConvertBinary.ConvertBinary;
+import classConvertBinary.ConvertBinary;
 
 import static SettingsSQLite.SqliteHelper.TABLE_BINARY_192;
 import static SettingsSQLite.SqliteHelper.TABLE_HOME;
@@ -120,6 +124,8 @@ public class HomeFragment extends Fragment {
 
     ImageView imageViewColorImageHomeB;
     ImageView imageViewBinaryImageHomeB;
+
+    ConvertBinary convertBinary;
     //truong hop bam choose nhieu hon 1 lan
     //boolean choose=true;
     //GridView gridviewHome;
@@ -239,10 +245,10 @@ public class HomeFragment extends Fragment {
                     int id = cursorCT.getInt(1);
                     int NumVal = NumberOfValves(id);
                     txt192x.setText(String.valueOf(NumVal) + " x ");
-                    int newWidth = (int) (((float) iH / iW) * NumVal);
-                    edtHeightHome.setText(String.valueOf(newWidth));
-//                    //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
-//                    ToastShow(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
+                    int newHeight = (int) (((float) iH / iW) * NumVal);
+                    edtHeightHome.setText(String.valueOf(newHeight));
+//                    //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newHeight);
+//                    ToastShow(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newHeight);
                 }//
 //                ToastShow(String.valueOf(iH) +" "+ String.valueOf((float)(iH/iW)*NumberValves));
             } catch (Exception e) {
@@ -379,6 +385,8 @@ public class HomeFragment extends Fragment {
                     ButtonChooseHomeClicked();
                     break;
                 case R.id.btnConvertHome:
+
+                    ButtonConvertHomeClicked();
                     break;
                 case R.id.btnSendHome:
                     break;
@@ -402,6 +410,39 @@ public class HomeFragment extends Fragment {
             }
         }
     };
+    private void ButtonConvertHomeClicked(){
+        try {
+                Bitmap bitmap = ((BitmapDrawable)imageViewColorImageHome.getDrawable()).getBitmap();
+                int iH = Integer.parseInt(edtHeightHome.getText().toString());//H original
+                int iW =  bitmap.getWidth();//W original
+                Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
+                while (cursorCT.moveToNext()) {
+                    int id = cursorCT.getInt(1);
+                    int newWidth = NumberOfValves(id);
+                    int newHeight = iH;//(int) (((float) iH / iW) * newWidth);//newWidth=valves
+                    Bitmap resized = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+                    imageViewBinaryImageHome.setImageBitmap(resized);
+
+                    ToastShow(String.valueOf(resized.getWidth())+ " "+String.valueOf(resized.getHeight()));
+                    //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
+                    //ToastShow(String.valueOf(iH) + " " + String.valueOf(iW) + " " + String.valueOf((float) iH / iW) + " " + newWidth);
+                }//
+            ClearEditTextFocus();
+//                ToastShow(String.valueOf(iH) +" "+ String.valueOf((float)(iH/iW)*NumberValves));
+//            Bitmap bitmap = ((BitmapDrawable)imageViewColorImageHome.getDrawable()).getBitmap();
+//            Bitmap resized= convertBinary.ResizeColorImage(bitmap);
+//            imageViewBinaryImageHome.setImageBitmap(resized);
+
+        }catch (Exception e){
+            if(e.getMessage().toString().contains("null object"))
+            {
+                ToastShow("Choose Image First! ");
+            }
+            //ToastShow(e.getMessage().toString());
+        }
+//        BitmapDrawable bm=(BitmapDrawable)imageViewColorImageHome.getDrawable();
+
+    }
     private View.OnFocusChangeListener edtFocusChange = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -570,7 +611,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         try {
@@ -578,6 +618,7 @@ public class HomeFragment extends Fragment {
                 if (requestCode == 1111) {
                     Bitmap photo = (Bitmap) data.getParcelableExtra("data");
                     imageViewColorImageHome.setImageBitmap(photo);
+                    imageViewBinaryImageHome.setImageBitmap(null);
 //                    picUri = data.getData();
 //                    performCrop();
                     //imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
@@ -586,19 +627,25 @@ public class HomeFragment extends Fragment {
 //            imageViewColorImageHome.setImageBitmap(photo);
                     picUri = data.getData();
                     performCrop();
+                    imageViewBinaryImageHome.setImageBitmap(null);
+
                 } else if (requestCode == CROP_PIC) {
                     // get the returned data
                     Bundle extras = data.getExtras();
                     // get the cropped bitmap
                     Bitmap thePic = extras.getParcelable("data");
                     imageViewColorImageHome.setImageBitmap(thePic);
+                    imageViewBinaryImageHome.setImageBitmap(null);
+
                 } else {
                     picUri = data.getData();
                     performCrop();
+                    imageViewBinaryImageHome.setImageBitmap(null);
                     imageViewColorImageHome.setImageURI(data.getData()); //Luu anh dang URI
                 }
             }
             ///////////////////////////////////////////////////////////////
+
             btnChooseHome.setEnabled(true);
             switchConfigSizeHome.setChecked(false);
             switchConfigSizeHomecheck(false);
@@ -671,13 +718,12 @@ public class HomeFragment extends Fragment {
 
 
             // gridviewHome = (GridView) v.findViewById(R.id.gridviewHome);
-
+            convertBinary =new ConvertBinary();
             imageArray = new ArrayList<ImageSingelHome>();
             adapter = new ArrayAdapter<ImageSingelHome>(getContext(), R.layout.row, imageArray);
         } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
-
     }
 
     //Load Database After
@@ -733,7 +779,6 @@ public class HomeFragment extends Fragment {
         }
 
     }
-
     private void BackupComponen() {
         radioGalleryB = radioGallery;
         radioCameraB = radioCamera;
@@ -754,9 +799,9 @@ public class HomeFragment extends Fragment {
         txtSendingProgressHomeB = txtSendingProgressHome;
         checkboxConvertAndSaveHomeB = checkboxConvertAndSaveHome;
 
-            imageViewColorImageHomeB=imageViewColorImageHome;
+        imageViewColorImageHomeB = imageViewColorImageHome;
 
-            imageViewBinaryImageHomeB=imageViewBinaryImageHome;
+        imageViewBinaryImageHomeB = imageViewBinaryImageHome;
     }
 
     private void RecoverValuesComponent() {
@@ -779,11 +824,12 @@ public class HomeFragment extends Fragment {
         txtSendingProgressHome.setTextColor(txtSendingProgressHomeB.getTextColors());
         checkboxConvertAndSaveHome.setChecked(checkboxConvertAndSaveHomeB.isChecked());
 
-            imageViewColorImageHome.setImageDrawable(imageViewColorImageHomeB.getDrawable());
+        imageViewColorImageHome.setImageDrawable(imageViewColorImageHomeB.getDrawable());
 
-            imageViewBinaryImageHome.setImageDrawable(imageViewBinaryImageHomeB.getDrawable());
+        imageViewBinaryImageHome.setImageDrawable(imageViewBinaryImageHomeB.getDrawable());
 
     }
+
 
     public byte[] ImageView_To_Byte(ImageView imgv) {
         BitmapDrawable drawable = (BitmapDrawable) imgv.getDrawable();

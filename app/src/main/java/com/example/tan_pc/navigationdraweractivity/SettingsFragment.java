@@ -71,7 +71,7 @@ import static com.example.tan_pc.navigationdraweractivity.MainActivity.PROJECTDA
 public class SettingsFragment extends Fragment {
 
     final String TABLE_NAME = "tblUser";
-final static  int bundleApply=1;
+    final static int bundleApply = 1;
 
     SpinnerAdapter customSpinnerAdapter;
     ViewGroup container1;
@@ -137,7 +137,7 @@ final static  int bundleApply=1;
 
         InitializeComponent(v);
         Log.e("Show Setting: ", "Fragment 5");
-       return v;
+        return v;
     }
 
     public void InitializeComponent(View v) {
@@ -191,19 +191,17 @@ final static  int bundleApply=1;
         Switch1check(false);
         DisplaySettingsValue();
     }
-    public void SetButtondisableOrEnable(Button btn,boolean b)
-    {
-        try{
-            if(b==true)
-            {
+
+    public void SetButtondisableOrEnable(Button btn, boolean b) {
+        try {
+            if (b == true) {
                 btn.setBackgroundColor(Color.parseColor("#269999"));
                 btn.setEnabled(true);
-            }
-            else {
+            } else {
                 btn.setBackgroundColor(Color.parseColor("#d3d3d3"));
                 btn.setEnabled(false);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
 
@@ -269,30 +267,31 @@ final static  int bundleApply=1;
 
 //            switch (v.getId()) {
 //                case R.id.edt2Rows:
-            try{
+            try {
                 if (!hasFocus) {
                     //Switch1check(switch1.isChecked());
                     getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                     InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 ToastShow(e.getMessage().toString());
             }
 
         }
     };
 
-    private TextWatcher edtTextChangeListener =new TextWatcher() {
+    private TextWatcher edtTextChangeListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
         }
+
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if(Unchange()==true){
-                    SetButtondisableOrEnable(btnApply,false);
-                } else {
+            if (Unchange() == true) {
+                SetButtondisableOrEnable(btnApply, false);
+            } else {
                 SetButtondisableOrEnable(btnApply, true);
             }
         }
@@ -302,19 +301,20 @@ final static  int bundleApply=1;
 
         }
     };
+
     //check anchange values from Database
-    public boolean Unchange(){
-        boolean unchangeEdt=true;
+    public boolean Unchange() {
+        boolean unchangeEdt = true;
         Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
         while (cursorCT.moveToNext()) {
-            if((edt2Rows.getText().toString().equals( cursorCT.getString(2)))&
-            (edt2Images.getText().toString().equals(cursorCT.getString(3)))&
-            (edtThreshold.getText().toString().equals(cursorCT.getString(4)))&
-            (edtIP.getText().toString().equals(cursorCT.getString(5)))&
-            (edtPort.getText().toString().equals(cursorCT.getString(6)))&
-            (spinValves.getSelectedItemPosition()== cursorCT.getInt(1))&
-            (spinLanguages.getSelectedItemPosition()==cursorCT.getInt(7))&
-            (spinThems.getSelectedItemPosition()==cursorCT.getInt(8))){
+            if ((edt2Rows.getText().toString().equals(cursorCT.getString(2))) &
+                    (edt2Images.getText().toString().equals(cursorCT.getString(3))) &
+                    (edtThreshold.getText().toString().equals(cursorCT.getString(4))) &
+                    (edtIP.getText().toString().equals(cursorCT.getString(5))) &
+                    (edtPort.getText().toString().equals(cursorCT.getString(6))) &
+                    (spinValves.getSelectedItemPosition() == cursorCT.getInt(1)) &
+                    (spinLanguages.getSelectedItemPosition() == cursorCT.getInt(7)) &
+                    (spinThems.getSelectedItemPosition() == cursorCT.getInt(8))) {
 //                Log.e( "UFFFF", String.valueOf((edt2Rows.getText().toString().equals( cursorCT.getString(2)))&
 //                        (edt2Images.getText().toString().equals(cursorCT.getString(3)))&
 //                        (edtThreshold.getText().toString().equals(cursorCT.getString(4)))&
@@ -324,9 +324,9 @@ final static  int bundleApply=1;
 //                        (spinLanguages.getSelectedItemPosition()==cursorCT.getInt(7))&
 //                        (spinThems.getSelectedItemPosition()==cursorCT.getInt(8))
 //                ));
-                unchangeEdt=true;
-            }else {
-                unchangeEdt=false;
+                unchangeEdt = true;
+            } else {
+                unchangeEdt = false;
             }
         }
 //        Log.e( "Result",String.valueOf(unchangeEdt));
@@ -334,11 +334,11 @@ final static  int bundleApply=1;
     }
 
 
-    private  AdapterView.OnItemSelectedListener itemSelectedListener =new AdapterView.OnItemSelectedListener() {
+    private AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            if(Unchange()==true){
-                SetButtondisableOrEnable(btnApply,false);
+            if (Unchange() == true) {
+                SetButtondisableOrEnable(btnApply, false);
             } else {
                 SetButtondisableOrEnable(btnApply, true);
             }
@@ -353,7 +353,7 @@ final static  int bundleApply=1;
     private View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            try{
+            try {
                 switch (view.getId()) {
                     case R.id.switch1:
                         Switch1check(switch1.isChecked());
@@ -408,7 +408,7 @@ final static  int bundleApply=1;
                         inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
                         break;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 ToastShow(e.getMessage().toString());
             }
 
@@ -435,7 +435,7 @@ final static  int bundleApply=1;
                 ToastShow("Your Settings Have Been Saved!");
 
                 Bundle isValvesChange = new Bundle();
-                isValvesChange.putString("ValvesChange",spinValves.getSelectedItem().toString());
+                isValvesChange.putString("ValvesChange", spinValves.getSelectedItem().toString());
 
                 Intent intent = getActivity().getIntent();
                 intent.putExtras(isValvesChange);
@@ -446,7 +446,7 @@ final static  int bundleApply=1;
 
 //                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
             } catch (Exception e) {
-                ToastShow("Failed When Saving To Database Error:\r\n"+e.getMessage().toString());
+                ToastShow("Failed When Saving To Database Error:\r\n" + e.getMessage().toString());
             }
         } else {
         }
@@ -489,14 +489,16 @@ final static  int bundleApply=1;
             int position = edt.getText().length();
             Editable editObj = edt.getText();
             Selection.setSelection(editObj, position);
-        }catch (Exception e){
-           ToastShow(e.getMessage().toString());
+        } catch (Exception e) {
+            ToastShow(e.getMessage().toString());
         }
 
     }
-public void ToastShow(String s){
-    Toast.makeText(getContext(),s,Toast.LENGTH_SHORT).show();
-}
+
+    public void ToastShow(String s) {
+        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+    }
+
     public void DisplaySettingsValue() {
         try {
             Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
@@ -510,13 +512,13 @@ public void ToastShow(String s){
                 spinLanguages.setSelection(cursorCT.getInt(7));
                 spinThems.setSelection(cursorCT.getInt(8));
             }
-        }catch (Exception e){
-            ToastShow("Error When Display Settings Values\r\n"+e.getMessage().toString());
+        } catch (Exception e) {
+            ToastShow("Error When Display Settings Values\r\n" + e.getMessage().toString());
         }
     }
 
     public void ButtonDefaultClicked() {
-        try{
+        try {
             Switch1check(true);
             edtIP.setError(null);
             edt2Rows.setText("150");
@@ -527,7 +529,7 @@ public void ToastShow(String s){
             spinLanguages.setSelection(0);
             spinThems.setSelection(0);
             spinValves.setSelection(0);
-        }catch (Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
 
@@ -536,7 +538,7 @@ public void ToastShow(String s){
     //switch=checked =>enable edit else disable
     public void Switch1check(boolean b) {
         // spinnerLoad(b);
-        try{
+        try {
             spinValves.setEnabled(b);
             spinLanguages.setEnabled(b);
             spinThems.setEnabled(b);
@@ -555,8 +557,8 @@ public void ToastShow(String s){
             edtIP.setFocusable(b);
             edtPort.setFocusableInTouchMode(b);
             edtPort.setFocusable(b);
-            SetButtondisableOrEnable(btnDefault,b);
-            SetButtondisableOrEnable(btnApply,false);
+            SetButtondisableOrEnable(btnDefault, b);
+            SetButtondisableOrEnable(btnApply, false);
             if (b == true) {
 
                 edtIP.setTextColor(Color.parseColor("#269999"));
@@ -575,14 +577,14 @@ public void ToastShow(String s){
                 edtThreshold.setTextColor(Color.parseColor("#d3d3d3"));
 
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
 
     }
 
     void spinnerLoad(boolean boo) {
-        try{
+        try {
             if (boo == true) {
                 //Load Valves enanble Color
                 valves = getActivity().getResources().getStringArray(R.array.valvesEnable);
@@ -606,14 +608,14 @@ public void ToastShow(String s){
             }
             spinLanguages.setAdapter(new ArrayAdapter<CharSequence>(getActivity(),
                     R.layout.support_simple_spinner_dropdown_item, spannedStringsLanguages));
-        }catch (Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
 
     }
 
     private void BackupComponen() {
-        try{
+        try {
             Button btnDefaultB;
             edtIPB = edtIP;
             edtPortB = edtPort;
@@ -625,11 +627,12 @@ public void ToastShow(String s){
             spinThemsB = spinThems.getSelectedItemPosition();
             switch1B = switch1;
             btnApplyB = btnApply;
-        }catch (Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
 
     }
+
     private void RecoverValuesComponent() {
         try {
             //Save status of all component Setting Fragment Before Screen Configchanged
@@ -644,7 +647,7 @@ public void ToastShow(String s){
             spinThems.setSelection(spinThemsB);
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
     }
@@ -676,14 +679,14 @@ public void ToastShow(String s){
 
             };
             edt.setFilters(filters);
-        }catch ( Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
     }
 
     //Define Port
     private void PortFormat(EditText edt) {
-        try{
+        try {
             InputFilter[] filters = new InputFilter[1];
             filters[0] = new InputFilter() {
                 @Override
@@ -708,7 +711,7 @@ public void ToastShow(String s){
 
             };
             edt.setFilters(filters);
-        }catch (Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
     }
@@ -716,7 +719,7 @@ public void ToastShow(String s){
     //khi xoay man hinh thi khong bi giu nguyen layout
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        try{
+        try {
             super.onConfigurationChanged(newConfig);
             BackupComponen();
             ViewGroup rootView = (ViewGroup) getView();
@@ -727,25 +730,25 @@ public void ToastShow(String s){
             //Restore Values
             InitializeComponent(newview);
             RecoverValuesComponent();
-        }catch (Exception e){
+        } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
     }
+
     //Color adapter
     class SpinnerAdapter extends BaseAdapter {
         ArrayList<Integer> colors;
         Context context;
 
         public SpinnerAdapter(Context context) {
-            try{
+            try {
                 this.context = context;
                 colors = new ArrayList<Integer>();
                 int retrieve[] = context.getResources().getIntArray(R.array.androidcolors);
                 for (int re : retrieve) {
                     colors.add(re);
                 }
-            }catch (Exception e)
-            {
+            } catch (Exception e) {
                 ToastShow(e.getMessage().toString());
             }
         }
