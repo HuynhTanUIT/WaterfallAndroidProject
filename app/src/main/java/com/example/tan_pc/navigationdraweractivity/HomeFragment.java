@@ -102,6 +102,24 @@ public class HomeFragment extends Fragment {
 
     LinearLayout HomeLinearLayout;
 
+
+    //Backup Component Varible
+    RadioButton radioGalleryB;
+    RadioButton radioCameraB;
+    Switch switchConfigSizeHomeB;
+    Switch switchActiveHomeB;
+    EditText edtHeightHomeB;
+    EditText edtRepeatTimeHomeB;
+    EditText edtRepeatAfterHomeB;
+
+    TextView txtRepeatTimeHomeB;
+    TextView txtRepeatAfterHomeB;
+    TextView txtSendingProgressHomeB;
+
+    CheckBox checkboxConvertAndSaveHomeB;
+
+    ImageView imageViewColorImageHomeB;
+    ImageView imageViewBinaryImageHomeB;
     //truong hop bam choose nhieu hon 1 lan
     //boolean choose=true;
     //GridView gridviewHome;
@@ -186,21 +204,21 @@ public class HomeFragment extends Fragment {
 
     public void switchActiveHomecheck(boolean b) {
         if (b == true) {
-            EnableTextView(txtRepeatTimeHome,true);
-            EnableTextView(txtRepeatAfterHome,true);
-            EnableTextView(txtSendingProgressHome,true);
+            EnableTextView(txtRepeatTimeHome, true);
+            EnableTextView(txtRepeatAfterHome, true);
+            EnableTextView(txtSendingProgressHome, true);
 
-            EnableEditText(edtRepeatTimeHome,true);
-            EnableEditText(edtRepeatAfterHome,true);
+            EnableEditText(edtRepeatTimeHome, true);
+            EnableEditText(edtRepeatAfterHome, true);
 
 
-        }else{
-            EnableTextView(txtRepeatTimeHome,false);
-            EnableTextView(txtRepeatAfterHome,false);
-            EnableTextView(txtSendingProgressHome,false);
+        } else {
+            EnableTextView(txtRepeatTimeHome, false);
+            EnableTextView(txtRepeatAfterHome, false);
+            EnableTextView(txtSendingProgressHome, false);
 
-            EnableEditText(edtRepeatTimeHome,false);
-            EnableEditText(edtRepeatAfterHome,false);
+            EnableEditText(edtRepeatTimeHome, false);
+            EnableEditText(edtRepeatAfterHome, false);
         }
     }
 
@@ -233,12 +251,11 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
     private void EnableTextView(TextView txv, boolean b) {
         if (b == true) {
-            txv.setEnabled(true);
             txv.setTextColor(Color.parseColor("#125656"));
         } else {
-            txv.setEnabled(false);
             txv.setTextColor(Color.parseColor("#d3d3d3"));
         }
 
@@ -255,19 +272,21 @@ public class HomeFragment extends Fragment {
             edt.setFocusable(false);
         }
     }
-private void LoadHomeValues(){
+
+    private void LoadHomeValues() {
 
         Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_HOME);
         while (cursorCT.moveToNext()) {
-            edtRepeatTimeHome.setText(String.valueOf(NumberOfValves(cursorCT.getInt(1))));
-            edtRepeatAfterHome.setText(String.valueOf(NumberOfValves(cursorCT.getInt(2))));
-           // txt192x.setText(String.valueOf(NumberOfValves(cursorCT.getInt(1))) + " x ");
+            edtRepeatTimeHome.setText(String.valueOf(cursorCT.getInt(1)));
+            edtRepeatAfterHome.setText(String.valueOf(cursorCT.getInt(2)));
+            // txt192x.setText(String.valueOf(NumberOfValves(cursorCT.getInt(1))) + " x ");
 
             //edtThreholdHome.setText(String.valueOf(cursorCT.getInt(4)));
         }
         PROJECTDATABASE.close();
 
-}
+    }
+
     //Load Threshold and valve from database to TextView
     private void LoadThresholdValves() {
         try {
@@ -369,9 +388,12 @@ private void LoadHomeValues(){
                     break;
                 case R.id.HomeLinearLayout:
 //                    edtIP.setError(null);
+                    ClearEditTextFocus();
+
                     getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                     InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
+
                     LoadThresholdValves();
                     break;
             }
@@ -383,24 +405,22 @@ private void LoadHomeValues(){
 
 //            switch (v.getId()) {
 //                case R.id.edt2Rows:
-            try{
+            try {
                 if (!hasFocus) {
                     //Switch1check(switch1.isChecked());
                     ClearEditTextFocus();
                     getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
                     InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                     inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
-
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 ToastShow(e.getMessage().toString());
             }
 
         }
     };
 
-    private void SetEditTextFocus()
-    {
+    private void SetEditTextFocus() {
         edtHeightHome.setFocusable(true);
         edtHeightHome.setFocusableInTouchMode(true);
 
@@ -410,12 +430,13 @@ private void LoadHomeValues(){
         edtRepeatTimeHome.setFocusable(true);
         edtRepeatAfterHome.setFocusableInTouchMode(true);
     }
-    private void ClearEditTextFocus()
-    {
+
+    private void ClearEditTextFocus() {
         edtHeightHome.setFocusable(false);
         edtRepeatAfterHome.setFocusable(false);
         edtRepeatTimeHome.setFocusable(false);
     }
+
     private void ButtonChooseHomeClicked() {
         if (radioCamera.isChecked() == true) {
             CameraMethod();
@@ -693,7 +714,7 @@ private void LoadHomeValues(){
     public void onConfigurationChanged(Configuration newConfig) {
         try {
             super.onConfigurationChanged(newConfig);
-//            BackupComponen();
+            BackupComponen();
             ViewGroup rootView = (ViewGroup) getView();
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View newview = inflater.inflate(R.layout.fragment_home, rootView, false);
@@ -701,7 +722,7 @@ private void LoadHomeValues(){
             rootView.addView(newview);
 //            //Restore Values
             InitializeComponent(newview);
-//            RecoverValuesComponent();
+            RecoverValuesComponent();
         } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
@@ -709,11 +730,52 @@ private void LoadHomeValues(){
     }
 
     private void BackupComponen() {
+        radioGalleryB=radioGallery;
+        radioCameraB=radioCamera;
 
+        switchConfigSizeHomeB=switchConfigSizeHome;
+        switchActiveHomeB=switchActiveHome;
+
+        edtHeightHomeB=edtHeightHome;
+        edtHeightHomeB=edtHeightHome;
+
+        edtRepeatTimeHomeB=edtRepeatTimeHome;
+        edtRepeatTimeHomeB=edtRepeatTimeHome;
+        edtRepeatAfterHomeB=edtRepeatAfterHome;
+        edtRepeatAfterHomeB=edtRepeatAfterHome;
+
+        txtRepeatTimeHomeB=txtRepeatTimeHome;
+        txtRepeatAfterHomeB=txtRepeatAfterHome;
+        txtSendingProgressHomeB=txtSendingProgressHome;
+        checkboxConvertAndSaveHomeB=checkboxConvertAndSaveHome;
+
+//        imageViewColorImageHomeB.setImageDrawable(imageViewColorImageHome.getDrawable());
+//        imageViewBinaryImageHomeB.setImageDrawable(imageViewBinaryImageHome.getDrawable());
     }
 
     private void RecoverValuesComponent() {
+        radioGallery.setChecked(radioGalleryB.isChecked());
+        radioCamera.setChecked(radioCameraB.isChecked());
 
+        switchConfigSizeHome.setChecked(switchConfigSizeHomeB.isChecked());
+        switchActiveHome.setChecked(switchActiveHomeB.isChecked());
+
+        edtHeightHome.setEnabled(edtHeightHomeB.isEnabled());
+        edtHeightHome.setText(edtHeightHomeB.getText());
+
+        edtRepeatTimeHome.setEnabled(edtRepeatTimeHomeB.isEnabled());
+        edtRepeatTimeHome.setText(edtRepeatTimeHomeB.getText());
+        edtRepeatAfterHome.setEnabled(edtRepeatAfterHomeB.isEnabled());
+        edtRepeatAfterHome.setText(edtRepeatAfterHomeB.getText());
+
+        txtRepeatTimeHome.setTextColor(txtRepeatTimeHomeB.getTextColors());
+        txtRepeatAfterHome.setTextColor(txtRepeatAfterHomeB.getTextColors());
+        txtSendingProgressHome.setTextColor(txtSendingProgressHomeB.getTextColors());
+        checkboxConvertAndSaveHome.setChecked(checkboxConvertAndSaveHomeB.isChecked());
+
+        
+        imageViewColorImageHome.setImageDrawable(imageViewColorImageHomeB.getDrawable());
+        imageViewBinaryImageHome.setImageDrawable(imageViewBinaryImageHomeB.getDrawable());
     }
 
     public byte[] ImageView_To_Byte(ImageView imgv) {

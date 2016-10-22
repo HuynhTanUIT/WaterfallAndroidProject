@@ -405,7 +405,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
-                            android:text="Repeat After: "
+                            android:text="Repeat After(S): "
                             android:textColor="@color/disable" />
 
                         <EditText

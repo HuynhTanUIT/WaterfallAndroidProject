@@ -420,7 +420,6 @@ final static  int bundleApply=1;
         if (checkEditTextNotnull() == true) {
             try {
                 PROJECTDATABASE.updateSettings(
-                        0,
                         spinValves.getSelectedItemPosition(),
                         Integer.parseInt(edt2Rows.getText().toString()),
                         Integer.parseInt(edt2Images.getText().toString()),
@@ -523,7 +522,7 @@ public void ToastShow(String s){
             edt2Rows.setText("150");
             edt2Images.setText("2000");
             edtThreshold.setText("128");
-            edtIP.setText("192.168.101.1");
+            edtIP.setText("192.168.1.1");
             edtPort.setText("8888");
             spinLanguages.setSelection(0);
             spinThems.setSelection(0);

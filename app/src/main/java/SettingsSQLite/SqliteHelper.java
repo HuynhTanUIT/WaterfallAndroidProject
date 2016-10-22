@@ -99,10 +99,21 @@ public class SqliteHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(ID_HOME, 0);
         contentValues.put(TIMES_HOME, 5);
-        contentValues.put(AFTER_HOME, 3);
-
+        contentValues.put(AFTER_HOME, 5);
         db.insert(TABLE_HOME, null, contentValues);
 
+    }
+    public boolean updateHome( int times,int after) {
+        SQLiteDatabase db= this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TIMES_HOME,times );
+        contentValues.put(AFTER_HOME, after);
+        try {
+            db.update(TABLE_HOME, contentValues, "_id = " + 0, null);
+        } catch (Exception ex) {
+            return false;
+        }
+        return true;
     }
     //Delete Binary Image by ID
     public void DETELE__BINARY_192Valves(int id){
@@ -197,7 +208,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
 
     }
     //Cập nhật bản ghi
-    public boolean updateSettings( int _id,int valves,int rows,int images,int threhold,String ip, int port, int languages,int themes) {
+    public boolean updateSettings( int valves,int rows,int images,int threhold,String ip, int port, int languages,int themes) {
         SQLiteDatabase db= this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_VALVES, valves);
@@ -209,7 +220,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
         contentValues.put(KEY_LANGUAGES, languages);
         contentValues.put(KEY_THEMES, themes);
         try {
-            db.update(TABLE_SETTINGS, contentValues, "_id = " + _id, null);
+            db.update(TABLE_SETTINGS, contentValues, "_id = " + 0, null);
         } catch (Exception ex) {
             return false;
         }
