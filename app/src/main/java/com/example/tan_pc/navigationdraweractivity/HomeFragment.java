@@ -48,6 +48,7 @@ import adapter.GridAdapterHome;
 import adapter.ImageSingelHome;
 
 import static SettingsSQLite.SqliteHelper.TABLE_BINARY_192;
+import static SettingsSQLite.SqliteHelper.TABLE_HOME;
 import static SettingsSQLite.SqliteHelper.TABLE_SETTINGS;
 import static android.content.Intent.getIntent;
 import static android.content.Intent.getIntentOld;
@@ -141,7 +142,17 @@ public class HomeFragment extends Fragment {
             radioCamera.setOnClickListener(btnClickListener);
 
             edtHeightHome.setOnClickListener(btnClickListener);
+            edtHeightHome.setOnFocusChangeListener(edtFocusChange);
+
+            edtRepeatTimeHome.setOnClickListener(btnClickListener);
+            edtRepeatTimeHome.setOnFocusChangeListener(edtFocusChange);
+
+
+            edtRepeatAfterHome.setOnClickListener(btnClickListener);
+            edtRepeatAfterHome.setOnFocusChangeListener(edtFocusChange);
+
             //LOad Values Threshold and WidthSize from database
+            LoadHomeValues();
             LoadThresholdValves();
             StartTimer();
             //gridviewHome.setOnItemClickListener(onItemClickListener);
@@ -149,8 +160,6 @@ public class HomeFragment extends Fragment {
             //LoadImageToGridView();
             // Get intent, action and MIME type
             v.setEnabled(false);
-
-
 //            if(bundle.getInt("resultApply")==1){
 //                LoadThresholdValves();
 //            }
@@ -246,7 +255,19 @@ public class HomeFragment extends Fragment {
             edt.setFocusable(false);
         }
     }
+private void LoadHomeValues(){
 
+        Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_HOME);
+        while (cursorCT.moveToNext()) {
+            edtRepeatTimeHome.setText(String.valueOf(NumberOfValves(cursorCT.getInt(1))));
+            edtRepeatAfterHome.setText(String.valueOf(NumberOfValves(cursorCT.getInt(2))));
+           // txt192x.setText(String.valueOf(NumberOfValves(cursorCT.getInt(1))) + " x ");
+
+            //edtThreholdHome.setText(String.valueOf(cursorCT.getInt(4)));
+        }
+        PROJECTDATABASE.close();
+
+}
     //Load Threshold and valve from database to TextView
     private void LoadThresholdValves() {
         try {
@@ -261,26 +282,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-
-    private View.OnFocusChangeListener edtFocusChange = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-
-//            switch (v.getId()) {
-//                case R.id.edt2Rows:
-            try {
-                if (!hasFocus) {
-                    //Switch1check(switch1.isChecked());
-                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
-                }
-            } catch (Exception e) {
-                ToastShow(e.getMessage().toString());
-            }
-
-        }
-    };
 //    private View.OnFocusChangeListener LinearFocusChange = new View.OnFocusChangeListener() {
 //        @Override
 //        public void onFocusChange(View v, boolean hasFocus) {
@@ -327,6 +328,7 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            SetEditTextFocus();
             switch (view.getId()) {
 //                case R.id.btnSaveHome:
 //                    ButtonSaveClicked();
@@ -375,7 +377,45 @@ public class HomeFragment extends Fragment {
             }
         }
     };
+    private View.OnFocusChangeListener edtFocusChange = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
 
+//            switch (v.getId()) {
+//                case R.id.edt2Rows:
+            try{
+                if (!hasFocus) {
+                    //Switch1check(switch1.isChecked());
+                    ClearEditTextFocus();
+                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
+
+                }
+            }catch (Exception e){
+                ToastShow(e.getMessage().toString());
+            }
+
+        }
+    };
+
+    private void SetEditTextFocus()
+    {
+        edtHeightHome.setFocusable(true);
+        edtHeightHome.setFocusableInTouchMode(true);
+
+        edtRepeatAfterHome.setFocusable(true);
+        edtRepeatAfterHome.setFocusableInTouchMode(true);
+
+        edtRepeatTimeHome.setFocusable(true);
+        edtRepeatAfterHome.setFocusableInTouchMode(true);
+    }
+    private void ClearEditTextFocus()
+    {
+        edtHeightHome.setFocusable(false);
+        edtRepeatAfterHome.setFocusable(false);
+        edtRepeatTimeHome.setFocusable(false);
+    }
     private void ButtonChooseHomeClicked() {
         if (radioCamera.isChecked() == true) {
             CameraMethod();

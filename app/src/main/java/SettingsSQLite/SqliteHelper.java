@@ -44,8 +44,11 @@ public class SqliteHelper extends SQLiteOpenHelper {
     public static final String HEIGHT_BIN192_="HeightBin";
     public static final String IMAGE_BIN192="ImageBin";
 
-    public static final String TABLE_VALVES = "ValvesTable";
-    public static final String ID_VALVES="idValves";
+    public static final String TABLE_HOME = "Home";
+    public static final String ID_HOME="IdHome";
+    public static final String TIMES_HOME="TimesHome";
+    public static final String AFTER_HOME="AfterHome";
+
 
 
     //    public SqliteHelper(Context context) {
@@ -76,12 +79,30 @@ public class SqliteHelper extends SQLiteOpenHelper {
         db.close();
         return cnt;
     }
-
+    public void CreateHome(SQLiteDatabase db){
+        String CREATE_TABLE_HOME="CREATE TABLE IF NOT EXISTS "+TABLE_HOME+" ("
+                +ID_HOME+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+                +TIMES_HOME+" INT,"
+                +AFTER_HOME+" INT)";
+        db.execSQL(CREATE_TABLE_HOME);
+        InitialHome(db);
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
         //Nên gọi các phương thức tạo bảng
+        CreateHome(db);
         CreateSettingsAndInitialValues(db);
         CreateBinary_192Valves(db);
+    }
+    public void InitialHome(SQLiteDatabase db){
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ID_HOME, 0);
+        contentValues.put(TIMES_HOME, 5);
+        contentValues.put(AFTER_HOME, 3);
+
+        db.insert(TABLE_HOME, null, contentValues);
+
     }
     //Delete Binary Image by ID
     public void DETELE__BINARY_192Valves(int id){
@@ -104,6 +125,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
             statement.bindBlob(4,image);
             statement.executeInsert();
     }
+
 
     public void CreateBinary_192Valves(SQLiteDatabase db){
 
