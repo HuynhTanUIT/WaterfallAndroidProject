@@ -162,7 +162,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.8"
+            android:layout_weight="1.3"
             android:orientation="vertical">
 
             <TextView
@@ -189,33 +189,6 @@
                 android:orientation="vertical"
                 android:paddingBottom="5dp"
                 android:paddingRight="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:id="@+id/txtThreholdHome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:text="Threshold (Bit):"
-                        android:textColor="@color/colorPrimary" />
-
-                    <EditText
-                        android:id="@+id/edtThreholdHome"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/txtThreholdHome"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:inputType="number"
-                        android:maxLength="3"
-                        android:padding="5dp" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

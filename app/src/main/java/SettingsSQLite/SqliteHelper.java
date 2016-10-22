@@ -65,6 +65,7 @@ public class SqliteHelper extends SQLiteOpenHelper {
     }
     public Cursor GetData(String sql){
         SQLiteDatabase database=getReadableDatabase();
+        //database.close();
         return database.rawQuery(sql,null);
     }
 

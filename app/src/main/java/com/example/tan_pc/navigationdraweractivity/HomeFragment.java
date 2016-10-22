@@ -136,7 +136,8 @@ public class HomeFragment extends Fragment {
             radioGallery.setOnClickListener(btnClickListener);
             radioCamera.setOnClickListener(btnClickListener);
             //LOad Values Threshold and WidthSize from database
-            StartTimer();
+            LoadThresholdValves();
+           // StartTimer();
 
             //gridviewHome.setOnItemClickListener(onItemClickListener);
             //gridviewHome.setCon
@@ -163,6 +164,7 @@ public class HomeFragment extends Fragment {
                 txt192x.setText(NumberOfValves(cursorCT.getInt(1)) + " x ");
                 //edtThreholdHome.setText(String.valueOf(cursorCT.getInt(4)));
             }
+            PROJECTDATABASE.close();
         }catch (Exception e){
 
         }
@@ -203,7 +205,6 @@ public class HomeFragment extends Fragment {
 //
 //        }
 //    };
-
 
     public void LoadImageToGridView() {
 
@@ -249,7 +250,6 @@ public class HomeFragment extends Fragment {
                     break;
                 case R.id.btnSendHome:
                     break;
-
                 //RADIO CLICK
                 case R.id.radioGallery:
                     RadioGalleryClicked();
@@ -260,7 +260,6 @@ public class HomeFragment extends Fragment {
             }
         }
     };
-
     private void ButtonChooseHomeClicked() {
         if (radioCamera.isChecked() == true) {
             CameraMethod();
@@ -485,22 +484,26 @@ public class HomeFragment extends Fragment {
     }
 
     //Load Database After
-    private void StartTimer() {
-        countDownTimer = new CountDownTimer(1000, 100) {
-            @Override
-            public void onTick(long l) {
-                LoadThresholdValves();
-            }
-
-            @Override
-            public void onFinish() {
-                countDownTimer.cancel();
-                countDownTimer = null;
-                StartTimer();
-            }
-        };
-        countDownTimer.start();
-    }
+//    private void StartTimer() {
+//        countDownTimer = new CountDownTimer(1000, 0) {
+//            @Override
+//            public void onTick(long l) {
+//                try {
+//                    LoadThresholdValves();
+//                }catch (Exception e){
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                countDownTimer.cancel();
+//                countDownTimer = null;
+//                StartTimer();
+//            }
+//        };
+//        countDownTimer.start();
+//    }
 
     //khi xoay man hinh thi khong bi giu nguyen layout
     @Override

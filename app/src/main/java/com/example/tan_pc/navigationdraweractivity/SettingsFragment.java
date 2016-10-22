@@ -433,7 +433,7 @@ final static  int bundleApply=1;
 
                 Switch1check(false);
                 switch1.setChecked(false);
-
+                PROJECTDATABASE.close();
                 ToastShow("Your Settings Have Been Saved!");
 
 //                Fragment fragment = new Fragment();
