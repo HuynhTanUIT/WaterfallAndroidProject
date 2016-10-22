@@ -138,6 +138,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
         InitializeComponent(v);
         return v;
     }
@@ -177,11 +179,9 @@ public class HomeFragment extends Fragment {
             //gridviewHome.setCon
             //LoadImageToGridView();
             // Get intent, action and MIME type
-            v.setEnabled(false);
 //            if(bundle.getInt("resultApply")==1){
 //                LoadThresholdValves();
-//            }
-//
+//            }//
         } catch (Exception e) {
             ToastShow(e.getMessage().toString());
         }
@@ -265,6 +265,7 @@ public class HomeFragment extends Fragment {
         if (b == true) {
             edt.setEnabled(true);
             edt.setTextColor(Color.parseColor("#125656"));
+            edt.setFocusable(false);
 
         } else {
             edt.setEnabled(false);
@@ -348,6 +349,8 @@ public class HomeFragment extends Fragment {
         @Override
         public void onClick(View view) {
             SetEditTextFocus();
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             switch (view.getId()) {
 //                case R.id.btnSaveHome:
 //                    ButtonSaveClicked();
@@ -713,6 +716,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         try {
+
+            ClearEditTextFocus();
             super.onConfigurationChanged(newConfig);
             BackupComponen();
             ViewGroup rootView = (ViewGroup) getView();
@@ -730,27 +735,28 @@ public class HomeFragment extends Fragment {
     }
 
     private void BackupComponen() {
-        radioGalleryB=radioGallery;
-        radioCameraB=radioCamera;
+        radioGalleryB = radioGallery;
+        radioCameraB = radioCamera;
 
-        switchConfigSizeHomeB=switchConfigSizeHome;
-        switchActiveHomeB=switchActiveHome;
+        switchConfigSizeHomeB = switchConfigSizeHome;
+        switchActiveHomeB = switchActiveHome;
 
-        edtHeightHomeB=edtHeightHome;
-        edtHeightHomeB=edtHeightHome;
+        edtHeightHomeB = edtHeightHome;
+        edtHeightHomeB = edtHeightHome;
 
-        edtRepeatTimeHomeB=edtRepeatTimeHome;
-        edtRepeatTimeHomeB=edtRepeatTimeHome;
-        edtRepeatAfterHomeB=edtRepeatAfterHome;
-        edtRepeatAfterHomeB=edtRepeatAfterHome;
+        edtRepeatTimeHomeB = edtRepeatTimeHome;
+        edtRepeatTimeHomeB = edtRepeatTimeHome;
+        edtRepeatAfterHomeB = edtRepeatAfterHome;
+        edtRepeatAfterHomeB = edtRepeatAfterHome;
 
-        txtRepeatTimeHomeB=txtRepeatTimeHome;
-        txtRepeatAfterHomeB=txtRepeatAfterHome;
-        txtSendingProgressHomeB=txtSendingProgressHome;
-        checkboxConvertAndSaveHomeB=checkboxConvertAndSaveHome;
+        txtRepeatTimeHomeB = txtRepeatTimeHome;
+        txtRepeatAfterHomeB = txtRepeatAfterHome;
+        txtSendingProgressHomeB = txtSendingProgressHome;
+        checkboxConvertAndSaveHomeB = checkboxConvertAndSaveHome;
 
-//        imageViewColorImageHomeB.setImageDrawable(imageViewColorImageHome.getDrawable());
-//        imageViewBinaryImageHomeB.setImageDrawable(imageViewBinaryImageHome.getDrawable());
+            imageViewColorImageHomeB=imageViewColorImageHome;
+
+            imageViewBinaryImageHomeB=imageViewBinaryImageHome;
     }
 
     private void RecoverValuesComponent() {
@@ -772,12 +778,11 @@ public class HomeFragment extends Fragment {
         txtRepeatAfterHome.setTextColor(txtRepeatAfterHomeB.getTextColors());
         txtSendingProgressHome.setTextColor(txtSendingProgressHomeB.getTextColors());
         checkboxConvertAndSaveHome.setChecked(checkboxConvertAndSaveHomeB.isChecked());
-        try {
+
             imageViewColorImageHome.setImageDrawable(imageViewColorImageHomeB.getDrawable());
+
             imageViewBinaryImageHome.setImageDrawable(imageViewBinaryImageHomeB.getDrawable());
-        }catch (Exception e){
-            
-        }
+
     }
 
     public byte[] ImageView_To_Byte(ImageView imgv) {

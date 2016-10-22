@@ -2,9 +2,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:clickable="true"
-    android:fadeScrollbars="false"
+    android:fadeScrollbars="true"
     android:fillViewport="true"
-    android:focusable="true"
     android:scrollbars="vertical">
 
     <LinearLayout
@@ -42,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/disable"
-                    android:scaleType="centerInside" />
+                    android:scaleType="fitCenter" />
             </LinearLayout>
 
             <TextView
@@ -252,6 +251,7 @@
                             <EditText
                                 android:id="@+id/edtHeightHome"
                                 android:layout_width="50dp"
+                                android:focusable="false"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_toRightOf="@+id/txt192x"
@@ -377,6 +377,7 @@
                             android:layout_gravity="center"
                             android:gravity="left"
                             android:ems="10"
+                            android:focusable="false"
                             android:enabled="false"
                             android:inputType="number"
                             android:maxLength="4"
@@ -404,6 +405,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:ems="10"
+                            android:focusable="false"
                             android:enabled="false"
                             android:inputType="number"
                             android:gravity="left"
