@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -162,6 +164,22 @@ public class HomeFragment extends Fragment {
         InitializeComponent(v);
         return v;
     }
+    private TextWatcher edtTextChangeListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+          EnableButton(btnConvertHome,true);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
     private void InitializeComponent(View v) {
         try {
@@ -171,6 +189,8 @@ public class HomeFragment extends Fragment {
             switchActiveHome.setOnCheckedChangeListener(checkedChangedListenner);
             //txt192x.setOnFocusChangeListener(txtFocusChange);
             HomeLinearLayout.setOnClickListener(btnClickListener);
+
+            checkboxConvertAndSaveHome.setOnCheckedChangeListener(checkedChangedListenner);
 
             btnChooseHome.setOnClickListener(btnClickListener);
             btnConvertHome.setOnClickListener(btnClickListener);
@@ -182,6 +202,7 @@ public class HomeFragment extends Fragment {
 
             edtHeightHome.setOnClickListener(btnClickListener);
             edtHeightHome.setOnFocusChangeListener(edtFocusChange);
+            edtHeightHome.addTextChangedListener(edtTextChangeListener);
 
             edtRepeatTimeHome.setOnClickListener(btnClickListener);
             edtRepeatTimeHome.setOnFocusChangeListener(edtFocusChange);
@@ -194,6 +215,7 @@ public class HomeFragment extends Fragment {
             LoadHomeValues();
             LoadThresholdValves();
             StartTimer();
+
             //gridviewHome.setOnItemClickListener(onItemClickListener);
             //gridviewHome.setCon
             //LoadImageToGridView();
@@ -217,6 +239,9 @@ public class HomeFragment extends Fragment {
                     switchActiveHomecheck(switchActiveHome.isChecked());
                     //EnableEditText(edtRepeatAfterHome,true);
                     break;
+                case R.id.checkboxConvertAndSaveHome:
+                    EnableButton(btnConvertHome,true);
+                    break;
             }
         }
     };
@@ -229,8 +254,8 @@ public class HomeFragment extends Fragment {
 
             EnableEditText(edtRepeatTimeHome, true);
             EnableEditText(edtRepeatAfterHome, true);
-            btnSendHome.setBackgroundColor(Color.parseColor("#269999"));
-            btnSendHome.setEnabled(true);
+            EnableButton(btnSendHome,true);
+
 
             progressBarHome.setVisibility(getView().VISIBLE);
             txtpercentTextHome.setVisibility(getView().VISIBLE);
@@ -243,13 +268,25 @@ public class HomeFragment extends Fragment {
 
             EnableEditText(edtRepeatTimeHome, false);
             EnableEditText(edtRepeatAfterHome, false);
-            btnSendHome.setBackgroundColor(Color.parseColor("#d3d3d3"));
-            btnSendHome.setEnabled(false);
+            EnableButton(btnSendHome,true);
+
+
 
             progressBarHome.setVisibility(getView().GONE);
             txtpercentTextHome.setVisibility(getView().GONE);
 
 
+        }
+    }
+    private void EnableButton(Button btn, boolean b) {
+        if (b == true) {
+
+            btn.setBackgroundColor(Color.parseColor("#269999"));
+            btn.setEnabled(true);
+
+        } else {
+            btn.setBackgroundColor(Color.parseColor("#d3d3d3"));
+            btn.setEnabled(false);
         }
     }
 
@@ -285,7 +322,7 @@ public class HomeFragment extends Fragment {
 //                ToastShow(String.valueOf(iH) +" "+ String.valueOf((float)(iH/iW)*NumberValves));
         } catch (Exception e) {
             edtHeightHome.setText("");
-            edtHeightHome.setEnabled(false);
+            //edtHeightHome.setEnabled(false);
         }
     }
 
@@ -382,6 +419,7 @@ public class HomeFragment extends Fragment {
             }
         }
     };
+
     private View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -416,6 +454,7 @@ public class HomeFragment extends Fragment {
                     ButtonChooseHomeClicked();
                     break;
                 case R.id.btnConvertHome:
+
                     ButtonConvertHomeClicked();
                     if(checkboxConvertAndSaveHome.isChecked()){
                         SaveToDatabase();
@@ -447,12 +486,10 @@ public class HomeFragment extends Fragment {
     private void ButtonConvertHomeClicked() {
         try {
             //Resized Imaged Color
-
             Bitmap resized = null;
             Bitmap resizedGrayscale = null;
             Bitmap resizedBinary = null;
             Bitmap bitmap = ((BitmapDrawable) imageViewColorImageHome.getDrawable()).getBitmap();
-
             int iH = Integer.parseInt(edtHeightHome.getText().toString());//H original
             int iW = bitmap.getWidth();//W original
             Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
@@ -476,6 +513,7 @@ public class HomeFragment extends Fragment {
             //btnConvertHome.setEnabled(true);
 
             ClearEditTextFocus();
+            EnableButton(btnConvertHome,false);
 
         } catch (Exception e) {
             if (e.getMessage().toString().contains("null object")) {
@@ -486,8 +524,8 @@ public class HomeFragment extends Fragment {
             //ToastShow(e.getMessage().toString());
         }
 //        BitmapDrawable bm=(BitmapDrawable)imageViewColorImageHome.getDrawable();
-
     }
+
 
     //ConVert Grayscale To binary
     public Bitmap GrayscaletoBinary(Bitmap bmpOriginal) {
@@ -607,7 +645,7 @@ public class HomeFragment extends Fragment {
                     192,
                     ImageView_To_Byte(imageViewBinaryImageHome)
             );
-            //LoadImageToGridView();
+            LoadImageToGridView();
             ToastShow("Binary Image Has Been Saved!");
         } catch (Exception e) {
             if (e.getMessage().toString().contains("UNIQUE")) {
@@ -736,7 +774,7 @@ public class HomeFragment extends Fragment {
                 }
             }
             ///////////////////////////////////////////////////////////////
-
+            EnableButton(btnConvertHome,true);
             btnChooseHome.setEnabled(true);
             switchConfigSizeHome.setChecked(false);
             switchConfigSizeHomecheck(false);

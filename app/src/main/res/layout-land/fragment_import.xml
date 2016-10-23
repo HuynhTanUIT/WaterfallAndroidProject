@@ -19,8 +19,6 @@
             android:layout_centerHorizontal="false"
             android:stretchMode="columnWidth"
             android:background="#fff"
-
-            
             />
         <GridView
             android:id="@+id/gripBlackWhite"

@@ -7,11 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
 import java.util.ArrayList;
 
 import adapter.AdapterGrid;
+import adapter.ImageSingelHome;
 
 //import adapter.GridAdapter;
 
@@ -20,11 +22,8 @@ import adapter.AdapterGrid;
  */
 public class AlbumDisplay extends Fragment {
     // Context context;
-    GridView gridViewColor;
-    AdapterGrid adapterGrid;
-    //ArrayList<Integer> arrayimg;
-    ArrayList<Integer> arrayimg = new ArrayList<Integer>();
-
+    ArrayList <ImageSingelHome>imageArray;
+    ArrayAdapter<ImageSingelHome> adapter;
     //  ArrayList<File> list;
     public AlbumDisplay() {
         // Required empty public constructor
@@ -110,36 +109,36 @@ public class AlbumDisplay extends Fragment {
 //            return convertView;
 //        }
 //    }
-    private void AddImage() {
-        //arrayimg = new ArrayList<Integer>();
-        arrayimg.clear();
-        arrayimg.add(R.drawable.a1);//0
-        arrayimg.add(R.drawable.a2);//1
-        arrayimg.add(R.drawable.a3);//2
-        arrayimg.add(R.drawable.a4);//0
-        arrayimg.add(R.drawable.a5);//1
-        arrayimg.add(R.drawable.a6);//
-        arrayimg.add(R.drawable.a7);//1
-        arrayimg.add(R.drawable.a8);//2
-        arrayimg.add(R.drawable.a9);//1
-        arrayimg.add(R.drawable.a10);
-        arrayimg.add(R.drawable.a11);
-        arrayimg.add(R.drawable.a12);
-        arrayimg.add(R.drawable.a13);
-        arrayimg.add(R.drawable.a14);//
-        arrayimg.add(R.drawable.a15);//1
-        arrayimg.add(R.drawable.a16);//2
-        arrayimg.add(R.drawable.a17);//2
-        arrayimg.add(R.drawable.a18);//2
-        arrayimg.add(R.drawable.a19);//2
-        arrayimg.add(R.drawable.a20);//2
-        arrayimg.add(R.drawable.a21);//2
-        arrayimg.add(R.drawable.a22);//2
-        arrayimg.add(R.drawable.a23);//2
-        arrayimg.add(R.drawable.a24);//2
-        arrayimg.add(R.drawable.a25);//2
-        arrayimg.add(R.drawable.a29);//2
-        arrayimg.add(R.drawable.a30);
+//    private void AddImage() {
+//        //arrayimg = new ArrayList<Integer>();
+//        arrayimg.clear();
+//        arrayimg.add(R.drawable.a1);//0
+//        arrayimg.add(R.drawable.a2);//1
+//        arrayimg.add(R.drawable.a3);//2
+//        arrayimg.add(R.drawable.a4);//0
+//        arrayimg.add(R.drawable.a5);//1
+//        arrayimg.add(R.drawable.a6);//
+//        arrayimg.add(R.drawable.a7);//1
+//        arrayimg.add(R.drawable.a8);//2
+//        arrayimg.add(R.drawable.a9);//1
+//        arrayimg.add(R.drawable.a10);
+//        arrayimg.add(R.drawable.a11);
+//        arrayimg.add(R.drawable.a12);
+//        arrayimg.add(R.drawable.a13);
+//        arrayimg.add(R.drawable.a14);//
+//        arrayimg.add(R.drawable.a15);//1
+//        arrayimg.add(R.drawable.a16);//2
+//        arrayimg.add(R.drawable.a17);//2
+//        arrayimg.add(R.drawable.a18);//2
+//        arrayimg.add(R.drawable.a19);//2
+//        arrayimg.add(R.drawable.a20);//2
+//        arrayimg.add(R.drawable.a21);//2
+//        arrayimg.add(R.drawable.a22);//2
+//        arrayimg.add(R.drawable.a23);//2
+//        arrayimg.add(R.drawable.a24);//2
+//        arrayimg.add(R.drawable.a25);//2
+//        arrayimg.add(R.drawable.a29);//2
+//        arrayimg.add(R.drawable.a30);
 
-    }
+//    }
 }
