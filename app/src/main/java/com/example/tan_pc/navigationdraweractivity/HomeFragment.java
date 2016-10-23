@@ -427,10 +427,6 @@ public class HomeFragment extends Fragment {
             getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
             getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             switch (view.getId()) {
-//                case R.id.btnSaveHome:
-//                    ButtonSaveClicked();
-//                    break;
-                //BUTTON CLICK
                 case R.id.edtHeightHome:
                     edtHeightHome.setFocusable(true);
                     edtHeightHome.setFocusableInTouchMode(true);

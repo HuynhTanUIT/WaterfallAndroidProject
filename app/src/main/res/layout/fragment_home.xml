@@ -118,8 +118,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@color/colorAccent"
+                            android:textColor="#ffffff"
                             android:text="Choose"
-                            android:textColor="#ffffff" />
+                             />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

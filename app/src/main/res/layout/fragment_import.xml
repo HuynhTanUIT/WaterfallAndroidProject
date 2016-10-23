@@ -2,222 +2,239 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:clickable="true"
     android:focusable="true"
-    android:padding="10dp"
-    >
-
+    android:orientation="vertical"
+    android:padding="10dp">
     <!-- TODO: Update blank fragment layout -->
 
-        <!--<GridView-->
-            <!--android:id="@+id/gripColor"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="fill_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:verticalSpacing="10dp"-->
-            <!--android:horizontalSpacing="0dp"-->
-            <!--android:numColumns="1"-->
-            <!--android:stretchMode="columnWidth"-->
-            <!--android:background="#fff"-->
-            <!--android:gravity="center"-->
-            <!--/>-->
+    <!--<GridView-->
+    <!--android:id="@+id/gripColor"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_weight="1"-->
+    <!--android:verticalSpacing="10dp"-->
+    <!--android:horizontalSpacing="0dp"-->
+    <!--android:numColumns="1"-->
+    <!--android:stretchMode="columnWidth"-->
+    <!--android:background="#fff"-->
+    <!--android:gravity="center"-->
+    <!--/>-->
 
     <LinearLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btnRefreshAlbum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="5dp"
+            android:text="Refresh" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#009688" />
+
         <GridView
             android:id="@+id/gridviewAlbum"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
             android:background="#ffffff"
+            android:clickable="true"
             android:columnWidth="80dp"
             android:drawSelectorOnTop="true"
-            android:horizontalSpacing="3dp"
-            android:verticalSpacing="5dp"
+            android:focusable="true"
             android:gravity="center"
+            android:horizontalSpacing="3dp"
             android:numColumns="auto_fit"
             android:stretchMode="columnWidth"
-            android:layout_marginTop="5dp"
-            android:focusable="true"
-            android:clickable="true"
-            ></GridView>
+            android:verticalSpacing="5dp"></GridView>
+
     </LinearLayout>
+
     <LinearLayout
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="0dp">
-                <LinearLayout
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:orientation="vertical"
+            android:paddingBottom="3dp">
+            <TextView
+                android:background="#009688"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+            <TextView
+                android:id="@+id/txtSendToHardware"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#009688"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:text="Send To Hardware:"
+                android:textColor="#ffffff"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.75"
                 android:orientation="vertical"
-                android:paddingBottom="3dp">
-
-                <TextView
-                    android:id="@+id/txtSendToHardware"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#009688"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:text="Send To Hardware:"
-                    android:textColor="#ffffff"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
+                android:paddingLeft="3dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingLeft="3dp">
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <Switch
+                        android:id="@+id/switchActiveHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text="Active    "
+                        android:textColor="@color/colorPrimary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtRepeatTimeHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text="Repeat(Times):"
+                        android:textColor="@color/disable" />
+
+                    <EditText
+                        android:id="@+id/edtRepeatTimeHome"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:gravity="left"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:padding="5dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txtRepeatAfterHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text="Repeat After(S): "
+                        android:textColor="@color/disable" />
+
+                    <EditText
+                        android:id="@+id/edtRepeatAfterHome"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:gravity="left"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:padding="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
-
-                        <Switch
-                            android:id="@+id/switchActiveHome"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:text="Active    "
-                            android:textColor="@color/colorPrimary" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
+                        android:layout_height="match_parent"
+                        android:layout_weight="3">
 
                         <TextView
-                            android:id="@+id/txtRepeatTimeHome"
+                            android:id="@+id/txtSendingProgressHome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
-                            android:text="Repeat(Times):"
+                            android:text="Sending Progress: "
+                            android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="@color/disable" />
-
-                        <EditText
-                            android:id="@+id/edtRepeatTimeHome"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:enabled="false"
-                            android:ems="10"
-                            android:gravity="left"
-                            android:inputType="number"
-                            android:maxLength="4"
-                            android:padding="5dp" />
-
                     </LinearLayout>
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
 
                         <TextView
-                            android:id="@+id/txtRepeatAfterHome"
+                            android:id="@+id/txtpercentTextHome"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"
-                            android:text="Repeat After(S): "
-                            android:textColor="@color/disable" />
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            android:text="0% "
+                            android:textColor="@color/colorPrimaryDark"
+                            android:visibility="gone" />
 
-                        <EditText
-                            android:id="@+id/edtRepeatAfterHome"
-                            android:layout_width="50dp"
+                        <ProgressBar
+                            android:id="@+id/progressBarHome"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:ems="10"
-                            android:gravity="left"
-                            android:enabled="false"
-                            android:inputType="number"
-                            android:maxLength="4"
-                            android:padding="5dp" />
-                    </LinearLayout>
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@+id/txtpercentTextHome"
+                            android:indeterminate="false"
+                            android:max="100"
+                            android:minHeight="13dp"
+                            android:minWidth="200dp"
+                            android:progress="0"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-                    <LinearLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5">
+
+                    <Button
+                        android:id="@+id/btnSendHome"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="3">
-
-                            <TextView
-                                android:id="@+id/txtSendingProgressHome"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginLeft="10dp"
-                                android:text="Sending Progress: "
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:textColor="@color/disable" />
-                        </LinearLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2">
-
-                            <TextView
-                                android:id="@+id/txtpercentTextHome"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginRight="5dp"
-                                android:visibility="gone"
-                                android:text="0% "
-                                android:textColor="@color/colorPrimaryDark" />
-
-                            <ProgressBar
-                                android:id="@+id/progressBarHome"
-                                android:visibility="gone"
-                                style="?android:attr/progressBarStyleHorizontal"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="3dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_toRightOf="@+id/txtpercentTextHome"
-                                android:indeterminate="false"
-                                android:max="100"
-                                android:minHeight="13dp"
-                                android:minWidth="200dp"
-                                android:progress="0" />
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.5">
-
-                        <Button
-                            android:id="@+id/btnSendHome"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentBottom="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginRight="3dp"
-                            android:background="@color/disable"
-                            android:text="Send"
-                            android:textColor="#ffffff" />
-                    </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginRight="3dp"
+                        android:background="@color/disable"
+                        android:text="Send"
+                        android:textColor="#ffffff" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+</LinearLayout>
 
 

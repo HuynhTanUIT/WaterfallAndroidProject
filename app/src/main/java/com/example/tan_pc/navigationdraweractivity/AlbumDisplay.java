@@ -2,18 +2,28 @@ package com.example.tan_pc.navigationdraweractivity;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 
 import java.util.ArrayList;
 
 import adapter.AdapterGrid;
+import adapter.GridAdapterHome;
 import adapter.ImageSingelHome;
+
+import static SettingsSQLite.SqliteHelper.TABLE_BINARY_192;
+import static com.example.tan_pc.navigationdraweractivity.MainActivity.PROJECTDATABASE;
+import static com.example.tan_pc.navigationdraweractivity.R.id.btnConvertHome;
 
 //import adapter.GridAdapter;
 
@@ -24,6 +34,8 @@ public class AlbumDisplay extends Fragment {
     // Context context;
     ArrayList <ImageSingelHome>imageArray;
     ArrayAdapter<ImageSingelHome> adapter;
+    GridView gridviewAlbum;
+    Button btnRefreshAlbum;
     //  ArrayList<File> list;
     public AlbumDisplay() {
         // Required empty public constructor
@@ -32,39 +44,75 @@ public class AlbumDisplay extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_import, container, false);
-        // Inflate the layout for this fragment
-        // list=imageReader(Environment.getExternalStorageDirectory());
-//        gridViewColor = (GridView) view.findViewById(R.id.gripColor);
-//        AddImage();
-//        //adapterGrid.clear();
-//        adapterGrid = new AdapterGrid(this.getActivity(), R.layout.layout_adapter_gridview, arrayimg);
-//        gridViewColor.setAdapter(adapterGrid);
-        // gridViewColor.setAdapter(new GridAdapter());
-        //  gridView.setAdapter(new AdapterGrid(view.getContext()));
-        return view;
+        View v = inflater.inflate(R.layout.fragment_import, container, false);
+        InitializeComponent(v);
+        return v;
     }
 
     //khi xoay man hinh thi khong bi giu nguyen layout
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        BackupComponen();
         ViewGroup rootView = (ViewGroup) getView();
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View newview = inflater.inflate(R.layout.fragment_import, rootView, false);
-        //ViewGroup rootView = (ViewGroup) getView();
-        // Remove all the existing views from the root view.
-        // This is also a good place to recycle any resources you won't need anymore
         rootView.removeAllViews();
-        rootView.addView(newview);
 
-//        gridViewColor = (GridView) newview.findViewById(R.id.gripColor);
-//        AddImage();
-//        //adapterGrid.clear();
-//        adapterGrid = new AdapterGrid(this.getActivity(), R.layout.layout_adapter_gridview, arrayimg);
-//        gridViewColor.setAdapter(adapterGrid);
-        // Log.i("myLogs", "Rotation");
+        rootView.addView(newview);
+        //Restore Values
+        InitializeComponent(newview);
+        RecoverValuesComponent();
     }
+
+    private void InitializeComponent(View v){
+        ReflectAndListener(v);
+
+
+        LoadImageToGridView();
+    }
+    private void ReflectAndListener(View v) {
+        gridviewAlbum =(GridView)v.findViewById(R.id.gridviewAlbum);
+         btnRefreshAlbum=(Button)v.findViewById(R.id.btnRefreshAlbum);
+        btnRefreshAlbum.setOnClickListener(btnClickListener);
+
+        imageArray=new ArrayList<ImageSingelHome>();
+
+    }
+
+    private View.OnClickListener btnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.btnRefreshAlbum:
+                    LoadImageToGridView();
+                    break;
+            }
+        }
+    };
+
+    private void BackupComponen(){
+
+    }
+    private void RecoverValuesComponent(){
+
+    }
+    public void LoadImageToGridView(){
+        imageArray.clear();
+        Cursor image=PROJECTDATABASE.GetData("SELECT * FROM "+TABLE_BINARY_192);
+        while (image.moveToNext()){
+            imageArray.add(new ImageSingelHome(
+                    image.getString(1),
+                    image.getLong(2),
+                    image.getLong(3),
+                    image.getBlob(4)
+            ));
+        }
+        GridAdapterHome apdaterHome= new GridAdapterHome(getContext(),R.layout.row,imageArray);
+       gridviewAlbum.setAdapter(apdaterHome);
+        //gridviewHome.setAdapter(null);
+    }
+
 
     //   ArrayList<File> imageReader(File root)
 //   {
