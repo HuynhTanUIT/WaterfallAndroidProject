@@ -107,6 +107,8 @@ public class HomeFragment extends Fragment {
 
     Switch switchConfigSizeHome;
     Switch switchActiveHome;
+    Switch switchSwapColor;
+
 
     CheckBox checkboxConvertAndSaveHome;
 
@@ -121,6 +123,8 @@ public class HomeFragment extends Fragment {
     RadioButton radioCameraB;
     Switch switchConfigSizeHomeB;
     Switch switchActiveHomeB;
+    Switch switchSwapColorB;
+
     EditText edtHeightHomeB;
     EditText edtRepeatTimeHomeB;
     EditText edtRepeatAfterHomeB;
@@ -164,6 +168,7 @@ public class HomeFragment extends Fragment {
         InitializeComponent(v);
         return v;
     }
+
     private TextWatcher edtTextChangeListener = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -172,7 +177,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-          EnableButton(btnConvertHome,true);
+            EnableButton(btnConvertHome, true);
         }
 
         @Override
@@ -184,32 +189,6 @@ public class HomeFragment extends Fragment {
     private void InitializeComponent(View v) {
         try {
             ReflectAndListener(v);
-            switchConfigSizeHome.setOnCheckedChangeListener(checkedChangedListenner);
-
-            switchActiveHome.setOnCheckedChangeListener(checkedChangedListenner);
-            //txt192x.setOnFocusChangeListener(txtFocusChange);
-            HomeLinearLayout.setOnClickListener(btnClickListener);
-
-            checkboxConvertAndSaveHome.setOnCheckedChangeListener(checkedChangedListenner);
-
-            btnChooseHome.setOnClickListener(btnClickListener);
-            btnConvertHome.setOnClickListener(btnClickListener);
-            btnSendHome.setOnClickListener(btnClickListener);
-
-
-            radioGallery.setOnClickListener(btnClickListener);
-            radioCamera.setOnClickListener(btnClickListener);
-
-            edtHeightHome.setOnClickListener(btnClickListener);
-            edtHeightHome.setOnFocusChangeListener(edtFocusChange);
-            edtHeightHome.addTextChangedListener(edtTextChangeListener);
-
-            edtRepeatTimeHome.setOnClickListener(btnClickListener);
-            edtRepeatTimeHome.setOnFocusChangeListener(edtFocusChange);
-
-
-            edtRepeatAfterHome.setOnClickListener(btnClickListener);
-            edtRepeatAfterHome.setOnFocusChangeListener(edtFocusChange);
 
             //LOad Values Threshold and WidthSize from database
             LoadHomeValues();
@@ -240,7 +219,10 @@ public class HomeFragment extends Fragment {
                     //EnableEditText(edtRepeatAfterHome,true);
                     break;
                 case R.id.checkboxConvertAndSaveHome:
-                    EnableButton(btnConvertHome,true);
+                    EnableButton(btnConvertHome, true);
+                    break;
+                case R.id.switchSwapColor:
+                    EnableButton(btnConvertHome, true);
                     break;
             }
         }
@@ -254,7 +236,7 @@ public class HomeFragment extends Fragment {
 
             EnableEditText(edtRepeatTimeHome, true);
             EnableEditText(edtRepeatAfterHome, true);
-            EnableButton(btnSendHome,true);
+            EnableButton(btnSendHome, true);
 
 
             progressBarHome.setVisibility(getView().VISIBLE);
@@ -268,8 +250,7 @@ public class HomeFragment extends Fragment {
 
             EnableEditText(edtRepeatTimeHome, false);
             EnableEditText(edtRepeatAfterHome, false);
-            EnableButton(btnSendHome,true);
-
+            EnableButton(btnSendHome, true);
 
 
             progressBarHome.setVisibility(getView().GONE);
@@ -278,6 +259,7 @@ public class HomeFragment extends Fragment {
 
         }
     }
+
     private void EnableButton(Button btn, boolean b) {
         if (b == true) {
 
@@ -309,13 +291,12 @@ public class HomeFragment extends Fragment {
                 int NumVal = NumberOfValves(id);
                 txt192x.setText(String.valueOf(NumVal) + " x ");
                 int newHeight = (int) (((float) iH / iW) * NumVal);
-                if(newHeight>999){
+                if (newHeight > 999) {
                     edtHeightHome.setText(String.valueOf(999));
-                }
-                else {
+                } else {
                     edtHeightHome.setText(String.valueOf(newHeight));
                 }
-               // edtHeightHome.setText(String.valueOf(newHeight));
+                // edtHeightHome.setText(String.valueOf(newHeight));
 //                    //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newHeight);
 //                    ToastShow(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newHeight);
             }//
@@ -408,17 +389,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            try {
-//                PROJECTDATABASE.DETELE__BINARY_192Valves((int)id);
-//                LoadImageToGridView();
-            } catch (Exception e) {
-//                ToastShow(e.getMessage().toString());
-            }
-        }
-    };
 
     private View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
@@ -452,7 +422,7 @@ public class HomeFragment extends Fragment {
                 case R.id.btnConvertHome:
 
                     ButtonConvertHomeClicked();
-                    if(checkboxConvertAndSaveHome.isChecked()){
+                    if (checkboxConvertAndSaveHome.isChecked()) {
                         SaveToDatabase();
                     }
                     break;
@@ -496,20 +466,27 @@ public class HomeFragment extends Fragment {
                 resized = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
                 //imageViewBinaryImageHome.setImageBitmap(resized);
 
-               // ToastShow(String.valueOf(resized.getWidth()) + " " + String.valueOf(resized.getHeight()));
+                // ToastShow(String.valueOf(resized.getWidth()) + " " + String.valueOf(resized.getHeight()));
                 //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
                 //ToastShow(String.valueOf(iH) + " " + String.valueOf(iW) + " " + String.valueOf((float) iH / iW) + " " + newWidth);
             }//
             //convert to Gray Image
             resizedGrayscale = ConvertToGrayscale(resized);
             //ConvertToBinary
-            resizedBinary = GrayscaletoBinary(resizedGrayscale);
+
+            if (switchSwapColor.isChecked()) {
+                resizedBinary = GrayscaletoBinarySwapColorOn(resizedGrayscale);
+
+            } else {
+                resizedBinary = GrayscaletoBinary(resizedGrayscale);
+            }
+
             imageViewBinaryImageHome.setImageBitmap(resizedBinary);
             //progressBarConvertHome.setVisibility(getView().GONE);
             //btnConvertHome.setEnabled(true);
 
             ClearEditTextFocus();
-            EnableButton(btnConvertHome,false);
+            EnableButton(btnConvertHome, false);
 
         } catch (Exception e) {
             if (e.getMessage().toString().contains("null object")) {
@@ -523,7 +500,36 @@ public class HomeFragment extends Fragment {
     }
 
 
-    //ConVert Grayscale To binary
+    //ConVert Grayscale To binary Nomal
+    public Bitmap GrayscaletoBinarySwapColorOn(Bitmap bmpOriginal) {
+        int width, height, threshold;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+        threshold = 127;
+//
+//
+        Bitmap bmpBinary = Bitmap.createBitmap(bmpOriginal);
+
+        for (int x = 0; x < width; ++x) {
+            // progressBarConvertHome.setVisibility(getView().VISIBLE);
+            for (int y = 0; y < height; ++y) {
+                // get one pixel color
+                int pixel = bmpOriginal.getPixel(x, y);
+                int red = Color.red(pixel);
+
+                //get binary value
+                if (red < threshold) {
+                    bmpBinary.setPixel(x, y, 0xFFFFFFFF);
+                } else {
+                    bmpBinary.setPixel(x, y, 0xFF000000);
+                }
+
+            }
+        }
+        return bmpBinary;
+    }
+
+    //ConVert Grayscale To binary Nomal
     public Bitmap GrayscaletoBinary(Bitmap bmpOriginal) {
         int width, height, threshold;
         height = bmpOriginal.getHeight();
@@ -770,7 +776,7 @@ public class HomeFragment extends Fragment {
                 }
             }
             ///////////////////////////////////////////////////////////////
-            EnableButton(btnConvertHome,true);
+            EnableButton(btnConvertHome, true);
             btnChooseHome.setEnabled(true);
             switchConfigSizeHome.setChecked(false);
             switchConfigSizeHomecheck(false);
@@ -788,10 +794,9 @@ public class HomeFragment extends Fragment {
                     txt192x.setText(String.valueOf(NumVal) + " x ");
                     int newHeight = (int) (((float) iH / iW) * NumVal);
 
-                    if(newHeight>999){
+                    if (newHeight > 999) {
                         edtHeightHome.setText(String.valueOf(999));
-                    }
-                    else {
+                    } else {
                         edtHeightHome.setText(String.valueOf(newHeight));
                     }
 
@@ -846,11 +851,42 @@ public class HomeFragment extends Fragment {
 
             switchConfigSizeHome = (Switch) v.findViewById(R.id.switchConfigSizeHome);
             switchActiveHome = (Switch) v.findViewById(R.id.switchActiveHome);
+            switchSwapColor = (Switch) v.findViewById(R.id.switchSwapColor);
 
             checkboxConvertAndSaveHome = (CheckBox) v.findViewById(R.id.checkboxConvertAndSaveHome);
 
             progressBarHome = (ProgressBar) v.findViewById(R.id.progressBarHome);
             progressBarConvertHome = (ProgressBar) v.findViewById(R.id.progressBarConvertHome);
+
+
+            //Listener
+            switchConfigSizeHome.setOnCheckedChangeListener(checkedChangedListenner);
+
+            switchActiveHome.setOnCheckedChangeListener(checkedChangedListenner);
+            switchSwapColor.setOnCheckedChangeListener(checkedChangedListenner);
+            //txt192x.setOnFocusChangeListener(txtFocusChange);
+            HomeLinearLayout.setOnClickListener(btnClickListener);
+
+            checkboxConvertAndSaveHome.setOnCheckedChangeListener(checkedChangedListenner);
+
+            btnChooseHome.setOnClickListener(btnClickListener);
+            btnConvertHome.setOnClickListener(btnClickListener);
+            btnSendHome.setOnClickListener(btnClickListener);
+
+
+            radioGallery.setOnClickListener(btnClickListener);
+            radioCamera.setOnClickListener(btnClickListener);
+
+            edtHeightHome.setOnClickListener(btnClickListener);
+            edtHeightHome.setOnFocusChangeListener(edtFocusChange);
+            edtHeightHome.addTextChangedListener(edtTextChangeListener);
+
+            edtRepeatTimeHome.setOnClickListener(btnClickListener);
+            edtRepeatTimeHome.setOnFocusChangeListener(edtFocusChange);
+
+
+            edtRepeatAfterHome.setOnClickListener(btnClickListener);
+            edtRepeatAfterHome.setOnFocusChangeListener(edtFocusChange);
 
 
             // gridviewHome = (GridView) v.findViewById(R.id.gridviewHome);
@@ -933,6 +969,7 @@ public class HomeFragment extends Fragment {
 
         switchConfigSizeHomeB = switchConfigSizeHome;
         switchActiveHomeB = switchActiveHome;
+        switchSwapColorB=switchSwapColor;
 
         edtHeightHomeB = edtHeightHome;
         edtHeightHomeB = edtHeightHome;
@@ -951,8 +988,9 @@ public class HomeFragment extends Fragment {
 
         imageViewBinaryImageHomeB = imageViewBinaryImageHome;
 
-         progressBarHomeB=progressBarHome;
-         progressBarConvertHomeB=progressBarConvertHome;
+        progressBarHomeB = progressBarHome;
+        progressBarConvertHomeB = progressBarConvertHome;
+
 
     }
 
@@ -962,6 +1000,8 @@ public class HomeFragment extends Fragment {
 
         switchConfigSizeHome.setChecked(switchConfigSizeHomeB.isChecked());
         switchActiveHome.setChecked(switchActiveHomeB.isChecked());
+        switchSwapColor.setChecked(switchSwapColor.isChecked());
+
 
         edtHeightHome.setEnabled(edtHeightHomeB.isEnabled());
         edtHeightHome.setText(edtHeightHomeB.getText());
