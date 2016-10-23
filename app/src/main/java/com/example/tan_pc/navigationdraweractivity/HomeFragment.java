@@ -1000,7 +1000,7 @@ public class HomeFragment extends Fragment {
 
         switchConfigSizeHome.setChecked(switchConfigSizeHomeB.isChecked());
         switchActiveHome.setChecked(switchActiveHomeB.isChecked());
-        switchSwapColor.setChecked(switchSwapColor.isChecked());
+        switchSwapColor.setChecked(switchSwapColorB.isChecked());
 
 
         edtHeightHome.setEnabled(edtHeightHomeB.isEnabled());
