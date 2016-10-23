@@ -20,6 +20,7 @@
             android:stretchMode="columnWidth"
             android:background="#fff"
 
+            
             />
         <GridView
             android:id="@+id/gripBlackWhite"
