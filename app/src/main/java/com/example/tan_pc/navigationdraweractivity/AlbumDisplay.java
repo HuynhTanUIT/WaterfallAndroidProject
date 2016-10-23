@@ -36,11 +36,11 @@ public class AlbumDisplay extends Fragment {
         View view = inflater.inflate(R.layout.fragment_import, container, false);
         // Inflate the layout for this fragment
         // list=imageReader(Environment.getExternalStorageDirectory());
-        gridViewColor = (GridView) view.findViewById(R.id.gripColor);
-        AddImage();
-        //adapterGrid.clear();
-        adapterGrid = new AdapterGrid(this.getActivity(), R.layout.layout_adapter_gridview, arrayimg);
-        gridViewColor.setAdapter(adapterGrid);
+//        gridViewColor = (GridView) view.findViewById(R.id.gripColor);
+//        AddImage();
+//        //adapterGrid.clear();
+//        adapterGrid = new AdapterGrid(this.getActivity(), R.layout.layout_adapter_gridview, arrayimg);
+//        gridViewColor.setAdapter(adapterGrid);
         // gridViewColor.setAdapter(new GridAdapter());
         //  gridView.setAdapter(new AdapterGrid(view.getContext()));
         return view;
@@ -59,11 +59,11 @@ public class AlbumDisplay extends Fragment {
         rootView.removeAllViews();
         rootView.addView(newview);
 
-        gridViewColor = (GridView) newview.findViewById(R.id.gripColor);
-        AddImage();
-        //adapterGrid.clear();
-        adapterGrid = new AdapterGrid(this.getActivity(), R.layout.layout_adapter_gridview, arrayimg);
-        gridViewColor.setAdapter(adapterGrid);
+//        gridViewColor = (GridView) newview.findViewById(R.id.gripColor);
+//        AddImage();
+//        //adapterGrid.clear();
+//        adapterGrid = new AdapterGrid(this.getActivity(), R.layout.layout_adapter_gridview, arrayimg);
+//        gridViewColor.setAdapter(adapterGrid);
         // Log.i("myLogs", "Rotation");
     }
 

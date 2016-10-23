@@ -7,7 +7,11 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -45,6 +49,8 @@ import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import adapter.GridAdapterHome;
 import adapter.ImageSingelHome;
@@ -103,6 +109,7 @@ public class HomeFragment extends Fragment {
     CheckBox checkboxConvertAndSaveHome;
 
     ProgressBar progressBarHome;
+    ProgressBar progressBarConvertHome;
 
     LinearLayout HomeLinearLayout;
 
@@ -125,13 +132,19 @@ public class HomeFragment extends Fragment {
     ImageView imageViewColorImageHomeB;
     ImageView imageViewBinaryImageHomeB;
 
+
+    ProgressBar progressBarHomeB;
+    ProgressBar progressBarConvertHomeB;
+
     ConvertBinary convertBinary;
+
     //truong hop bam choose nhieu hon 1 lan
     //boolean choose=true;
     //GridView gridviewHome;
 
     private Uri picUri;
     final int CROP_PIC = 2;
+
 
     ArrayList<ImageSingelHome> imageArray;
     ArrayAdapter<ImageSingelHome> adapter;
@@ -216,6 +229,11 @@ public class HomeFragment extends Fragment {
 
             EnableEditText(edtRepeatTimeHome, true);
             EnableEditText(edtRepeatAfterHome, true);
+            btnSendHome.setBackgroundColor(Color.parseColor("#269999"));
+            btnSendHome.setEnabled(true);
+
+            progressBarHome.setVisibility(getView().VISIBLE);
+            txtpercentTextHome.setVisibility(getView().VISIBLE);
 
 
         } else {
@@ -225,6 +243,13 @@ public class HomeFragment extends Fragment {
 
             EnableEditText(edtRepeatTimeHome, false);
             EnableEditText(edtRepeatAfterHome, false);
+            btnSendHome.setBackgroundColor(Color.parseColor("#d3d3d3"));
+            btnSendHome.setEnabled(false);
+
+            progressBarHome.setVisibility(getView().GONE);
+            txtpercentTextHome.setVisibility(getView().GONE);
+
+
         }
     }
 
@@ -236,25 +261,31 @@ public class HomeFragment extends Fragment {
 //            edtHeightHome.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
         } else {
             EnableEditText(edtHeightHome, false);
-            try {
-                int iH = imageViewColorImageHome.getDrawable().getIntrinsicHeight();//H original
-                int iW = imageViewColorImageHome.getDrawable().getIntrinsicWidth();//W original
-                // int ih = imageViewColorImageHome.getMeasuredHeight();//height of imageView
-                Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
-                while (cursorCT.moveToNext()) {
-                    int id = cursorCT.getInt(1);
-                    int NumVal = NumberOfValves(id);
-                    txt192x.setText(String.valueOf(NumVal) + " x ");
-                    int newHeight = (int) (((float) iH / iW) * NumVal);
+        }
+        try {
+            int iH = imageViewColorImageHome.getDrawable().getIntrinsicHeight();//H original
+            int iW = imageViewColorImageHome.getDrawable().getIntrinsicWidth();//W original
+            // int ih = imageViewColorImageHome.getMeasuredHeight();//height of imageView
+            Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
+            while (cursorCT.moveToNext()) {
+                int id = cursorCT.getInt(1);
+                int NumVal = NumberOfValves(id);
+                txt192x.setText(String.valueOf(NumVal) + " x ");
+                int newHeight = (int) (((float) iH / iW) * NumVal);
+                if(newHeight>999){
+                    edtHeightHome.setText(String.valueOf(999));
+                }
+                else {
                     edtHeightHome.setText(String.valueOf(newHeight));
+                }
+               // edtHeightHome.setText(String.valueOf(newHeight));
 //                    //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newHeight);
 //                    ToastShow(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newHeight);
-                }//
+            }//
 //                ToastShow(String.valueOf(iH) +" "+ String.valueOf((float)(iH/iW)*NumberValves));
-            } catch (Exception e) {
-                edtHeightHome.setText("");
-                edtHeightHome.setEnabled(false);
-            }
+        } catch (Exception e) {
+            edtHeightHome.setText("");
+            edtHeightHome.setEnabled(false);
         }
     }
 
@@ -385,8 +416,10 @@ public class HomeFragment extends Fragment {
                     ButtonChooseHomeClicked();
                     break;
                 case R.id.btnConvertHome:
-
                     ButtonConvertHomeClicked();
+                    if(checkboxConvertAndSaveHome.isChecked()){
+                        SaveToDatabase();
+                    }
                     break;
                 case R.id.btnSendHome:
                     break;
@@ -410,39 +443,97 @@ public class HomeFragment extends Fragment {
             }
         }
     };
-    private void ButtonConvertHomeClicked(){
+
+    private void ButtonConvertHomeClicked() {
         try {
-                Bitmap bitmap = ((BitmapDrawable)imageViewColorImageHome.getDrawable()).getBitmap();
-                int iH = Integer.parseInt(edtHeightHome.getText().toString());//H original
-                int iW =  bitmap.getWidth();//W original
-                Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
-                while (cursorCT.moveToNext()) {
-                    int id = cursorCT.getInt(1);
-                    int newWidth = NumberOfValves(id);
-                    int newHeight = iH;//(int) (((float) iH / iW) * newWidth);//newWidth=valves
-                    Bitmap resized = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-                    imageViewBinaryImageHome.setImageBitmap(resized);
+            //Resized Imaged Color
 
-                    ToastShow(String.valueOf(resized.getWidth())+ " "+String.valueOf(resized.getHeight()));
-                    //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
-                    //ToastShow(String.valueOf(iH) + " " + String.valueOf(iW) + " " + String.valueOf((float) iH / iW) + " " + newWidth);
-                }//
+            Bitmap resized = null;
+            Bitmap resizedGrayscale = null;
+            Bitmap resizedBinary = null;
+            Bitmap bitmap = ((BitmapDrawable) imageViewColorImageHome.getDrawable()).getBitmap();
+
+            int iH = Integer.parseInt(edtHeightHome.getText().toString());//H original
+            int iW = bitmap.getWidth();//W original
+            Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
+            while (cursorCT.moveToNext()) {
+                int id = cursorCT.getInt(1);
+                int newWidth = NumberOfValves(id);
+                int newHeight = iH;//(int) (((float) iH / iW) * newWidth);//newWidth=valves
+                resized = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+                //imageViewBinaryImageHome.setImageBitmap(resized);
+
+               // ToastShow(String.valueOf(resized.getWidth()) + " " + String.valueOf(resized.getHeight()));
+                //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
+                //ToastShow(String.valueOf(iH) + " " + String.valueOf(iW) + " " + String.valueOf((float) iH / iW) + " " + newWidth);
+            }//
+            //convert to Gray Image
+            resizedGrayscale = ConvertToGrayscale(resized);
+            //ConvertToBinary
+            resizedBinary = GrayscaletoBinary(resizedGrayscale);
+            imageViewBinaryImageHome.setImageBitmap(resizedBinary);
+            //progressBarConvertHome.setVisibility(getView().GONE);
+            //btnConvertHome.setEnabled(true);
+
             ClearEditTextFocus();
-//                ToastShow(String.valueOf(iH) +" "+ String.valueOf((float)(iH/iW)*NumberValves));
-//            Bitmap bitmap = ((BitmapDrawable)imageViewColorImageHome.getDrawable()).getBitmap();
-//            Bitmap resized= convertBinary.ResizeColorImage(bitmap);
-//            imageViewBinaryImageHome.setImageBitmap(resized);
 
-        }catch (Exception e){
-            if(e.getMessage().toString().contains("null object"))
-            {
+        } catch (Exception e) {
+            if (e.getMessage().toString().contains("null object")) {
                 ToastShow("Choose Image First! ");
+//                progressBarConvertHome.setVisibility(getView().GONE);
+
             }
             //ToastShow(e.getMessage().toString());
         }
 //        BitmapDrawable bm=(BitmapDrawable)imageViewColorImageHome.getDrawable();
 
     }
+
+    //ConVert Grayscale To binary
+    public Bitmap GrayscaletoBinary(Bitmap bmpOriginal) {
+        int width, height, threshold;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+        threshold = 127;
+//
+//
+        Bitmap bmpBinary = Bitmap.createBitmap(bmpOriginal);
+
+        for (int x = 0; x < width; ++x) {
+            // progressBarConvertHome.setVisibility(getView().VISIBLE);
+            for (int y = 0; y < height; ++y) {
+                // get one pixel color
+                int pixel = bmpOriginal.getPixel(x, y);
+                int red = Color.red(pixel);
+
+                //get binary value
+                if (red < threshold) {
+                    bmpBinary.setPixel(x, y, 0xFF000000);
+                } else {
+                    bmpBinary.setPixel(x, y, 0xFFFFFFFF);
+                }
+
+            }
+        }
+        return bmpBinary;
+    }
+
+    //Convert To GrayScale
+    public Bitmap ConvertToGrayscale(Bitmap bmpOriginal) {
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        Canvas c = new Canvas(bmpGrayscale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return bmpGrayscale;
+    }
+
     private View.OnFocusChangeListener edtFocusChange = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -502,7 +593,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public void ButtonSaveClicked() {
+    public void SaveToDatabase() {
         try {
 //            String s=String.valueOf(PROJECTDATABASE.CountImage192Valves());
             long yourmilliseconds = System.currentTimeMillis();
@@ -514,7 +605,7 @@ public class HomeFragment extends Fragment {
                     "Image192_" + sdf.format(resultdate),
                     192,
                     192,
-                    ImageView_To_Byte(imageViewColorImageHome)
+                    ImageView_To_Byte(imageViewBinaryImageHome)
             );
             //LoadImageToGridView();
             ToastShow("Binary Image Has Been Saved!");
@@ -661,8 +752,17 @@ public class HomeFragment extends Fragment {
                     int id = cursorCT.getInt(1);
                     int NumVal = NumberOfValves(id);
                     txt192x.setText(String.valueOf(NumVal) + " x ");
-                    int newWidth = (int) (((float) iH / iW) * NumVal);
-                    edtHeightHome.setText(String.valueOf(newWidth));
+                    int newHeight = (int) (((float) iH / iW) * NumVal);
+
+                    if(newHeight>999){
+                        edtHeightHome.setText(String.valueOf(999));
+                    }
+                    else {
+                        edtHeightHome.setText(String.valueOf(newHeight));
+                    }
+
+                    //fdgfhgjhk
+                    //edtHeightHome.setText(String.valueOf(newWidth));
                     //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
                     //ToastShow(String.valueOf(iH) + " " + String.valueOf(iW) + " " + String.valueOf((float) iH / iW) + " " + newWidth);
                 }
@@ -677,6 +777,7 @@ public class HomeFragment extends Fragment {
             ToastShow(e.getMessage().toString());
         }
     }
+
 
     private void ReflectAndListener(View v) {
         try {
@@ -715,10 +816,11 @@ public class HomeFragment extends Fragment {
             checkboxConvertAndSaveHome = (CheckBox) v.findViewById(R.id.checkboxConvertAndSaveHome);
 
             progressBarHome = (ProgressBar) v.findViewById(R.id.progressBarHome);
+            progressBarConvertHome = (ProgressBar) v.findViewById(R.id.progressBarConvertHome);
 
 
             // gridviewHome = (GridView) v.findViewById(R.id.gridviewHome);
-            convertBinary =new ConvertBinary();
+            convertBinary = new ConvertBinary();
             imageArray = new ArrayList<ImageSingelHome>();
             adapter = new ArrayAdapter<ImageSingelHome>(getContext(), R.layout.row, imageArray);
         } catch (Exception e) {
@@ -738,10 +840,20 @@ public class HomeFragment extends Fragment {
                     if (isValvesChange != null) {
 //                        if(isValvesChange.getString("ValvesChange"))
 //                        Log.e("bulble Nullllllll ","NUll ROi");
+//                        String txt192xBK=txt192x.getText().toString().trim();
                         txt192x.setText(isValvesChange.getString("ValvesChange").trim() + " x ");
-                    } else {
-
+//                        String txtTemp =txt192x.getText().toString().trim();
+//                        if(txt192xBK!=txtTemp){
+//                            int iH = imageViewColorImageHome.getDrawable().getIntrinsicHeight();//H original
+//                            int iW = imageViewColorImageHome.getDrawable().getIntrinsicWidth();//W original
+//                            int NumVal = Integer.parseInt(isValvesChange.getString("ValvesChange").trim()) ;
+//                            // int ih = imageViewColorImageHome.getMeasuredHeight();//height of imageView
+//                            int newWidth = (int) (((float) iH / iW) * NumVal);
+//                            edtHeightHome.setText(String.valueOf(newWidth));
+//                            switchConfigSizeHome.setChecked(false);
+//                            }
                     }
+                    isValvesChange.clear();
 
                 } catch (Exception e) {
 
@@ -772,6 +884,7 @@ public class HomeFragment extends Fragment {
             rootView.removeAllViews();
             rootView.addView(newview);
 //            //Restore Values
+//
             InitializeComponent(newview);
             RecoverValuesComponent();
         } catch (Exception e) {
@@ -779,6 +892,7 @@ public class HomeFragment extends Fragment {
         }
 
     }
+
     private void BackupComponen() {
         radioGalleryB = radioGallery;
         radioCameraB = radioCamera;
@@ -802,6 +916,10 @@ public class HomeFragment extends Fragment {
         imageViewColorImageHomeB = imageViewColorImageHome;
 
         imageViewBinaryImageHomeB = imageViewBinaryImageHome;
+
+         progressBarHomeB=progressBarHome;
+         progressBarConvertHomeB=progressBarConvertHome;
+
     }
 
     private void RecoverValuesComponent() {
@@ -827,6 +945,9 @@ public class HomeFragment extends Fragment {
         imageViewColorImageHome.setImageDrawable(imageViewColorImageHomeB.getDrawable());
 
         imageViewBinaryImageHome.setImageDrawable(imageViewBinaryImageHomeB.getDrawable());
+
+        progressBarHome.setProgress(progressBarHome.getProgress());
+        progressBarConvertHome.setProgress(progressBarConvertHome.getProgress());
 
     }
 
@@ -876,66 +997,6 @@ public class HomeFragment extends Fragment {
         }
         return s;
     }
-//    private void start() {
-//        cancel();
-//        countDownTimer = new CountDownTimer(92000 * 1000, 3000) {
-//            @Override
-//            public void onTick(long l) {
-//                loadImage();
-//                //timetext.setText(""+l/1000);
-//            }
-//
-//            @Override
-//            public void onFinish() {
-//                // timetext.setText("Done");
-//                //cancel();
-//            }
-//        };
-//        countDownTimer.start();
-//    }
-//
-//    private void cancel() {
-//        if (countDownTimer != null) {
-//            countDownTimer.cancel();
-//            countDownTimer = null;
-//        }
-//    }
-//
-//    private void loadImage() {
-//        ArrayList<Integer> arrayimg = new ArrayList<Integer>();
-//        arrayimg.add(R.drawable.a1);//0
-//        arrayimg.add(R.drawable.a2);//1
-//        arrayimg.add(R.drawable.a3);//2
-//        arrayimg.add(R.drawable.a4);//0
-//        arrayimg.add(R.drawable.a5);//1
-//        arrayimg.add(R.drawable.a6);//2arrayimg.add(R.drawable.a1);//0
-//        arrayimg.add(R.drawable.a7);//1
-//        arrayimg.add(R.drawable.a8);//2arrayimg.add(R.drawable.a1);//0
-//        arrayimg.add(R.drawable.a9);//1
-//        arrayimg.add(R.drawable.a10);//2arrayimg.add(R.drawable.a1);//0
-//        arrayimg.add(R.drawable.a11);//1
-//        arrayimg.add(R.drawable.a12);//2arrayimg.add(R.drawable.a1);//0
-//        arrayimg.add(R.drawable.a13);//1
-//        arrayimg.add(R.drawable.a14);//2arrayimg.add(R.drawable.a1);//0
-//        arrayimg.add(R.drawable.a15);//1
-//        arrayimg.add(R.drawable.a16);//2
-//        arrayimg.add(R.drawable.a17);//2
-//        arrayimg.add(R.drawable.a18);//2
-//        arrayimg.add(R.drawable.a19);//2
-//        arrayimg.add(R.drawable.a20);//2
-//        arrayimg.add(R.drawable.a21);//2
-//        arrayimg.add(R.drawable.a22);//2
-//        Random r = new Random();
-//        int ran = r.nextInt(arrayimg.size());
-//        img.setImageResource(arrayimg.get(ran));
-//        Glide
-//                .with(this)
-//                .load(ran)
-//                .centerCrop()
-//
-//                .into(img);
-    // background.setBackgroundResource(R.drawable.icon);
-//    }
 
 
 }

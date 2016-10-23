@@ -79,7 +79,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="ab5e3888810404ecd4a455b5f306bb5c8cb0b45e">
+        sha1="5d3e8905c2cd5020626616a32d56c5d0e66178c9">
         <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_7908a422ff1ff59cdc01b69c0d2237f97f14dbc3/classes.dex" />
     </item>
     <item
@@ -124,7 +124,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="b66e17753bb3277dccdabd6db0f8b5171f64e673">
+        sha1="0bb2752ce34988aabd4b5a6f1d9e7cbc5a5b3e56">
         <dex dex="/home/tan-pc/AndroidStudioProjects/WaterfallAndroidProject/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_772b463f098a643adbd8d1aa83b597165ab8abc3/classes.dex" />
     </item>
     <item

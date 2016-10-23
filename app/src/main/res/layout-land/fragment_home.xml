@@ -50,7 +50,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.15"
@@ -62,7 +62,22 @@
                     android:layout_height="match_parent"
                     android:background="@color/disable"
                     android:scaleType="fitCenter" />
-            </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progressBarConvertHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:minHeight="13dp"
+                    android:visibility="gone"
+                    android:minWidth="200dp"
+                    android:progress="5" />
+
+            </FrameLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -434,15 +449,17 @@
                             android:layout_height="match_parent">
 
                             <TextView
+                                android:visibility="gone"
                                 android:id="@+id/txtpercentTextHome"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
                                 android:layout_marginRight="5dp"
-                                android:text="5% "
+                                android:text="0% "
                                 android:textColor="@color/colorPrimaryDark" />
 
                             <ProgressBar
+                                android:visibility="gone"
                                 android:id="@+id/progressBarHome"
                                 style="?android:attr/progressBarStyleHorizontal"
                                 android:layout_width="wrap_content"
@@ -455,7 +472,7 @@
                                 android:max="100"
                                 android:minHeight="13dp"
                                 android:minWidth="200dp"
-                                android:progress="5" />
+                                android:progress="0" />
                         </RelativeLayout>
 
                     </LinearLayout>
@@ -482,7 +499,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_centerHorizontal="true"
                                 android:layout_centerVertical="true"
-                                android:background="@color/colorAccent"
+                                android:background="@color/disable"
                                 android:text="Send"
                                 android:textColor="#ffffff" />
                         </LinearLayout>
