@@ -309,11 +309,9 @@
                                 android:enabled="false"
                                 android:gravity="left"
                                 android:inputType="number"
-                                android:maxLength="3"
+                                android:maxLength="4"
                                 android:padding="5dp" />
                         </RelativeLayout>
-
-
                     </LinearLayout>
 
 

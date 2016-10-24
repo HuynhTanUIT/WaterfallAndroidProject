@@ -1,6 +1,7 @@
 package com.example.tan_pc.navigationdraweractivity;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -14,6 +15,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
@@ -21,6 +23,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +47,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,6 +67,7 @@ import classConvertBinary.ConvertBinary;
 import static SettingsSQLite.SqliteHelper.TABLE_BINARY_192;
 import static SettingsSQLite.SqliteHelper.TABLE_HOME;
 import static SettingsSQLite.SqliteHelper.TABLE_SETTINGS;
+import static android.R.id.progress;
 import static android.content.Intent.getIntent;
 import static android.content.Intent.getIntentOld;
 import static com.example.tan_pc.navigationdraweractivity.MainActivity.PROJECTDATABASE;
@@ -73,6 +79,11 @@ import static android.app.Activity.RESULT_OK;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+    private ProgressDialog progress;
+    Bitmap resizedGrayscale = null;
+    Bitmap resizedBinary = null;
+    Bitmap resized = null;
+
     //Give Action ApplyClick
     private Button btnApply;
     private CountDownTimer countDownTimer;
@@ -189,6 +200,7 @@ public class HomeFragment extends Fragment {
     private void InitializeComponent(View v) {
         try {
             ReflectAndListener(v);
+            //HomeLinearLayout.setEnabled(false);
 
             //LOad Values Threshold and WidthSize from database
             LoadHomeValues();
@@ -291,11 +303,11 @@ public class HomeFragment extends Fragment {
                 int NumVal = NumberOfValves(id);
                 txt192x.setText(String.valueOf(NumVal) + " x ");
                 int newHeight = (int) (((float) iH / iW) * NumVal);
-                if (newHeight > 999) {
-                    edtHeightHome.setText(String.valueOf(999));
-                } else {
+//                if (newHeight > 999) {
+//                    edtHeightHome.setText(String.valueOf(999));
+//                } else {
                     edtHeightHome.setText(String.valueOf(newHeight));
-                }
+//                }
                 // edtHeightHome.setText(String.valueOf(newHeight));
 //                    //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newHeight);
 //                    ToastShow(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newHeight);
@@ -452,10 +464,10 @@ public class HomeFragment extends Fragment {
     private void ButtonConvertHomeClicked() {
         try {
             //Resized Imaged Color
-            Bitmap resized = null;
-            Bitmap resizedGrayscale = null;
-            Bitmap resizedBinary = null;
+//            Bitmap resizedGrayscale = null;
+//            Bitmap resizedBinary = null;
             Bitmap bitmap = ((BitmapDrawable) imageViewColorImageHome.getDrawable()).getBitmap();
+
             int iH = Integer.parseInt(edtHeightHome.getText().toString());//H original
             int iW = bitmap.getWidth();//W original
             Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
@@ -464,43 +476,155 @@ public class HomeFragment extends Fragment {
                 int newWidth = NumberOfValves(id);
                 int newHeight = iH;//(int) (((float) iH / iW) * newWidth);//newWidth=valves
                 resized = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
-                //imageViewBinaryImageHome.setImageBitmap(resized);
-
-                // ToastShow(String.valueOf(resized.getWidth()) + " " + String.valueOf(resized.getHeight()));
-                //txtSendToHardware.setText(String.valueOf(iH)+" "+String.valueOf(iW)+ " "+ String.valueOf((float)iH/iW)  +" "+newWidth);
-                //ToastShow(String.valueOf(iH) + " " + String.valueOf(iW) + " " + String.valueOf((float) iH / iW) + " " + newWidth);
-            }//
-            //convert to Gray Image
-            resizedGrayscale = ConvertToGrayscale(resized);
-            //ConvertToBinary
-
-            if (switchSwapColor.isChecked()) {
-                resizedBinary = GrayscaletoBinarySwapColorOn(resizedGrayscale);
-
-            } else {
-                resizedBinary = GrayscaletoBinary(resizedGrayscale);
             }
-
-            imageViewBinaryImageHome.setImageBitmap(resizedBinary);
-            //progressBarConvertHome.setVisibility(getView().GONE);
-            //btnConvertHome.setEnabled(true);
-
+            //convert to Gray Image
+            //  new ConvertAsyncTask(getContext(), 1, resized,  imageViewBinaryImageHome);
+            //ConvertToBinary
+            if (switchSwapColor.isChecked()==false) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new ConvertNormalAsyncTask(getContext(), resized).execute();
+                    }
+                });
+            } else {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new ConvertSwapColorOnAsyncTask(getContext(), resized).execute();
+                    }
+                });
+            }
             ClearEditTextFocus();
             EnableButton(btnConvertHome, false);
-
         } catch (Exception e) {
             if (e.getMessage().toString().contains("null object")) {
-                ToastShow("Choose Image First! ");
-//                progressBarConvertHome.setVisibility(getView().GONE);
+                // ToastShow("Choose Image First! ");
 
+                Toast toast = Toast.makeText(getActivity(),
+                        "Choose Image First!", Toast.LENGTH_LONG);
+                //toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+                toast.show();
+//                progressBarConvertHome.setVisibility(getView().GONE);
             }
-            //ToastShow(e.getMessage().toString());
         }
-//        BitmapDrawable bm=(BitmapDrawable)imageViewColorImageHome.getDrawable();
     }
 
+    private class ConvertNormalAsyncTask extends AsyncTask<Bitmap, String, Bitmap> {
+        private final Context context;
+        private final Bitmap bitmapcolorresized;
 
-    //ConVert Grayscale To binary Nomal
+        public ConvertNormalAsyncTask(Context c, Bitmap Bresized) {
+            context = c;
+            bitmapcolorresized = Bresized;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress = new ProgressDialog(getContext());
+            progress.setMessage("Converting...");
+            progress.setCancelable(false);
+            progress.show();
+
+        }
+
+        @Override
+        protected Bitmap doInBackground(Bitmap... params) {
+            resizedGrayscale = ConvertToGrayscale(bitmapcolorresized);
+            resizedBinary = GrayscaletoBinary(resizedGrayscale);
+
+            return resizedBinary;
+        }
+//            @Override
+//            protected void onProgressUpdate(Integer... values) {
+//                super.onProgressUpdate(values);
+//            }
+
+        @Override
+        protected void onPostExecute(Bitmap img) {
+            super.onPostExecute(img);
+            imageViewBinaryImageHome.setImageBitmap(img);
+            progress.dismiss();
+        }
+//        @Override
+//        protected void onCancelled() {
+//
+//            super.onCancelled();
+////            progressDialog.dismiss();
+////            Toast toast = Toast.makeText(context,
+////                    "Error is occured due to some probelm", Toast.LENGTH_LONG);
+////            toast.setGravity(Gravity.TOP, 25, 400);
+////            toast.show();
+//        }
+    }
+
+    private class ConvertSwapColorOnAsyncTask extends AsyncTask<Bitmap, String, Bitmap> {
+        private final Context context;
+        private final Bitmap bitmapcolorresized;
+
+        public ConvertSwapColorOnAsyncTask(Context c, Bitmap Bresized) {
+            context = c;
+            bitmapcolorresized = Bresized;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progress = new ProgressDialog(getContext());
+            progress.setMessage("Converting...");
+            progress.setCancelable(false);
+            progress.show();
+
+        }
+
+        @Override
+        protected Bitmap doInBackground(Bitmap... params) {
+            resizedGrayscale = ConvertToGrayscale(bitmapcolorresized);
+            resizedBinary = GrayscaletoBinarySwapColorOn(resizedGrayscale);
+
+            return resizedBinary;
+        }
+//            @Override
+//            protected void onProgressUpdate(Integer... values) {
+//                super.onProgressUpdate(values);
+//            }
+
+        @Override
+        protected void onPostExecute(Bitmap img) {
+            super.onPostExecute(img);
+            imageViewBinaryImageHome.setImageBitmap(img);
+            progress.dismiss();
+        }
+//        @Override
+//        protected void onCancelled() {
+//
+//            super.onCancelled();
+////            progressDialog.dismiss();
+////            Toast toast = Toast.makeText(context,
+////                    "Error is occured due to some probelm", Toast.LENGTH_LONG);
+////            toast.setGravity(Gravity.TOP, 25, 400);
+////            toast.show();
+//        }
+    }
+
+    //Convert To GrayScale
+    public Bitmap ConvertToGrayscale(Bitmap bmpOriginal) {
+        int width, height;
+        height = bmpOriginal.getHeight();
+        width = bmpOriginal.getWidth();
+        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        Canvas c = new Canvas(bmpGrayscale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bmpOriginal, 0, 0, paint);
+        return bmpGrayscale;
+    }
+
+    //ConVert Grayscale To binary SwapColor
     public Bitmap GrayscaletoBinarySwapColorOn(Bitmap bmpOriginal) {
         int width, height, threshold;
         height = bmpOriginal.getHeight();
@@ -558,22 +682,6 @@ public class HomeFragment extends Fragment {
         return bmpBinary;
     }
 
-    //Convert To GrayScale
-    public Bitmap ConvertToGrayscale(Bitmap bmpOriginal) {
-        int width, height;
-        height = bmpOriginal.getHeight();
-        width = bmpOriginal.getWidth();
-        Bitmap bmpGrayscale = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        Canvas c = new Canvas(bmpGrayscale);
-        Paint paint = new Paint();
-        ColorMatrix cm = new ColorMatrix();
-        cm.setSaturation(0);
-        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
-        paint.setColorFilter(f);
-        c.drawBitmap(bmpOriginal, 0, 0, paint);
-        return bmpGrayscale;
-    }
-
     private View.OnFocusChangeListener edtFocusChange = new View.OnFocusChangeListener() {
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
@@ -591,7 +699,6 @@ public class HomeFragment extends Fragment {
             } catch (Exception e) {
                 ToastShow(e.getMessage().toString());
             }
-
         }
     };
 
@@ -783,7 +890,6 @@ public class HomeFragment extends Fragment {
             try {
                 int iH = imageViewColorImageHome.getDrawable().getIntrinsicHeight();//H original
                 int iW = imageViewColorImageHome.getDrawable().getIntrinsicWidth();//W original
-
                 // int ih = imageViewColorImageHome.getMeasuredHeight();//height of imageView
 
                 Cursor cursorCT = PROJECTDATABASE.GetData("SELECT * FROM " + TABLE_SETTINGS);
@@ -794,11 +900,7 @@ public class HomeFragment extends Fragment {
                     txt192x.setText(String.valueOf(NumVal) + " x ");
                     int newHeight = (int) (((float) iH / iW) * NumVal);
 
-                    if (newHeight > 999) {
-                        edtHeightHome.setText(String.valueOf(999));
-                    } else {
                         edtHeightHome.setText(String.valueOf(newHeight));
-                    }
 
                     //fdgfhgjhk
                     //edtHeightHome.setText(String.valueOf(newWidth));
@@ -969,7 +1071,7 @@ public class HomeFragment extends Fragment {
 
         switchConfigSizeHomeB = switchConfigSizeHome;
         switchActiveHomeB = switchActiveHome;
-        switchSwapColorB=switchSwapColor;
+        switchSwapColorB = switchSwapColor;
 
         edtHeightHomeB = edtHeightHome;
         edtHeightHomeB = edtHeightHome;
@@ -1025,7 +1127,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-
     public byte[] ImageView_To_Byte(ImageView imgv) {
         BitmapDrawable drawable = (BitmapDrawable) imgv.getDrawable();
         Bitmap bmp = drawable.getBitmap();
@@ -1037,6 +1138,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void ToastShow(String s) {
+
+
         Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
     }
 
