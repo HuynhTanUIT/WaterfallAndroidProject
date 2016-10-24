@@ -136,7 +136,6 @@ public class SettingsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
 
         InitializeComponent(v);
-        Log.e("Show Setting: ", "Fragment 5");
         return v;
     }
 

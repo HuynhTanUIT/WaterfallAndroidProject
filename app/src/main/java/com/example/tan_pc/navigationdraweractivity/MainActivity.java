@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        setContentView(R.layout.activity_main);
         InitializeComponent();
         FragmentShow(4);
         FragmentShow(3);
@@ -155,8 +157,7 @@ public class MainActivity extends AppCompatActivity
     private void InitializeComponent() {
         try {
 
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-            setContentView(R.layout.activity_main);
+
 
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);

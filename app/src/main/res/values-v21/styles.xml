@@ -5,6 +5,8 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDisablePreview">true</item>
+
     </style>
 
     <style name="Toolbar_Popup" parent="Base.ThemeOverlay.AppCompat.Light">
@@ -12,4 +14,6 @@
         <item name="android:background">#7f000000</item>
 
     </style>
+
+
 </resources>
