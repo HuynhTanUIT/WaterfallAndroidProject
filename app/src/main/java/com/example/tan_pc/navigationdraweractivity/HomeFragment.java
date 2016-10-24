@@ -495,9 +495,7 @@ public class HomeFragment extends Fragment {
             }
             ClearEditTextFocus();
             EnableButton(btnConvertHome, false);
-            if (checkboxConvertAndSaveHome.isChecked()) {
-                SaveToDatabase();
-            }
+          
         } catch (Exception e) {
             if (e.getMessage().toString().contains("null object")) {
                 // ToastShow("Choose Image First! ");
@@ -546,6 +544,9 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(Bitmap img) {
             super.onPostExecute(img);
             imageViewBinaryImageHome.setImageBitmap(img);
+            if (checkboxConvertAndSaveHome.isChecked()) {
+                SaveToDatabase();
+            }
             progress.dismiss();
         }
 //        @Override
@@ -595,6 +596,9 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(Bitmap img) {
             super.onPostExecute(img);
             imageViewBinaryImageHome.setImageBitmap(img);
+            if (checkboxConvertAndSaveHome.isChecked()) {
+                SaveToDatabase();
+            }
             progress.dismiss();
         }
 //        @Override
