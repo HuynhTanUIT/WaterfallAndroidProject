@@ -434,9 +434,7 @@ public class HomeFragment extends Fragment {
                 case R.id.btnConvertHome:
 
                     ButtonConvertHomeClicked();
-                    if (checkboxConvertAndSaveHome.isChecked()) {
-                        SaveToDatabase();
-                    }
+
                     break;
                 case R.id.btnSendHome:
                     break;
@@ -497,6 +495,9 @@ public class HomeFragment extends Fragment {
             }
             ClearEditTextFocus();
             EnableButton(btnConvertHome, false);
+            if (checkboxConvertAndSaveHome.isChecked()) {
+                SaveToDatabase();
+            }
         } catch (Exception e) {
             if (e.getMessage().toString().contains("null object")) {
                 // ToastShow("Choose Image First! ");
