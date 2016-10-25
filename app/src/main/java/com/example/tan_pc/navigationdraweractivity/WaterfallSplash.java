@@ -48,7 +48,7 @@ public class WaterfallSplash extends Activity {
                     while(counter <= 1)
                     {
                         //Wait 850 milliseconds
-                        this.wait(750);
+                        this.wait(250);
                         //Increment the counter
                         counter++;
                         //Set the current progress.
