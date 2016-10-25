@@ -1,9 +1,13 @@
 package com.example.tan_pc.navigationdraweractivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -60,22 +64,66 @@ public class MainActivity extends AppCompatActivity
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.activity_main);
         InitializeComponent();
+        FragmentShow(5);
         FragmentShow(4);
         FragmentShow(3);
         FragmentShow(2);
         FragmentShow(1);
-        FragmentShow(5);
         FragmentShow(0);
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                Log.e("Show Hom: ", "Fragment 5");
-//            }
-//        });
-//
-//        Log.e("Show Hom: ", "Fragment 0");
+
     }
+
+    private class FragmentSettingLoad extends AsyncTask<Void, Void, Void> {
+        private final Context context;
+
+        public FragmentSettingLoad(Context c) {
+            context = c;
+        }
+
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            FragmentShow(5);
+            FragmentShow(4);
+            FragmentShow(3);
+            FragmentShow(2);
+            FragmentShow(1);
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//          ProgressDialog progress;
+//            progress = new ProgressDialog(context);
+//            progress.setMessage("Converting...");
+//            progress.setCancelable(false);
+//            progress.show();
+
+        }
+
+//            @Override
+//            protected void onProgressUpdate(Integer... values) {
+//                super.onProgressUpdate(values);
+//            }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            FragmentShow(0);
+
+        }
+
+//
+    }
+
+
+
+
+
+
+
+
 
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);

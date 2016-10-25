@@ -188,7 +188,7 @@ public class SettingsFragment extends Fragment {
         edtPort.setOnKeyListener(edtOnKeyListener);
         edtPort.addTextChangedListener(edtTextChangeListener);
         Switch1check(false);
-        DisplaySettingsValue();
+        //DisplaySettingsValue();
     }
 
     public void SetButtondisableOrEnable(Button btn, boolean b) {

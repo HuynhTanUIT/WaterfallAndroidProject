@@ -78,8 +78,9 @@ public class WaterfallSplash extends Activity {
         {
             Intent mainIntent = new Intent(WaterfallSplash.this,MainActivity.class);
             WaterfallSplash.this.startActivity(mainIntent);
-            progressDialog.dismiss();
             finish();
+            progressDialog.dismiss();
+
             //close the progress dialog
 
         }

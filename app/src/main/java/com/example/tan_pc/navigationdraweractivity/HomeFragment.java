@@ -495,7 +495,7 @@ public class HomeFragment extends Fragment {
             }
             ClearEditTextFocus();
             EnableButton(btnConvertHome, false);
-          
+
         } catch (Exception e) {
             if (e.getMessage().toString().contains("null object")) {
                 // ToastShow("Choose Image First! ");

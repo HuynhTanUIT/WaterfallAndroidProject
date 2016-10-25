@@ -10,6 +10,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize"
             android:name=".WaterfallSplash" >
             <intent-filter>
 
