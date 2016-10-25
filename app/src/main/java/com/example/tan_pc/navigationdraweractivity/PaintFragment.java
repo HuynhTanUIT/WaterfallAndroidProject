@@ -73,7 +73,7 @@ public class PaintFragment extends Fragment {
         super.onConfigurationChanged(newConfig);
         ViewGroup rootView = (ViewGroup) getView();
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View newview = inflater.inflate(R.layout.fragment_display_text, rootView, false);
+        View newview = inflater.inflate(R.layout.fragment_paint, rootView, false);
         //ViewGroup rootView = (ViewGroup) getView();
         // Remove all the existing views from the root view.
         // This is also a good place to recycle any resources you won't need anymore
@@ -87,7 +87,7 @@ public class PaintFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
 
-        View view = inflater.inflate(R.layout.fragment_display_text, container, false);
+        View view = inflater.inflate(R.layout.fragment_paint, container, false);
         //InitializeComponent(view);
         return view;
     }
@@ -99,45 +99,7 @@ public class PaintFragment extends Fragment {
 
     public void ReflectAndListener(View view) {
 
-        TextLinearLayout = (LinearLayout) view.findViewById(R.id.TextLinearLayout);
-        TextLinearLayout.setOnClickListener(btnClickListener);
-        switchActiveTextDisplay = (Switch) view.findViewById(R.id.switchActiveTextDisplay);
-        switchActiveTextDisplay.setOnClickListener(btnClickListener);
-        switchActiveTextDisplay.setOnCheckedChangeListener(checkedChangedListenner);
 
-        txtReviewDisplayText = (TextView) view.findViewById(R.id.txtReviewDisplayText);
-        txtInProgress = (TextView) view.findViewById(R.id.txtInProgress);
-        txtNextProgress = (TextView) view.findViewById(R.id.txtNextProgress);
-        txtpercentText = (TextView) view.findViewById(R.id.txtpercentText);
-        TxtQueue = (TextView) view.findViewById(R.id.TxtQueue);
-        txtImageView = (TextView) view.findViewById(R.id.txtImageView);
-
-        edtSendText = (EditText) view.findViewById(R.id.edtSendText);
-        edtSendText.setOnClickListener(btnClickListener);
-        edtSendText.setOnFocusChangeListener(edtFocusChange);
-        edtSendText.setOnKeyListener(edtOnKeyListener);
-        edtSendText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (btnSendText.getText().toString().trim().isEmpty()) {
-                    btnSendText.setEnabled(false);
-                    btnSendText.setBackgroundColor(Color.parseColor("#d3d3d3"));
-                } else {
-                    btnSendText.setEnabled(true);
-                    btnSendText.setBackgroundColor(Color.parseColor("#269999"));
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
 
         radioLetterByLetter = (RadioButton) view.findViewById(R.id.radioLetterByLetter);
         radioLetterByLetter.setOnClickListener(btnClickListener);
