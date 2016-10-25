@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:backgroundTintMode="screen"
-    android:background="#00000000"
+    android:background="@drawable/loading6"
     android:layout_height="match_parent">
 
 
