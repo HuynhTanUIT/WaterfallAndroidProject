@@ -35,6 +35,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.List;
 
+import ClientSocket.ClientSocket;
 import adapter.AdapterGrid;
 
 /**
@@ -44,7 +45,7 @@ import adapter.AdapterGrid;
 public class PaintFragment extends Fragment {
     TextView response;
     EditText editTextAddress, editTextPort;
-    Button buttonConnect, buttonClear;
+    Button btnConnect, btnClearPaint;
 
     //khi xoay man hinh thi khong bi giu nguyen layout
     @Override
@@ -67,22 +68,25 @@ public class PaintFragment extends Fragment {
         super.onSaveInstanceState(savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_paint, container, false);
-        //InitializeComponent(view);
+        InitializeComponent(view);
         return view;
     }
 
     private void InitializeComponent(View v) {
         //load into Valves
-        //ReflectAndListener(v);
+        ReflectAndListener(v);
     }
 
     public void ReflectAndListener(View v) {
 
         editTextAddress = (EditText) v.findViewById(R.id.addressEditText);
         editTextPort = (EditText) v.findViewById(R.id.portEditText);
-        buttonConnect = (Button) v.findViewById(R.id.connectButton);
-        buttonClear = (Button) v.findViewById(R.id.clearButton);
+        btnConnect = (Button) v.findViewById(R.id.btnConnect);
+        btnClearPaint = (Button) v.findViewById(R.id.btnClearPaint);
         response = (TextView) v.findViewById(R.id.responseTextView);
+
+        btnConnect.setOnClickListener(btnClickListener);
+        btnClearPaint.setOnClickListener(btnClickListener);
 
        // SwitchTextCheck(false);
     }
@@ -91,23 +95,31 @@ public class PaintFragment extends Fragment {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.buttonConnect:
-                    break;
-                case R.id.radioWordByWord:
-                    RadioWordByWordCheck(true);
-                    break;
-                case R.id.TextLinearLayout:
-                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
-                    break;
-                case R.id.edtSendText:
-//                    edtSendText.setFocusableInTouchMode(true);
-//                    edtSendText.setFocusable(true);
-//                    edtSendText.requestFocus();
-//                    edtSendText.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+                case R.id.btnConnect:
+                    ClientSocket clientSocket = new ClientSocket (editTextAddress.getText()
+                            .toString(), Integer.parseInt(editTextPort
+                            .getText().toString()), response);
+                    clientSocket.execute();
+
+
 
                     break;
+                case R.id.btnClearPaint:
+                    response.setText("");
+                    //RadioWordByWordCheck(true);
+                    break;
+//                case R.id.TextLinearLayout:
+//                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+//                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
+//                    break;
+//                case R.id.edtSendText:
+////                    edtSendText.setFocusableInTouchMode(true);
+////                    edtSendText.setFocusable(true);
+////                    edtSendText.requestFocus();
+////                    edtSendText.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+//
+//                    break;
             }
         }
     };

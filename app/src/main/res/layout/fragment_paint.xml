@@ -27,14 +27,14 @@
         android:hint="Server port number" />
 
     <Button
-        android:id="@+id/connectButton"
+        android:id="@+id/btnConnect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Connect..." />
 
     <Button
-        android:id="@+id/clearButton"
+        android:id="@+id/btnClearPaint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Clear" />

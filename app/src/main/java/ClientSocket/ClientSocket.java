@@ -20,7 +20,7 @@ public class ClientSocket extends AsyncTask<Void, Void, Void> {
     String response = "";
     TextView textResponse;
 
-    ClientSocket(String addr, int port, TextView textResponse) {
+   public ClientSocket(String addr, int port, TextView textResponse) {
         dstAddress = addr;
         dstPort = port;
         this.textResponse = textResponse;
