@@ -42,30 +42,9 @@ import adapter.AdapterGrid;
  */
 
 public class PaintFragment extends Fragment {
-    LinearLayout TextLinearLayout;
-    Switch switchActiveTextDisplay;
-    TextView txtReviewDisplayText;
-    TextView txtInProgress;
-    TextView txtNextProgress;
-    TextView txtpercentText;
-    TextView TxtQueue;
-    TextView txtImageView;
-    RadioGroup radioGroup;
-
-    EditText edtSendText;
-
-    RadioButton radioLetterByLetter;
-    RadioButton radioWordByWord;
-
-    ImageView imageInProgess;
-    ImageView imageNextProgress;
-    ImageView imageExample;
-
-    ProgressBar progressBarText;
-
-    GridView gridviewText;
-
-    Button btnSendText;
+    TextView response;
+    EditText editTextAddress, editTextPort;
+    Button buttonConnect, buttonClear;
 
     //khi xoay man hinh thi khong bi giu nguyen layout
     @Override
@@ -97,40 +76,22 @@ public class PaintFragment extends Fragment {
         //ReflectAndListener(v);
     }
 
-    public void ReflectAndListener(View view) {
+    public void ReflectAndListener(View v) {
 
+        editTextAddress = (EditText) v.findViewById(R.id.addressEditText);
+        editTextPort = (EditText) v.findViewById(R.id.portEditText);
+        buttonConnect = (Button) v.findViewById(R.id.connectButton);
+        buttonClear = (Button) v.findViewById(R.id.clearButton);
+        response = (TextView) v.findViewById(R.id.responseTextView);
 
-
-        radioLetterByLetter = (RadioButton) view.findViewById(R.id.radioLetterByLetter);
-        radioLetterByLetter.setOnClickListener(btnClickListener);
-        radioLetterByLetter.setOnCheckedChangeListener(checkedChangedListenner);
-
-        radioWordByWord = (RadioButton) view.findViewById(R.id.radioWordByWord);
-        radioWordByWord.setOnClickListener(btnClickListener);
-        radioWordByWord.setOnCheckedChangeListener(checkedChangedListenner);
-
-        imageInProgess = (ImageView) view.findViewById(R.id.imageInProgess);
-        imageNextProgress = (ImageView) view.findViewById(R.id.imageNextProgress);
-        imageExample = (ImageView) view.findViewById(R.id.imageExample);
-
-        progressBarText = (ProgressBar) view.findViewById(R.id.progressBarText);
-        gridviewText = (GridView) view.findViewById(R.id.gridviewText);
-
-        btnSendText = (Button) view.findViewById(R.id.btnSendText);
-        radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        edtSendText.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
-        edtSendText.setInputType(InputType.TYPE_TEXT_VARIATION_PHONETIC);
-
-        SwitchTextCheck(false);
+       // SwitchTextCheck(false);
     }
 
     private View.OnClickListener btnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.radioLetterByLetter:
-                    RadioLetterByLetterCheck(true);
+                case R.id.buttonConnect:
                     break;
                 case R.id.radioWordByWord:
                     RadioWordByWordCheck(true);
@@ -141,10 +102,10 @@ public class PaintFragment extends Fragment {
                     inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
                     break;
                 case R.id.edtSendText:
-                    edtSendText.setFocusableInTouchMode(true);
-                    edtSendText.setFocusable(true);
-                    edtSendText.requestFocus();
-                    edtSendText.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
+//                    edtSendText.setFocusableInTouchMode(true);
+//                    edtSendText.setFocusable(true);
+//                    edtSendText.requestFocus();
+//                    edtSendText.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
 
                     break;
             }
@@ -154,7 +115,7 @@ public class PaintFragment extends Fragment {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-            SwitchTextCheck(switchActiveTextDisplay.isChecked());
+          //  SwitchTextCheck(switchActiveTextDisplay.isChecked());
         }
     };
     private View.OnFocusChangeListener edtFocusChange = new View.OnFocusChangeListener() {
@@ -171,44 +132,44 @@ public class PaintFragment extends Fragment {
 
     private void SwitchTextCheck(boolean b) {
         if (b == true) {
-            radioLetterByLetter.setEnabled(true);
-            radioWordByWord.setEnabled(true);
-            radioLetterByLetter.setTextColor(Color.parseColor("#125656"));
-            radioWordByWord.setTextColor(Color.parseColor("#125656"));
-            edtSendText.setEnabled(true);
-            edtSendText.setFocusableInTouchMode(true);
-            edtSendText.setFocusable(true);
+//            radioLetterByLetter.setEnabled(true);
+//            radioWordByWord.setEnabled(true);
+//            radioLetterByLetter.setTextColor(Color.parseColor("#125656"));
+//            radioWordByWord.setTextColor(Color.parseColor("#125656"));
+//            edtSendText.setEnabled(true);
+//            edtSendText.setFocusableInTouchMode(true);
+//            edtSendText.setFocusable(true);
 
         } else if (b == false) {
-            edtSendText.setFocusableInTouchMode(false);
-            edtSendText.setFocusable(false);
-            edtSendText.setEnabled(false);
-            edtSendText.setText(null);
-
-            radioLetterByLetter.setEnabled(false);
-            radioWordByWord.setEnabled(false);
-            radioLetterByLetter.setTextColor(Color.parseColor("#d3d3d3"));
-            radioWordByWord.setTextColor(Color.parseColor("#d3d3d3"));
-
-            btnSendText.setEnabled(false);
-            btnSendText.setBackgroundColor(Color.parseColor("#d3d3d3"));
+//            edtSendText.setFocusableInTouchMode(false);
+//            edtSendText.setFocusable(false);
+//            edtSendText.setEnabled(false);
+//            edtSendText.setText(null);
+//
+//            radioLetterByLetter.setEnabled(false);
+//            radioWordByWord.setEnabled(false);
+//            radioLetterByLetter.setTextColor(Color.parseColor("#d3d3d3"));
+//            radioWordByWord.setTextColor(Color.parseColor("#d3d3d3"));
+//
+//            btnSendText.setEnabled(false);
+//            btnSendText.setBackgroundColor(Color.parseColor("#d3d3d3"));
 
         }
     }
 
     private void RadioLetterByLetterCheck(boolean b) {
-
-        radioWordByWord.setChecked(false);
-        //radioLetterByLetter.setChecked(false);
-        radioLetterByLetter.setChecked(true);
-        //radioLetterByLetter.setBa
-        edtSendText.setEnabled(b);
+//
+//        radioWordByWord.setChecked(false);
+//        //radioLetterByLetter.setChecked(false);
+//        radioLetterByLetter.setChecked(true);
+//        //radioLetterByLetter.setBa
+//        edtSendText.setEnabled(b);
     }
     private void RadioWordByWordCheck(boolean b) {
-        radioLetterByLetter.setChecked(false);
-        //radioWordByWord.setChecked(false);
-        radioWordByWord.setChecked(true);
-        edtSendText.setEnabled(b);
+//        radioLetterByLetter.setChecked(false);
+//        //radioWordByWord.setChecked(false);
+//        radioWordByWord.setChecked(true);
+//        edtSendText.setEnabled(b);
     }
 
     public PaintFragment() {
@@ -221,8 +182,8 @@ public class PaintFragment extends Fragment {
             //String s=edtSendText.getText().toString().trim();
             if (((event.getAction() == KeyEvent.ACTION_DOWN
                     && event.getKeyCode() == KeyEvent.KEYCODE_DEL))) {
-                btnSendText.setEnabled(false);
-                btnSendText.setBackgroundColor(Color.parseColor("#d3d3d3"));
+//                btnSendText.setEnabled(false);
+//                btnSendText.setBackgroundColor(Color.parseColor("#d3d3d3"));
                 //return true;
 
             }
