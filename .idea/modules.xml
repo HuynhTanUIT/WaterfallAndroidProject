@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WaterfallAndroidProject.iml" filepath="$PROJECT_DIR$/WaterfallAndroidProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OdysseyOne.iml" filepath="$PROJECT_DIR$/OdysseyOne.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/localizationActivity/localizationActivity.iml" filepath="$PROJECT_DIR$/localizationActivity/localizationActivity.iml" />
     </modules>
   </component>
 </project>

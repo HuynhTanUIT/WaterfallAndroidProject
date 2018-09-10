@@ -14,8 +14,31 @@
     <item name="darkorange" type="color">#FFFF8800</item>
     <item name="disable" type="color">#d3d3d3</item>
     <item name="darkred" type="color">#FFCC0000</item>
+    <item name="transparent" type="color">#00000000</item>
+    <item name="white" type="color">#ffffff</item>
+    <item name="black" type="color">#000000</item>
+
+    <array name="androidcolors">
+        <item>@color/colorPrimary</item>
+        <item>@color/blue</item>
+        <item>@color/purple</item>
+        <item>@color/green</item>
+        <item>@color/orange</item>
+        <item>@color/red</item>
+        <item>@color/darkblue</item>
+        <item>@color/darkpurple</item>
+        <item>@color/darkgreen</item>
+        <item>@color/darkorange</item>
+        <item>@color/darkred</item>
+        <item>@color/disable</item>
+        <item>@color/transparent</item>
+    </array>
 
     <string-array name="valvesEnable">
+        <item><![CDATA[<font >320 </font>]]></item>
+        <item><![CDATA[<font >288 </font>]]></item>
+        <item><![CDATA[<font >256 </font>]]></item>
+        <item><![CDATA[<font >224</font>]]></item>
         <item><![CDATA[<font >192 </font>]]></item>
         <item><![CDATA[<font >160 </font>]]></item>
         <item><![CDATA[<font >128 </font>]]></item>
@@ -27,6 +50,10 @@
     </string-array>
 
     <string-array name="valvesDisable">
+        <item><![CDATA[<font color="#D3D3D3">320 </font>]]></item>
+        <item><![CDATA[<font color="#D3D3D3">288 </font>]]></item>
+        <item><![CDATA[<font color="#D3D3D3">256 </font>]]></item>
+        <item><![CDATA[<font color="#D3D3D3">224</font>]]></item>
         <item><![CDATA[<font color="#D3D3D3">192 </font>]]></item>
         <item><![CDATA[<font color="#D3D3D3">160 </font>]]></item>
         <item><![CDATA[<font color="#D3D3D3">128 </font>]]></item>
@@ -49,22 +76,15 @@
         <item><![CDATA[<font color="#D3D3D3">Vietnamese </font>]]></item>
         <item><![CDATA[<font color="#D3D3D3">Japanese </font>]]></item>
 
+    </string-array>
+
+    <string-array name="FormatClockEnable">
+        <item><![CDATA[<font >"hh:mm"</font>]]></item>
+        <item><![CDATA[<font >"hh:mm tt"</font>]]></item>
+        <item><![CDATA[<font >"hh:mm:ss"</font>]]></item>
+        <item><![CDATA[<font >"hh:mm:ss tt"</font>]]></item>
+        <item><![CDATA[<font >"dd-MM-yyyy"</font>]]></item>
 
     </string-array>
-    <array name="androidcolors">
-        <item>@color/colorPrimary</item>
-        <item>@color/blue</item>
-        <item>@color/purple</item>
-        <item>@color/green</item>
-        <item>@color/orange</item>
-        <item>@color/red</item>
-        <item>@color/darkblue</item>
-        <item>@color/darkpurple</item>
-        <item>@color/darkgreen</item>
-        <item>@color/darkorange</item>
-        <item>@color/darkred</item>
-        <item>@color/disable</item>
-    </array>
-
 
 </resources>
