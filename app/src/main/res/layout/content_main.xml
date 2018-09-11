@@ -138,14 +138,4 @@
             android:layout_height="match_parent" />
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rEmployeeTracking"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include
-            android:visibility="gone"
-            layout="@layout/fragment_employee_tracking"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
 </FrameLayout>

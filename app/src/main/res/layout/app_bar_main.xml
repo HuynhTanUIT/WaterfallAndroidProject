@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#3f000000"
     android:orientation="vertical"
-    tools:context="com.example.tan_pc.navigationdraweractivity.MainActivity"
+    tools:context="com.example.tan_pc.navigationdraweractivity.Activity.MainActivity"
     tools:layout_height="48dp">
 
     <android.support.design.widget.AppBarLayout

@@ -17,6 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.tan_pc.navigationdraweractivity.R;
 
 import java.util.List;
@@ -24,10 +27,13 @@ import java.util.List;
 import ClientSocket.GetDataService;
 import ClientSocket.RetrofitClientInstance;
 import ClientSocket.account;
-import adapter.CustomAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by tan-pc on 8/9/2018.
@@ -84,6 +90,7 @@ public class LoginActivity extends LocalizationActivity {
                 attemptLogin();
             }
         });
+
 
 //        mProgressView = findViewById(R.id.login_progress);
 

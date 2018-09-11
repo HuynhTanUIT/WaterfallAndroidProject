@@ -1,11 +1,13 @@
-package com.example.tan_pc.navigationdraweractivity.AdminFragment;
+package com.example.tan_pc.navigationdraweractivity.AdminManagement;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.tan_pc.navigationdraweractivity.R;
 
@@ -27,6 +29,7 @@ public class AdminMainFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private LinearLayout allEmployeesLinear;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,9 +68,20 @@ public class AdminMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        View v = inflater.inflate(R.layout.fragment_admin_main, container, false);
 //        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        return inflater.inflate(R.layout.fragment_admin_main, container, false);
+        allEmployeesLinear=(LinearLayout)v.findViewById(R.id.allEmployeesLinear);
+
+        allEmployeesLinear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(getContext(), "hello", Toast.LENGTH_LONG).show();
+                Intent mainIntent = new Intent(getActivity(),AllEmployeesTrackingActivity.class);
+                getActivity().startActivity(mainIntent);
+            }
+        });
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

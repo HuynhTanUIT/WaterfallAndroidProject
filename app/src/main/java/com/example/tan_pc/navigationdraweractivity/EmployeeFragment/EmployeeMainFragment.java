@@ -1,13 +1,19 @@
 package com.example.tan_pc.navigationdraweractivity.EmployeeFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.amazonaws.services.kms.model.KeyUnavailableException;
+import com.example.tan_pc.navigationdraweractivity.Activity.LoginActivity;
+import com.example.tan_pc.navigationdraweractivity.Activity.MainActivity;
 import com.example.tan_pc.navigationdraweractivity.R;
 import com.google.android.gms.maps.SupportMapFragment;
 
@@ -31,7 +37,6 @@ public class EmployeeMainFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
     public EmployeeMainFragment() {
         // Required empty public constructor
     }
@@ -66,8 +71,15 @@ public class EmployeeMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View v;
+        v =  inflater.inflate(R.layout.fragment_employee_main, container, false);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_employee_main, container, false);
+        return v;
+
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -8,7 +8,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -16,14 +15,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
-import com.example.tan_pc.navigationdraweractivity.AdminFragment.AdminMainFragment;
+//import com.example.tan_pc.navigationdraweractivity.AdminFragment.AdminMainFragment;
+import com.example.tan_pc.navigationdraweractivity.AdminManagement.AdminMainFragment;
 import com.example.tan_pc.navigationdraweractivity.CustomerFragment.CustomerMainFragment;
-import com.example.tan_pc.navigationdraweractivity.EmployeeFragment.EmployeeTrackingFragment;
 import com.example.tan_pc.navigationdraweractivity.Reference.DeviceInfo;
 import com.example.tan_pc.navigationdraweractivity.EmployeeFragment.EmployeeMainFragment;
 import com.example.tan_pc.navigationdraweractivity.R;
@@ -44,7 +42,6 @@ public class MainActivity extends LocalizationActivity
     public RelativeLayout rSettings;
     public RelativeLayout rAdminMain;
     public RelativeLayout rCustomerMain;
-    public RelativeLayout rEmployeeTracking;
     public RelativeLayout rEmployeeMain;
     public static int vanNumber;
     public static int thresholeNumber;
@@ -55,9 +52,9 @@ public class MainActivity extends LocalizationActivity
     DrawerLayout backupmainApp;
     Button btnSignOut;
     int sttfragment = 0;//trang thai dang o fragment nao 0=home; 1=Displaytext;2=Clock; 3=Import....
-    AdminMainFragment worktracking = new AdminMainFragment();
+    AdminMainFragment adminMainFragment = new AdminMainFragment();
     CustomerMainFragment customerMain =new CustomerMainFragment();
-    EmployeeTrackingFragment employeeTrackingFragment = new EmployeeTrackingFragment();
+//    EmployeeTrackingFragment employeeTrackingFragment = new EmployeeTrackingFragment();
     EmployeeMainFragment employeeMainFragment = new EmployeeMainFragment();
     SettingsFragment settingsFragment = new SettingsFragment();
 
@@ -116,6 +113,15 @@ public class MainActivity extends LocalizationActivity
                 if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
                 } else {
+//                    int count =  getSupportFragmentManager().getBackStackEntryCount();
+//                    if (count == 1){
+//                        finish();
+//                    } else {
+//                        String title = getSupportFragmentManager().getBackStackEntryAt(count - 2).getName();
+//                        getSupportFragmentManager().popBackStack();
+//                        getSupportActionBar().setTitle(title);
+//                    }
+                    finish();
                     //Khong Tat Ung Dung Khi nhan nut Back;
 //                    MainActivity.super.onBackPressed();
                 }
@@ -196,6 +202,21 @@ public class MainActivity extends LocalizationActivity
                             }
                         }, 100);
                         break;
+
+                         default: new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                FragmentShow(5);
+                            }
+                        }, 10);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                                drawer.closeDrawer(GravityCompat.START);
+                            }
+                        }, 100);
+                        break;
                 }
 
         return true;
@@ -213,7 +234,6 @@ public class MainActivity extends LocalizationActivity
             rCustomerMain =(RelativeLayout)findViewById(R.id.rCustomerMain) ;
             backupmainApp = (DrawerLayout) findViewById(R.id.drawer_layout);
             rEmployeeMain =(RelativeLayout)findViewById(R.id.rEmployeeMain) ;
-            rEmployeeTracking =(RelativeLayout)findViewById(R.id.rEmployeeTracking) ;
             ThreelinesLeftShow();
             PROJECTDATABASE = new SqliteHelper(getApplicationContext(), DATABASENAME, null, 1);
         } catch (Exception e) {
@@ -224,39 +244,48 @@ public class MainActivity extends LocalizationActivity
 
     private void FragmentShow(int frag) {
         try{
-
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             switch (frag) {
                 case 0: //admin
                     sttfragment = 2;
                     hideAllFragment();
                     rAdminMain.setVisibility(View.VISIBLE);
                     setTitle("Work Tracking Management");
+
                     getSupportFragmentManager()
                             .beginTransaction()
                             .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                            .replace(R.id.rAdminMain, worktracking)
+                            .replace(R.id.rAdminMain, adminMainFragment)
                             .commit();
+
+//                    fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+//                    fragmentTransaction.replace(R.id.rAdminMain, worktracking);
+//                    fragmentTransaction.addToBackStack(null);
+//                    fragmentTransaction.commit();
                     break;
                 case 1: //Customer
                     sttfragment = 2;
                     hideAllFragment();
                     rCustomerMain.setVisibility(View.VISIBLE);
                     setTitle("Customer Name");
+
                     getSupportFragmentManager()
                             .beginTransaction()
                             .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                             .replace(R.id.rCustomerMain, customerMain)
                             .commit();
+
                     break;
                 case 2:
                     sttfragment=5;
                     hideAllFragment();
-                    rEmployeeTracking.setVisibility(View.VISIBLE);
-                    setTitle("Employee Tracking ");
+                    rEmployeeMain.setVisibility(View.VISIBLE);
+                    setTitle("Employee");
                     getSupportFragmentManager()
                             .beginTransaction()
                             .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                            .replace(R.id.rEmployeeTracking,employeeTrackingFragment )
+                            .replace(R.id.rEmployeeMain,employeeMainFragment )
                             .commit();
                     break;
                 default:
@@ -269,7 +298,14 @@ public class MainActivity extends LocalizationActivity
                             .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                             .replace(R.id.rSettings, settingsFragment)
                             .commit();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+//                    fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+//                    fragmentTransaction.replace(R.id.rAdminMain, worktracking);
+//                    fragmentTransaction.addToBackStack(null);
+//                    fragmentTransaction.commit();
                     break;
+
             }
 
         }catch (Exception e){
@@ -365,7 +401,7 @@ public class MainActivity extends LocalizationActivity
             rCustomerMain.setVisibility(View.GONE);
             rEmployeeMain.setVisibility(View.GONE);
             rSettings.setVisibility(View.GONE);
-            rEmployeeTracking.setVisibility(View.GONE);
+            rEmployeeMain.setVisibility(View.GONE);
             rAdminMain.setVisibility(View.GONE);
         }catch (Exception e)
         {
