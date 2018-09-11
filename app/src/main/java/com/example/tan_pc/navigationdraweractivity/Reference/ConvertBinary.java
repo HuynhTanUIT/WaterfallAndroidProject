@@ -1,10 +1,10 @@
-package classConvertBinary;
+package com.example.tan_pc.navigationdraweractivity.Reference;
 
 import android.database.Cursor;
 import android.graphics.Bitmap;
 
 import static SettingsSQLite.SqliteHelper.TABLE_SETTINGS;
-import static com.example.tan_pc.navigationdraweractivity.MainActivity.PROJECTDATABASE;
+import static com.example.tan_pc.navigationdraweractivity.Activity.MainActivity.PROJECTDATABASE;
 import static com.example.tan_pc.navigationdraweractivity.R.id.imageViewColorImageHome;
 import static com.example.tan_pc.navigationdraweractivity.R.id.txt192x;
 
