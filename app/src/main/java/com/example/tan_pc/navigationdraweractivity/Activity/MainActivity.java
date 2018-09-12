@@ -1,5 +1,7 @@
 package com.example.tan_pc.navigationdraweractivity.Activity;
 
+import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -34,6 +36,8 @@ import static com.example.tan_pc.navigationdraweractivity.Activity.LoginActivity
 
 public class MainActivity extends LocalizationActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+    public static String  API_URL_BASE = "https://odyssey-one-mock-server.herokuapp.com";
+
     public static SqliteHelper PROJECTDATABASE;
     public static DrawerLayout drawerLayout;
     public static ClientSocket mTcpClient = null;
@@ -75,11 +79,14 @@ public class MainActivity extends LocalizationActivity
                         FragmentShow(0);//Admin
                         break;
                     case 1:
-                        FragmentShow(1);//Admin
+                        FragmentShow(1);//customer
                         break;
                     case 2:
-                        FragmentShow(2);//Admin
+                        FragmentShow(2);//Employee
                         break;
+                     default:
+                         FragmentShow (3);//Setting
+                                break;
                 }
             }
         }, 0);
@@ -129,9 +136,20 @@ public class MainActivity extends LocalizationActivity
         }, 0);
     }
 
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        return super.onPrepareOptionsMenu(menu);
+//
+//    }
+
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+//        if (typeOfUser == 0 && menu !=null) {
+//            menu.findItem(R.id.nav_admin_create_user).setVisible(false);
+//                    createuser.setVisible(true);
+//        }
+
 
 //        getMenuInflater().inflate(R.menu.main, menu);
         new Handler().postDelayed(new Runnable() {
@@ -140,9 +158,13 @@ public class MainActivity extends LocalizationActivity
                 getMenuInflater().inflate(R.menu.main, menu);
 
                 btnSignOut = (Button) findViewById(R.id.btnSignOut);
+
+
+//                    Item = (Item) findViewById(R.id.nav_admin_create_tsk).setVisibility(true);
                 if (btnSignOut==null) {
                 } else
                 {
+
                     btnSignOut.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -162,7 +184,7 @@ public class MainActivity extends LocalizationActivity
 
             }
         }, 0);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -292,7 +314,7 @@ public class MainActivity extends LocalizationActivity
                     sttfragment=5;
                     hideAllFragment();
                     rSettings.setVisibility(View.VISIBLE);
-                    setTitle("Settings ");
+                    setTitle("Settings");
                     getSupportFragmentManager()
                             .beginTransaction()
                             .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -394,7 +416,14 @@ public class MainActivity extends LocalizationActivity
         }
 
     }
+    public static void ToastShow(Context context,String frag) {
+        try{
+            Toast.makeText(context, frag, Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
 
+        }
+
+    }
     public void hideAllFragment() {
         try{
             rClock.setVisibility(View.GONE);

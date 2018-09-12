@@ -1,12 +1,9 @@
 package com.example.tan_pc.navigationdraweractivity.Activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,26 +11,28 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.akexorcist.localizationactivity.ui.LocalizationActivity;
-import com.android.volley.Request;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.tan_pc.navigationdraweractivity.R;
+//import com.squareup.okhttp.OkHttpClient;
 
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import ClientSocket.GetDataService;
-import ClientSocket.RetrofitClientInstance;
+import java.io.IOException;
+
+import ClientSocket.GetDataServiceAPI;
 import ClientSocket.account;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import static com.example.tan_pc.navigationdraweractivity.Activity.MainActivity.API_URL_BASE;
+import static com.example.tan_pc.navigationdraweractivity.Activity.MainActivity.ToastShow;
 
 /**
  * Created by tan-pc on 8/9/2018.
@@ -62,25 +61,15 @@ public class LoginActivity extends LocalizationActivity {
         mEmailSignInButton = (Button)findViewById(R.id.btn_login);
         mEnButton = (Button)findViewById(R.id.btnEn);
         mVnButton = (Button)findViewById(R.id.btnVn);
-//        mEmailSignInButton.setOnClickListener(btnClickListener);
-
-
         mEmailView = (EditText) findViewById(R.id.input_name);
-//        populateAutoComplete();
-
         mPasswordView = (EditText) findViewById(R.id.input_password);
-
         mLoginFormView = findViewById(R.id.login_form);
         mEnButton.setOnClickListener(onEngLanguageCLick());
         mVnButton.setOnClickListener(onVnLanguageCLick());
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
+                return id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL;
             }
         });
 
@@ -88,14 +77,40 @@ public class LoginActivity extends LocalizationActivity {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+//                OkHttpClient client = new OkHttpClient();
+////                client.interceptors().add(new Interceptor() {
+////                    @Override
+////                    public okhttp3.Response intercept(Chain chain) throws IOException {
+////                        okhttp3.Response response = chain.proceed(chain.request());
+////                        // Do anything with response here
+////                        return response;
+////                    }
+////                });
+//                response
+
+//                    @Override
+//                    public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+//
+//                        ToastShow(getApplicationContext(),"On response"+response.toString());
+////                        ToastShow(getApplicationContext(),"On response"+call.toString());
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<JSONObject> call, Throwable t) {
+//                        ToastShow(getApplicationContext(),"On failure"+t.toString());
+//
+//
+//                    }
+//                });
+
+//                    @Override
+//                    public void onFailure(Call<String> call, Throwable t) {
+//                        Log.e("onfailure", t.toString());
+//                        ToastShow(getApplicationContext(),"onfailure" +t.toString());
+//                    }
+//                });
             }
         });
-
-
-//        mProgressView = findViewById(R.id.login_progress);
-
-//        setContentView(R.layout.waterfallsplash);
-//        new LoadViewTask().execute();
 
     }
 
@@ -120,111 +135,7 @@ public class LoginActivity extends LocalizationActivity {
         // Restore x-position of horizontal scroll view.
 //        svLanguageChooser.scrollTo(savedInstanceState.getInt(KEY_SCROLL_X), 0);
     }
-//    private View.OnClickListener onToggleLanguageCLick() {
-//
-//        Toast.makeText(getApplicationContext(),"getCurrentLanguage", Toast.LENGTH_SHORT).show();
-//        if (getCurrentLanguage().equals("en")) {
-//            return view -> setLanguage("vn");
-//        } else {
-//            return view -> setLanguage("en");
-//        }
-//    }
-// Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
 
-    /*
-    private class LoadViewTask extends AsyncTask<Void, Integer, Void>
-    {
-        //Before running code in separate thread
-        @Override
-        protected void onPreExecute()
-        {
-            progressDialog = ProgressDialog.show(Login.this,"Please wait",
-                    "Loading Data...", false, false);
-        }
-
-        //The code to be executed in a background thread.
-        @Override
-        protected Void doInBackground(Void... params)
-        {
-            try
-            {
-                Intent mainIntent = new Intent(Login.this,MainActivity.class);
-                Login.this.startActivity(mainIntent);
-
-                //Get the current thread's token
-                synchronized (this)
-                {
-                    //Initialize an integer (that will act as a counter) to zero
-                    int counter = 0;
-                    //While the counter is smaller than four
-                    while(counter <= 1)
-                    {
-                        //Wait 850 milliseconds
-                        this.wait(250);
-                        //Increment the counter
-                        counter++;
-                        //Set the current progress.
-                        //This value is going to be passed to the onProgressUpdate() method.
-                        publishProgress(counter*25);
-                    }
-                }
-            }
-            catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        //Update the progress
-        @Override
-        protected void onProgressUpdate(Integer... values)
-        {
-            //set the current progress of the progress dialog
-//            progressDialog.setProgress(values[0]);
-        }
-
-        //after executing the code in the thread
-        @Override
-        protected void onPostExecute(Void result)
-        {
-
-            finish();
-            progressDialog.dismiss();
-
-            //close the progress dialog
-
-        }
-    }
-    private View.OnClickListener btnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-//            SetEditTextFocus();
-//            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-//            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            switch (view.getId()) {
-                case R.id.btn_login:
-//                            setContentView(R.layout.waterfallsplash);
-                            new LoadViewTask().execute();
-//                    edtHeightHome.setFocusable(true);
-//                    edtHeightHome.setFocusableInTouchMode(true);
-//                    edtHeightHome.requestFocus();
-//                    edtHeightHome.setImeOptions((EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI));
-                    break;
-//                case R.id.HomeLinearLayout:
-////                    edtIP.setError(null);
-//                    ClearEditTextFocus();
-//
-//                    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-//                    InputMethodManager inputManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    inputManager.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getApplicationWindowToken(), 0);
-//
-//                    LoadThresholdValves();
-//                    break;
-            }
-        }
-    };
-*/
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -272,9 +183,56 @@ public class LoginActivity extends LocalizationActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 //            showProgress(true);
+            progressDialog = ProgressDialog.show(LoginActivity.this,"Please wait",
+                    "Loading Data...", false, false);
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(API_URL_BASE)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            GetDataServiceAPI service = retrofit.create(GetDataServiceAPI.class);
+            Call<account> UserVerification = service.UserVerification(user,password);
 
-            mAuthTask = new UserLoginTask(user, password);
-            mAuthTask.execute((Void) null);
+            UserVerification.enqueue(new Callback<account>() {
+                @Override
+                public void onResponse(Call<account> call, Response<account> response) {
+
+                    ToastShow(getApplicationContext(),"On response: "+response.body().getUserVerified().toString());
+                    ToastShow(getApplicationContext(),"On response: "+response.raw().toString());
+                    if (response.body().getUserVerified().toString() == "true") {
+                         String role = response.body().getRole().toString();
+                         typeOfUser = Integer.parseInt(role);
+                        mAuthTask = new UserLoginTask(user, password);
+
+                        mAuthTask.execute((Void) null);
+//                        progressDialog.dismiss();
+//                        Intent mainIntent = new Intent(LoginActivity.this,MainActivity.class);
+//                        LoginActivity.this.startActivity(mainIntent);
+                        finish();
+                        } else{
+//
+//                        typeOfUser=99;
+//                        Intent mainIntent = new Intent(LoginActivity.this,MainActivity.class);
+//                        LoginActivity.this.startActivity(mainIntent);
+//                        progressDialog.dismiss();
+//                        finish();//
+                        progressDialog.dismiss();
+
+                        mPasswordView.setError(getString(R.string.error_incorrect_password));
+                        mPasswordView.requestFocus();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<account> call, Throwable t) {
+                    progressDialog.dismiss();
+                    ToastShow(getApplicationContext(),"On Failure: "+t.toString());
+                }
+            });
+
+
+
+//            mAuthTask = new UserLoginTask(, password);
+//            mAuthTask.execute((Void) null);
         }
     }
 
@@ -301,30 +259,30 @@ public class LoginActivity extends LocalizationActivity {
         UserLoginTask(String email, String password) {
             mUser = email;
             mPassword = password;
-            switch (mUser){
-                case "admin" : {
-                    typeOfUser = 0;
-                    break;
-                }
-                case "customer" : {
-                    typeOfUser = 1;
-                    break;
-                }
-                case "user" : {
-                    typeOfUser = 2;
-                    break;
-                }
-                default: {
-                    typeOfUser = 99;
-                    break;
-                }
-            }
+//            switch (mUser){
+//                case "admin" : {
+//                    typeOfUser = 0;
+//                    break;
+//                }
+//                case "customer" : {
+//                    typeOfUser = 1;
+//                    break;
+//                }
+//                case "user" : {
+//                    typeOfUser = 2;
+//                    break;
+//                }
+//                default: {
+//                    typeOfUser = 99;
+//                    break;
+//                }
+//            }
         }
         @Override
         protected void onPreExecute()
         {
-            progressDialog = ProgressDialog.show(LoginActivity.this,"Please wait",
-                    "Loading Data...", false, false);
+//            progressDialog = ProgressDialog.show(LoginActivity.this,"Please wait",
+//                    "Loading Data...", false, false);
         }
         @Override
         protected Boolean doInBackground(Void... params) {
@@ -340,40 +298,31 @@ public class LoginActivity extends LocalizationActivity {
             try
             {
                 if (typeOfUser == 99){
-//                    return false;
-                } else
-                {
-                    Intent mainIntent = new Intent(LoginActivity.this,MainActivity.class);
+                    return false;
+                } else {
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                     LoginActivity.this.startActivity(mainIntent);
 //                    return true;
-                }
-                //Get the current thread's token
-                synchronized (this)
-                {
 
-                    //Initialize an integer (that will act as a counter) to zero
-                    int counter = 0;
-                    //While the counter is smaller than four
-                    while(counter <= 1)
-                    {
+                    //Get the current thread's token
+                    synchronized (this) {
 
-                        //Wait 850 milliseconds
-                        this.wait(250);
-                        //Increment the counter
-                        counter++;
-                        //Set the current progress.
-                        //This value is going to be passed to the onProgressUpdate() method.
+                        //Initialize an integer (that will act as a counter) to zero
+                        int counter = 0;
+                        //While the counter is smaller than four
+                        while (counter <= 1) {
+
+                            //Wait 850 milliseconds
+                            this.wait(250);
+                            //Increment the counter
+                            counter++;
+                            //Set the current progress.
+                            //This value is going to be passed to the onProgressUpdate() method.
 //                        publishProgress(counter*25);
+                        }
                     }
                 }
-                if (typeOfUser == 99){
-                    return false;
-                } else
-                {
-//                    Intent mainIntent = new Intent(LoginActivity.this,MainActivity.class);
-//                    LoginActivity.this.startActivity(mainIntent);
-                    return true;
-                }
+//                return typeOfUser != 99;
             }
             catch (InterruptedException e)
             {

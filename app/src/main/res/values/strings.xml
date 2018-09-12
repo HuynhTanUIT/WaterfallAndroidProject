@@ -92,5 +92,6 @@
     <string name="rating">Rating</string>
     <string name="description">Description</string>
     <string name="create_new_task">Create New Task</string>
+    <string name="create_new_user">Create New User</string>
 
 </resources>
