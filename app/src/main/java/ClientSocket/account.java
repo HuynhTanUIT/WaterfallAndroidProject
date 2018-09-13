@@ -12,14 +12,14 @@ public class account {
     @SerializedName("password")
     private String password;
 
-    @SerializedName("role")
-    private String role;
+    @SerializedName("userRole")
+    private String userRole;
     @SerializedName ("userVerified")
     private String userVerified;
     public account(String username, String password, String role,String userVerified) {
         this.username = username;
         this.password = password;
-        this.role = role;
+        this.userRole = userRole;
         this.userVerified =userVerified;
     }
 
@@ -40,11 +40,11 @@ public class account {
     }
 
     public String getRole() {
-        return role;
+        return userRole;
     }
 
     public void setRole(String role) {
-        this.role = role;
+        this.userRole = role;
     }
 
     public String getUserVerified() {

@@ -46,7 +46,7 @@ public class LoginActivity extends LocalizationActivity {
     Button mVnButton;
 
     private UserLoginTask mAuthTask = null;
-    private EditText mEmailView;
+    private EditText mUserNameView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -61,7 +61,7 @@ public class LoginActivity extends LocalizationActivity {
         mEmailSignInButton = (Button)findViewById(R.id.btn_login);
         mEnButton = (Button)findViewById(R.id.btnEn);
         mVnButton = (Button)findViewById(R.id.btnVn);
-        mEmailView = (EditText) findViewById(R.id.input_name);
+        mUserNameView = (EditText) findViewById(R.id.input_name);
         mPasswordView = (EditText) findViewById(R.id.input_password);
         mLoginFormView = findViewById(R.id.login_form);
         mEnButton.setOnClickListener(onEngLanguageCLick());
@@ -151,11 +151,11 @@ public class LoginActivity extends LocalizationActivity {
         }
 
         // Reset errors.
-        mEmailView.setError(null);
+        mUserNameView.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String user = mEmailView.getText().toString().trim();
+        String user = mUserNameView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
 
         boolean cancel = false;
@@ -170,8 +170,8 @@ public class LoginActivity extends LocalizationActivity {
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(user)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            mUserNameView.setError(getString(R.string.error_field_required));
+            focusView = mUserNameView;
             cancel = true;
         }
 
@@ -256,8 +256,8 @@ public class LoginActivity extends LocalizationActivity {
         private final String mUser;
         private final String mPassword;
 
-        UserLoginTask(String email, String password) {
-            mUser = email;
+        UserLoginTask(String user, String password) {
+            mUser = user;
             mPassword = password;
 //            switch (mUser){
 //                case "admin" : {
